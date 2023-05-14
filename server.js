@@ -1,6 +1,7 @@
 const express = require('express')
 
-const actorRoutes = require('./src/actor/routes')
+const actorRoutes = require('./src/actor/routes') 
+const loginRoutes = require('./src/login/routes') 
 
 const app = express()
 const port = 3000
@@ -22,6 +23,7 @@ app.get('/testpage', (req, res) => {
 })
 
 app.use('/api/v1/actors', actorRoutes)
+app.use('/api/v1/login', loginRoutes)
 
 app.all('*', (req, res) =>{
     res.send('Pagina non trova')
