@@ -25,4 +25,10 @@ Pagine/Dati disponibili per ora:
 localhost:3000/                 -> hello world
 localhost:3000/login            -> Hello login
 localhost:3000/testpage         -> pagina invia testpage.html
-localhost:3000/api/v1/actors    -> invia json con lista attori presenti nel db
+localhost:3000/api/v1/login
+    ->/:username&:password      -> true se password è 'password', false altrimenti
+localhost:3000/api/v1/actors    -> json con lista attori presenti nel db
+    ->/mock                     -> lista mockata di un paio di film
+    ->/:id                      -> info su attore con l' id passato
+localhost:3000/api/v1/movies    -> json con lista film presenti nel db
+    ->/:title                   -> info su film col titolo passato
