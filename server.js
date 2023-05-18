@@ -1,43 +1,32 @@
-const express = require('express')
+var express = require("express")
+var { graphqlHTTP } = require("express-graphql")
+var { buildSchema } = require("graphql")
 
-const actorRoutes = require('./src/actor/routes') 
-const loginRoutes = require('./src/login/routes') 
-const movieRoutes = require('./src/movie/routes') 
+// Construct a schema, using GraphQL schema language
+var schema = buildSchema(`
+  type Query {
+    hello: String
+  }
+`)
 
-const app = express()
-const port = 3000
-const logger = require('morgan');
-app.use(express.json())
+// The root provides a resolver function for each API endpoint
+var root = {
+  hello: () => {
+    return "Hello world!"
+  },
+}
 
-app.use(logger('dev'))
-//app.use(cors()) //non installato, utile? bah
-
-app.get('/', (req, res) => {
-  res.send('Hello World')
-//   res.statusCode = 200
-//   res.setHeader('Content-Type', 'text/plain') //necessari in express?
-})
-
-
-app.get('/login', (req, res) => {
-    res.send('Hello login')
-})
-
-app.get('/testpage', (req, res) => {
-    res.sendFile('testpage.html', {root: __dirname})
-})
-
-app.use('/api/v1/actors', actorRoutes)
-app.use('/api/v1/login', loginRoutes)
-app.use('/api/v1/movies', movieRoutes)
-
-app.all('*', (req, res) =>{
-    res.send('Pagina non trova')
-})
-
-
-
-app.listen(port, () => console.log(`server listening on port ${port}`))
+var app = express()
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  })
+)
+app.listen(4000)
+console.log("Running a GraphQL API server at http://localhost:4000/graphql")
 
 
 //pensare azioni in comune come middleware
