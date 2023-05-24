@@ -10,6 +10,8 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import {ProvaComponent} from "./prova/prova.component";
 
+// modules
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import {ProvaComponent} from "./prova/prova.component";
     BrowserAnimationsModule,
     MatButtonModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
