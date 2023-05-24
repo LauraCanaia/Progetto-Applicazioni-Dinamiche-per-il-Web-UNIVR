@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/app/prova/prova.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/prova/prova.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/prova/prova.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/prova/prova.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/angular.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +58,7 @@
       <updated>1683894009159</updated>
       <workItem from="1683894010135" duration="117000" />
       <workItem from="1684570781745" duration="1270000" />
-      <workItem from="1684938597690" duration="3596000" />
+      <workItem from="1684938597690" duration="4527000" />
     </task>
     <servers />
   </component>

@@ -10,6 +10,7 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import {ProvaComponent} from "./prova/prova.component";
 
+
 @NgModule({
   declarations: [
     AppComponent,
