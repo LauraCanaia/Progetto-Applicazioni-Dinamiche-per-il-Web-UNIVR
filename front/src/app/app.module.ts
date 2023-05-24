@@ -8,10 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import {ProvaComponent} from "./prova/prova.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProvaComponent
   ],
   imports: [
     BrowserModule,
