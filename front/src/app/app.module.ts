@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatButtonModule} from "@angular/material/button";
 
+import {GraphqlModule} from "./graphql.module";
+
 @NgModule({
   declarations: [
     AppComponent
