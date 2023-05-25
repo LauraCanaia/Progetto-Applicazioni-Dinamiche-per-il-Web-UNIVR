@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/front/src/app/film/film.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/film/film.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/film/film.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/film/film.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/prova/prova.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/prova/prova.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/prova/prova.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/prova/prova.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/tsconfig.app.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +52,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\Laura\\Desktop\\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\\front\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "/home/laura/Scrivania/Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR/front/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -56,6 +67,7 @@
       <workItem from="1683894010135" duration="117000" />
       <workItem from="1684570781745" duration="1270000" />
       <workItem from="1684938597690" duration="6083000" />
+      <workItem from="1685005381356" duration="4049000" />
     </task>
     <servers />
   </component>
