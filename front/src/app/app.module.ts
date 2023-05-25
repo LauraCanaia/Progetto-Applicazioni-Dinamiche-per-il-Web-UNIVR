@@ -12,7 +12,7 @@ import {ProvaComponent} from "./prova/prova.component";
 
 // modules
 import {MatCardModule} from '@angular/material/card';
-import {FilmComponent} from "./film/film.component";
+import { FilmComponent } from './film/film.component';
 
 @NgModule({
   declarations: [
