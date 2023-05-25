@@ -13,6 +13,7 @@ import {ProvaComponent} from "./prova/prova.component";
 // modules
 import {MatCardModule} from '@angular/material/card';
 import { FilmComponent } from './film/film.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FilmComponent } from './film/film.component';
     MatButtonModule,
     GraphQLModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
