@@ -4,6 +4,9 @@
   container, and the inline axis of a grid container*/
   justify-content: space-between;
   color: white;
+  /*property controls what happens to content that's too big to fit in the area*/
+  overflow: auto;
+  font-size : larger;
 }
 
 /*tag that works just like div*/
