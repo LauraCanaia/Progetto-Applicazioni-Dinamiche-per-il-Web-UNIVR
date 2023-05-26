@@ -7,9 +7,16 @@ lib-cov
 *.pid
 *.gz
 
-pids
-logs
-results
-build
-
 node_modules
+
+server/node_modules
+server/pids
+server/logs
+server/results
+server/build
+
+front/node_modules
+front/pids
+front/logs
+front/results
+front/build

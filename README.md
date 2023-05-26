@@ -9,7 +9,7 @@ Andando alla ciccia:
 CONFIGURAZIONE NECESSARIA PRIMA DI FARLO PARTIRE:
 
 - scaricare database (https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) e importarlo in Postgres
-- modificare il file db.js con i dettagli di configurazione del proprio database Postgres
+- modificare il file server/.env con i dettagli di configurazione del proprio database Postgres
 
 
 PER FARLO FUNZIONARE:
@@ -26,6 +26,9 @@ NOTA BENE : graphql (al momento) riceve dati mockati
 esempi:
 {movies{title}} -> lista di titoli di tutti i film
 {movie(id:1){title}} -> titolo del film con id 1
+
+
+
 
 
 TODO:
