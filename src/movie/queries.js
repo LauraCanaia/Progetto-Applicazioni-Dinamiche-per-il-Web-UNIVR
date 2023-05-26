@@ -2,7 +2,8 @@ const getMovies = 'SELECT * FROM film'
 
 const getAvailableMovies = 'select * \
                             from film f \
-                            where f.film_id in (select film_id \
+                            where f.film_id in ( \
+                                select film_id \
                                 from inventory i \
                                 where inventory_id not in ( \
                                     select inventory_id \

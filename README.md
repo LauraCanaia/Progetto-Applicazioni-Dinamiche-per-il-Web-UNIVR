@@ -16,4 +16,20 @@ PER FARLO FUNZIONARE:
 
 aprire il terminale e usare i seguenti comandi
 - npm install (scarica i pacchetti necessari)
-- node server.js (fa partire il server in ascolto sulla porta 4000) 
+- npm run dev (fa partire il server in ascolto sulla porta 4000) 
+
+per testare grapgql:
+http://localhost:4000/graphql
+
+NOTA BENE : graphql (al momento) riceve dati mockati
+
+esempi:
+{movies{title}} -> lista di titoli di tutti i film
+{movie(id:1){title}} -> titolo del film con id 1
+
+
+TODO:
+
+//pensare azioni in comune come middleware
+
+// inserire autocompletamento parole (non ogni cambio di parola, ma ogni x millisecondi) guarda tutorial searchhearos
