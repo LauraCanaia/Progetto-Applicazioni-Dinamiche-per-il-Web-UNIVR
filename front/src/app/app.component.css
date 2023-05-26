@@ -1,0 +1,16 @@
+/*Instantiate class in css for the navbar*/
+.navbar{
+  /*how the browser distributes space between and around content items along the main-axis of a flex
+  container, and the inline axis of a grid container*/
+  justify-content: space-between;
+  color: white;
+  /*property controls what happens to content that's too big to fit in the area*/
+  overflow: auto;
+  font-size : larger;
+}
+
+/*tag that works just like div*/
+span {
+  /*creates space around an element's content*/
+  padding-right: 1rem;
+}

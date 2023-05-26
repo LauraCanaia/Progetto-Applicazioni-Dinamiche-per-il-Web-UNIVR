@@ -8,10 +8,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import {ProvaComponent} from "./prova/prova.component";
+
+// modules
+import {MatCardModule} from '@angular/material/card';
+import { FilmComponent } from './film/film.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProvaComponent,
+    FilmComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +27,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatButtonModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
