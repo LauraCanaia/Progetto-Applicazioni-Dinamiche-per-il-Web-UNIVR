@@ -15,25 +15,6 @@ const {
     GraphQLEnumType,
   } = require('graphql');
 
-const ActorType = new GraphQLObjectType({
-  name: 'Movie',
-  description: 'movie tyoe',
-  fields: () => ({
-      film_id: { type: GraphQLID },
-      title: { type: GraphQLString },
-      description: { type: GraphQLString },
-      release_year: { type: GraphQLString },
-      language_id: { type: GraphQLString },
-      rental_duration: { type: GraphQLString },
-      rental_rate: { type: GraphQLString },
-      length: { type: GraphQLInt },
-      replacement_cost: { type: GraphQLString },
-      rating: { type: GraphQLString },
-      last_update: { type: GraphQLString },
-      special_features: { type: GraphQLList(GraphQLString) },
-      fulltext: { type: GraphQLString }
-  }),
-});
 
 const MovieType = new GraphQLObjectType({
   name: 'Movie',
