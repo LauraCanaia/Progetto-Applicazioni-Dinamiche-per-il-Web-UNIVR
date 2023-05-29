@@ -21,10 +21,10 @@ aprire il terminale e usare i seguenti comandi
 per testare grapgql:
 http://localhost:4000/graphql
 
-NOTA BENE : graphql (al momento) riceve dati mockati
 
 esempi:
 {movies{title}} -> lista di titoli di tutti i film
+
 {movie(id:1){title}} -> titolo del film con id 1
 
 
