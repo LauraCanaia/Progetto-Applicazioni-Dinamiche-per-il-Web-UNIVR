@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Apollo} from 'apollo-angular';
+import {MOVIES} from '../graphql/graphql.movies';
 
 @Component({
   selector: 'app-film',
@@ -7,10 +9,24 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class FilmComponent implements OnInit{
-  constructor() {
+
+  // 3 things I need to talk with the graphql api
+  movies : any[] = [];
+  loading = true;
+  error : any;
+
+  constructor(private apollo : Apollo) {
   }
 
   ngOnInit(): void {
+    this.apollo
+      .watchQuery({
+        query : MOVIES,
+      }).valueChanges.subscribe((result : any) => {
+        this.movies = result.post;
+        this.loading = result.loading;
+        this.error = result.error;
+    });
   }
 
 }

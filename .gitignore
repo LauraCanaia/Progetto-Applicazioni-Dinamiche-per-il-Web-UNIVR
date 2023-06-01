@@ -20,3 +20,4 @@ front/pids
 front/logs
 front/results
 front/build
+server/.env

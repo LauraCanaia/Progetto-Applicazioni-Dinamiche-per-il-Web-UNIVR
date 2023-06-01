@@ -124,6 +124,17 @@ const RootQuery = new GraphQLObjectType({
             return result.rows
           }          
         },
+        movies_by_title: {
+          type: new GraphQLList(MovieType),
+          description: 'get list of all movies with a title that matches',
+          args: { title: { type: GraphQLID } },
+          resolve: async (parent, args) => {
+            const param = '%' + args.title + '%';
+            const result = await pool.query(queries.getMovieByTitle, [param])
+            // console.log(result.rows)
+            return result.rows
+          }          
+        },
         movie: {
           type: MovieType,
           description: 'get movie by id',
