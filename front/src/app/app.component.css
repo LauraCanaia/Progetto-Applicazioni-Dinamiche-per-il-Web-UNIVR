@@ -22,3 +22,13 @@ button{
   height: auto;
   width: auto;
 }
+
+.container{
+  /*this defines a flex container; inline or block depending on the given value. It enables a flex content for all its
+  direct children*/
+  flex-wrap: wrap-reverse;
+}
+
+app-film{
+  flex-wrap: wrap-reverse;
+}

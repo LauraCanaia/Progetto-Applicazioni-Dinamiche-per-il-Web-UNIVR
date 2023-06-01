@@ -1,5 +1,4 @@
 .film-card {
-  max-width: 400px;
-  justify-content: center;
+  flex-wrap: wrap-reverse;
 }
 

@@ -1,4 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  DoCheck, OnDestroy,
+  OnInit
+} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {MOVIES} from '../graphql/graphql.movies';
 
@@ -8,7 +16,8 @@ import {MOVIES} from '../graphql/graphql.movies';
   styleUrls: ['./film.component.css'],
 })
 
-export class FilmComponent implements OnInit{
+export class FilmComponent implements OnInit, AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
+DoCheck, OnDestroy{
 
   // 3 things I need to talk with the graphql api
   movies : any[] = [];
@@ -28,6 +37,24 @@ export class FilmComponent implements OnInit{
         this.loading = result.loading;
         this.error = result.error;
     });
+  }
+
+  ngAfterContentChecked(): void {
+  }
+
+  ngAfterContentInit(): void {
+  }
+
+  ngAfterViewChecked(): void {
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  ngDoCheck(): void {
+  }
+
+  ngOnDestroy(): void {
   }
 
 
