@@ -24,6 +24,9 @@ DoCheck, OnDestroy{
   loading = true;
   error : any;
 
+  //button if a user isn't logged
+  isDisabled : boolean = false
+
   constructor(private apollo : Apollo) {
   }
 
@@ -37,6 +40,7 @@ DoCheck, OnDestroy{
         this.loading = result.loading;
         this.error = result.error;
     });
+
   }
 
   ngAfterContentChecked(): void {

@@ -1,4 +1,10 @@
-.film-card {
-  flex-wrap: wrap-reverse;
+
+.book{
+  color: deeppink;
+  font-weight: bold;
 }
 
+.like{
+  color : deeppink;
+  font-weight: bold;
+}
