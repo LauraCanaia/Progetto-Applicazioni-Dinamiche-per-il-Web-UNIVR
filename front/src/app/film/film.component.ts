@@ -19,14 +19,16 @@ export class FilmComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
     this.apollo
       .watchQuery({
         query : MOVIES,
       }).valueChanges.subscribe((result : any) => {
-        this.movies = result.post;
+        this.movies = result?.data?.movies;
         this.loading = result.loading;
         this.error = result.error;
     });
   }
+
 
 }
