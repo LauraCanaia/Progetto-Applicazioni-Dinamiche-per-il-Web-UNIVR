@@ -18,7 +18,9 @@
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button class = "like">LIKE</button>
-          <button mat-raised-button class = "book" [disabled] = "isDisabled">BOOK</button>
+          <button mat-raised-button class = "book" (click)= "onClick(this)">
+            BOOK
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

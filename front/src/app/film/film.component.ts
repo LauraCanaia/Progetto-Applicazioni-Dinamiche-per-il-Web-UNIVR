@@ -24,9 +24,6 @@ DoCheck, OnDestroy{
   loading = true;
   error : any;
 
-  //button if a user isn't logged
-  isDisabled : boolean = false
-
   constructor(private apollo : Apollo) {
   }
 
@@ -61,5 +58,9 @@ DoCheck, OnDestroy{
   ngOnDestroy(): void {
   }
 
+
+  onClick(e : any) {
+    console.log(e)
+  }
 
 }
