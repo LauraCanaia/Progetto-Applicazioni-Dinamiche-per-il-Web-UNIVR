@@ -4,6 +4,7 @@
 <div *ngIf="error">
   Error :(
 </div>
+<!--
 <div *ngIf = "movies">
   <div *ngFor="let movie of movies">
     <mat-card class="film-card">
@@ -20,5 +21,11 @@
         <button mat-button>BOOK</button>
       </mat-card-actions>
     </mat-card>
+  </div>
+</div>
+-->
+<div *ngIf = "movies">
+  <div>
+    {{movies.concat()}}
   </div>
 </div>
