@@ -1,7 +1,7 @@
 import {gql} from 'apollo-angular';
 
-const MOVIES = gql`query {
-  movie(id : 1){
+const MOVIES = gql`query{
+  movies{
     title
   }
 }`
