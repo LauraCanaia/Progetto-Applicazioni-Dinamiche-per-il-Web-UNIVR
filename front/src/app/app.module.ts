@@ -15,6 +15,7 @@ import {MatCardModule} from '@angular/material/card';
 import { FilmComponent } from './film/film.component';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatInputModule} from "@angular/material/input";
         HttpClientModule,
         MatCardModule,
         MatToolbarModule,
-        MatInputModule
+        MatInputModule,
+        FormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

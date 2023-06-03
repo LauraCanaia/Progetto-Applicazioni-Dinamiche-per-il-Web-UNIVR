@@ -19,6 +19,8 @@ import {MOVIES} from '../graphql/graphql.movies';
 export class FilmComponent implements OnInit, AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
 DoCheck, OnDestroy{
 
+  reset = ""
+
   // 3 things I need to talk with the graphql api
   movies : any[] = [];
   loading = true;
@@ -60,7 +62,7 @@ DoCheck, OnDestroy{
 
 // Taking the string of the filter -> HTMLInputElement is a casting
   onInput(event : Event) {
-    console.log((<HTMLInputElement>event.target).value)
+    this.reset = (<HTMLInputElement>event.target).value
   }
 
   onClick(e : any) {

@@ -1,10 +1,10 @@
-
+<button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)">RESET</button>
 <mat-form-field appearance="fill">
   <mat-label>
     Film Selector
   </mat-label>
   <!-- Sto andando a prendere un evento come input -->
-  <input matInput placeholder="Film Name" (input)="onInput($event)">
+  <input matInput placeholder="Film Name" [(ngModel)] = "reset">
 </mat-form-field>
 
 <div *ngIf="loading">

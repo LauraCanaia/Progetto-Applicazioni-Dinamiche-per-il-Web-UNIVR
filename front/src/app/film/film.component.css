@@ -1,6 +1,9 @@
 
 .book{
   color: deeppink;
-  font-weight: bold;
+  font-weight: bolder;
 }
 
+.reset{
+  font-weight: bold;
+}
