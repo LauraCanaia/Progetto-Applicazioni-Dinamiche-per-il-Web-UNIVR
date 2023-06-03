@@ -58,9 +58,12 @@ DoCheck, OnDestroy{
   ngOnDestroy(): void {
   }
 
+// Taking the string of the filter -> HTMLInputElement is a casting
+  onInput(event : Event) {
+    console.log((<HTMLInputElement>event.target).value)
+  }
 
   onClick(e : any) {
     console.log(e)
   }
-
 }
