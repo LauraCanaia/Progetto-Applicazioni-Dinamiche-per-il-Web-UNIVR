@@ -7,3 +7,18 @@
 .reset{
   font-weight: bold;
 }
+
+li{
+  margin-bottom: 20px;
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.reset{
+  margin: 20px 5px auto 20px;
+}
+
+.filter{
+  margin-top: 20px;
+}

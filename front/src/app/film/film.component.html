@@ -1,5 +1,5 @@
 <button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)">RESET</button>
-<mat-form-field appearance="fill">
+<mat-form-field class = 'filter' appearance="fill">
   <mat-label>
     Film Selector
   </mat-label>
@@ -15,21 +15,23 @@
 </div>
 <main>
   <div *ngIf = "movies">
-    <div *ngFor="let movie of movies">
-      <mat-card class="film-card">
-        <mat-card-header>
-          <mat-card-title>{{movie.title}}</mat-card-title>
-          <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{movie.description}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button class = "book" (click)= "onClick(this)">
-            BOOK
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
+    <ul>
+      <li *ngFor="let movie of movies">
+        <mat-card class="film-card">
+          <mat-card-header>
+            <mat-card-title>{{movie.title}}</mat-card-title>
+            <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{movie.description}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button class = "book" (click)= "onClick(this)">
+              BOOK
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </li>
+    </ul>
   </div>
 </main>
