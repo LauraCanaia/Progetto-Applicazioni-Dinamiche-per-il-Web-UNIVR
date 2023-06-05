@@ -19,13 +19,17 @@ aprire il terminale e usare i seguenti comandi
 - npm run dev (fa partire il server in ascolto sulla porta 4000) 
 
 per testare grapgql:
-http://localhost:4000/graphql
+http://localhost:PORT/graphql
+
+graphql endpoint:
+movies(film_title: String, film_category: [String], only_available: Boolean)    : [Movie]
+movie(film_id: ID, film_title: String)                                          : Movie
+categories                                                                      : [Category]
 
 
 esempi:
-{movies{title}} -> lista di titoli di tutti i film
-
-{movie(id:1){title}} -> titolo del film con id 1
+{movies{film_title}} -> lista di titoli di tutti i film
+{movies(only_available : true){film_title}} -> lista di titoli di tutti i film disponibili
 
 
 
