@@ -9,6 +9,8 @@ const {
     GraphQLEnumType,
   } = require('graphql');
 
+const query = require('../config/db')
+
 
 const ActorType = new GraphQLObjectType({
   name: 'Actor',
@@ -53,7 +55,8 @@ const MovieType = new GraphQLObjectType({
       language: { 
         type: LanguageType,
         resolve: async (parent, args) => {
-          const result = await pool.query("select * from language where language_id = $1", [parent.language_id]);
+          const result = await query("select * from language where language_id = $1", [parent.language_id]);
+          console.log(result.rows)
           return result.rows[0]
         }
       },
@@ -68,36 +71,80 @@ const MovieType = new GraphQLObjectType({
       actor: { 
         type: new GraphQLList(ActorType), 
         resolve: async (parent, args) => {
-          const result = await pool.query("select * from actor a join film_actor fa on a.actor_id = fa.actor_id where fa.film_id = $1", [parent.film_id]);
+          const result = await query("select * from actor a join film_actor fa on a.actor_id = fa.actor_id where fa.film_id = $1", [parent.film_id]);
           return result.rows
         }
       },
       category: { 
         type: new GraphQLList(CategoryType), 
         resolve: async (parent, args) => {
-          const result = await pool.query("select * from category c join film_category fc on c.category_id  = fc.category_id where fc.film_id = $1", [parent.film_id]);
+          const result = await query("select * from category c join film_category fc on c.category_id  = fc.category_id where fc.film_id = $1", [parent.film_id]);
           return result.rows
         }
       },
   }),
-
-// // Project Type
-// const ProjectType = new GraphQLObjectType({
-//   name: 'Project',
-//   fields: () => ({
-//     id: { type: GraphQLID },
-//     name: { type: GraphQLString },
-//     description: { type: GraphQLString },
-//     status: { type: GraphQLString },
-//     client: {
-//       type: ClientType,
-//       resolve(parent, args) {
-//         return Client.findById(parent.clientId);
-//       },
-//     },
-//   }),
-// });
 });
+
+
+
+const RentalType = new GraphQLObjectType({
+  name: 'Rental',
+  description: 'RentalType',
+  fields: () => ({
+      rental_id: { type: GraphQLID },
+      rental_date: { type: GraphQLString },
+      inventory_id: { type: GraphQLID },
+      costumer_id: { type: GraphQLID },
+      return_date: { type: GraphQLString },
+      staff_id: { type: GraphQLID },
+      last_update: { type: GraphQLString }
+  }),
+});
+
+const PaymentType = new GraphQLObjectType({
+  name: 'Payment',
+  description: 'PaymentType',
+  fields: () => ({
+      payment_id: { type: GraphQLID },
+      costumer_id: { type: GraphQLID },
+      staff_id: { type: GraphQLID },
+      rental_id: { type: GraphQLID },
+      amount: { type: GraphQLString },
+      payment_date: { type: GraphQLString }
+  }),
+});
+
+
+const CustomerType = new GraphQLObjectType({
+  name: 'Customer',
+  description: 'CustomerType',
+  fields: () => ({
+      costumer_id: { type: GraphQLID },
+      store_id: { type: GraphQLID },
+      first_name: { type: GraphQLString },
+      last_name: { type: GraphQLString },
+      email: { type: GraphQLString },
+      adress_id: { type: GraphQLID },
+      activebool: { type: GraphQLString },
+      create_date: { type: GraphQLString },
+      last_update: { type: GraphQLString },
+      active: { type: GraphQLString },
+
+  }),
+});
+
+const StoreType = new GraphQLObjectType({
+  name: 'Store',
+  description: 'StoreType',
+  fields: () => ({
+      store_id: { type: GraphQLID },
+      manager_staff_id: { type: GraphQLID },
+      aderess_id: { type: GraphQLID },
+      last_update: { type: GraphQLString }
+  }),
+});
+
+
 
 module.exports  = {
     ActorType,

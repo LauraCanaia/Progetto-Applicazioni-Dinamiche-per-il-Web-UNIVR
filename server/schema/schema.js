@@ -1,8 +1,10 @@
-const pool = require('../config/db')
+const query = require('../config/db')
+// import * as from '../db.js'
 const queries = require('../src/queries')
 const {
   CategoryType,
-  MovieType
+  MovieType,
+  RentalType
 }  = require('../src/types');
 
 
@@ -28,7 +30,8 @@ const RootQuery = new GraphQLObjectType({
           description: 'get list of all movies',
           args: { 
             film_title: { type: GraphQLString },
-            film_category: { type : new GraphQLList(GraphQLString)},
+            film_category: { type : new GraphQLList(GraphQLID),
+                            description: 'list of id of wanted categories',},
             only_available: { type: GraphQLBoolean}
           },
           resolve: async (parent, args) => {
@@ -36,17 +39,24 @@ const RootQuery = new GraphQLObjectType({
             if (args.film_title != null){
               const param = '%' + args.film_title + '%';
               console.log(param)
-              result = await pool.query(queries.getMovieByTitle, [param])
+              result = await query(queries.getMovieByTitle, [param])
             }
             else if (args.only_available != null){
               if (args.only_available == true){
-                result = await pool.query(queries.getAvailableMovies)
+                result = await query(queries.getAvailableMovies)
               }else{
-                result = await pool.query(queries.getMovies)
+                result = await query(queries.getMovies)
               }
               
             }
+            else if (args.film_category != null){
+              console.log(args.film_category)
 
+              result = await query(queries.getMoviesInCategory,[ args.film_category ])
+              
+              console.log(result.rows);
+              return result.rows
+            }
 
             
             // console.log(result.rows)
@@ -68,13 +78,13 @@ const RootQuery = new GraphQLObjectType({
             console.log(args.film_title)
             if (args.film_id != null){
               console.log("args.film_id != emptystring")
-              result = await pool.query(queries.getMovieInfoById, [args.film_id])
+              result = await query(queries.getMovieInfoById, [args.film_id])
             }
             else if (args.film_title != null){
               console.log("args.film_title != emptystring")
               const param = '%' + args.film_title + '%';
               console.log(param)
-              result = await pool.query(queries.getMovieByTitle, [param])
+              result = await query(queries.getMovieByTitle, [param])
             }
 
             //TODO IF ID AND TITLE != EMPTY STRING
@@ -85,11 +95,18 @@ const RootQuery = new GraphQLObjectType({
           type: new GraphQLList(CategoryType),
           description: 'get all categories',
           resolve: async () => {
-            const result = await pool.query("select * from category c group by category_id")
+            const result = await query("select * from category c group by category_id")
             // console.log(result.rows)
             return result.rows
           }          
         },
+        pecunia_pagata:{
+          type: MovieType,
+          description: 'get movie by id',
+          args: { 
+            costumer_id: { type: GraphQLID }
+         },
+        }
     },
   });
 
