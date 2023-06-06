@@ -31,36 +31,52 @@ const RootQuery = new GraphQLObjectType({
           args: { 
             film_title: { type: GraphQLString },
             film_category: { type : new GraphQLList(GraphQLID),
-                            description: 'list of id of wanted categories',},
-            only_available: { type: GraphQLBoolean}
+                            description: 'list of id of wanted categories'},
+            only_available: { type: GraphQLBoolean,
+                            description: 'return only available movies'}
           },
           resolve: async (parent, args) => {
-            let result = ""
+            let conditionNumber = 0
+            let newQuery = queries.getMovies
+            let paramsList = []
+
             if (args.film_title != null){
-              const param = '%' + args.film_title + '%';
-              console.log(param)
-              result = await query(queries.getMovieByTitle, [param])
-            }
-            else if (args.only_available != null){
-              if (args.only_available == true){
-                result = await query(queries.getAvailableMovies)
+              if (conditionNumber == 0){
+                newQuery += " WHERE " 
               }else{
-                result = await query(queries.getMovies)
+                newQuery += " AND "
               }
-              
-            }
-            else if (args.film_category != null){
-              console.log(args.film_category)
-
-              result = await query(queries.getMoviesInCategory,[ args.film_category ])
-              
-              console.log(result.rows);
-              return result.rows
+              conditionNumber++
+              newQuery += queries.moviesByTitleCondition.replace("$1", "$"+conditionNumber); 
+              paramsList.push('%' + args.film_title + '%');
             }
 
-            
-            // console.log(result.rows)
+            if (args.film_category != null){
+              if (conditionNumber == 0){
+                newQuery += " WHERE "
+              }else{
+                newQuery += " AND "
+              }
+              conditionNumber++
+              newQuery += queries.moviesByCategoryCondition.replace("$1", "$"+conditionNumber); 
+              paramsList.push(args.film_category);
+            }
+
+            if (args.only_available != null && args.only_available==true){
+              if (conditionNumber == 0){
+                newQuery += " WHERE "
+              }else{
+                newQuery += " AND "
+              }
+              conditionNumber++
+              newQuery += queries.moviesAvailabilityCondition; 
+            }
+
+            console.log(newQuery)
+            const result = await query(newQuery, paramsList)
+            console.log(result.rows)
             return result.rows
+            
           }          
         },
 
@@ -69,40 +85,30 @@ const RootQuery = new GraphQLObjectType({
           description: 'get movie by id',
           args: { 
             film_id: { type: GraphQLID },
-            film_title: { type: GraphQLString },
          },
           resolve: async (parent, args) => {
             let result = ""
-            console.log(args)
-            console.log(args.film_id)
-            console.log(args.film_title)
             if (args.film_id != null){
-              console.log("args.film_id != emptystring")
               result = await query(queries.getMovieInfoById, [args.film_id])
             }
-            else if (args.film_title != null){
-              console.log("args.film_title != emptystring")
-              const param = '%' + args.film_title + '%';
-              console.log(param)
-              result = await query(queries.getMovieByTitle, [param])
-            }
-
-            //TODO IF ID AND TITLE != EMPTY STRING
             return result.rows[0]
           }
         },
+
+
         categories: {
           type: new GraphQLList(CategoryType),
           description: 'get all categories',
           resolve: async () => {
             const result = await query("select * from category c group by category_id")
-            // console.log(result.rows)
             return result.rows
           }          
         },
+
+
         pecunia_pagata:{
           type: MovieType,
-          description: 'get movie by id',
+          description: 'TODO',
           args: { 
             costumer_id: { type: GraphQLID }
          },
