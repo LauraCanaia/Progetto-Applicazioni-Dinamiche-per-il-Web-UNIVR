@@ -93,8 +93,18 @@ const RentalType = new GraphQLObjectType({
   fields: () => ({
       rental_id: { type: GraphQLID },
       rental_date: { type: GraphQLString },
-      inventory_id: { type: GraphQLID },
-      costumer_id: { type: GraphQLID },
+      inventory: { type: InventoryType, 
+        resolve: async (parent, args) => {
+          const result = await query("select * from inventory i where inventory_id = $1", [parent.inventory_id]);
+          return result.rows[0]
+        }
+      },
+      customer: { type: CustomerType, 
+        resolve: async (parent, args) => {
+          const result = await query("select * from customer c where customer_id = $1", [parent.customer_id]);
+          return result.rows[0]
+        }
+      },
       return_date: { type: GraphQLString },
       staff_id: { type: GraphQLID },
       last_update: { type: GraphQLString }
@@ -106,9 +116,14 @@ const PaymentType = new GraphQLObjectType({
   description: 'PaymentType',
   fields: () => ({
       payment_id: { type: GraphQLID },
-      costumer_id: { type: GraphQLID },
+      customer_id: { type: GraphQLID },
       staff_id: { type: GraphQLID },
-      rental_id: { type: GraphQLID },
+      rental: { type: RentalType, 
+        resolve: async (parent, args) => {
+          const result = await query("select * from rental r where rental_id = $1", [parent.rental_id]);
+          return result.rows[0]
+        }
+      },
       amount: { type: GraphQLString },
       payment_date: { type: GraphQLString }
   }),
@@ -119,12 +134,12 @@ const CustomerType = new GraphQLObjectType({
   name: 'Customer',
   description: 'CustomerType',
   fields: () => ({
-      costumer_id: { type: GraphQLID },
+      customer_id: { type: GraphQLID },
       store_id: { type: GraphQLID },
       first_name: { type: GraphQLString },
       last_name: { type: GraphQLString },
       email: { type: GraphQLString },
-      adress_id: { type: GraphQLID },
+      address_id: { type: GraphQLID },
       activebool: { type: GraphQLString },
       create_date: { type: GraphQLString },
       last_update: { type: GraphQLString },
@@ -144,11 +159,21 @@ const StoreType = new GraphQLObjectType({
   }),
 });
 
+const InventoryType = new GraphQLObjectType({
+  name: 'Inventory',
+  description: 'InventoryType',
+  fields: () => ({
+      inventory_id: { type: GraphQLID },
+      film_id: { type: GraphQLID },
+      store_id: { type: GraphQLID },
+      last_update: { type: GraphQLString }
+  }),
+});
+
 
 
 module.exports  = {
-    ActorType,
     CategoryType,
-    LanguageType, 
+    PaymentType,
     MovieType
 }
