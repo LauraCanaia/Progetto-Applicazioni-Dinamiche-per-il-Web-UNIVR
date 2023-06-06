@@ -108,7 +108,7 @@ const RootQuery = new GraphQLObjectType({
 
         pecunia_pagata:{
           type: new GraphQLList(PaymentType),
-          description: 'TODO',
+          description: 'list of payment',
           args: { 
             costumer_id: { type: GraphQLID }
          },

@@ -10,6 +10,7 @@ const {
   } = require('graphql');
 
 const query = require('../config/db')
+const queries = require('../src/queries')
 
 
 const ActorType = new GraphQLObjectType({
@@ -55,7 +56,7 @@ const MovieType = new GraphQLObjectType({
       language: { 
         type: LanguageType,
         resolve: async (parent, args) => {
-          const result = await query("select * from language where language_id = $1", [parent.language_id]);
+          const result = await query(queries.getLanguageById, [parent.language_id]);
           console.log(result.rows)
           return result.rows[0]
         }
@@ -95,13 +96,13 @@ const RentalType = new GraphQLObjectType({
       rental_date: { type: GraphQLString },
       inventory: { type: InventoryType, 
         resolve: async (parent, args) => {
-          const result = await query("select * from inventory i where inventory_id = $1", [parent.inventory_id]);
+          const result = await query(queries.getInventoryById, [parent.inventory_id]);
           return result.rows[0]
         }
       },
       customer: { type: CustomerType, 
         resolve: async (parent, args) => {
-          const result = await query("select * from customer c where customer_id = $1", [parent.customer_id]);
+          const result = await query(queries.getCustomerById, [parent.customer_id]);
           return result.rows[0]
         }
       },
@@ -116,11 +117,16 @@ const PaymentType = new GraphQLObjectType({
   description: 'PaymentType',
   fields: () => ({
       payment_id: { type: GraphQLID },
-      customer_id: { type: GraphQLID },
+      customer: { type: CustomerType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getCustomerById, [parent.customer_id]);
+          return result.rows[0]
+        }
+      },
       staff_id: { type: GraphQLID },
       rental: { type: RentalType, 
         resolve: async (parent, args) => {
-          const result = await query("select * from rental r where rental_id = $1", [parent.rental_id]);
+          const result = await query(queries.getRentalById, [parent.rental_id]);
           return result.rows[0]
         }
       },
@@ -164,7 +170,12 @@ const InventoryType = new GraphQLObjectType({
   description: 'InventoryType',
   fields: () => ({
       inventory_id: { type: GraphQLID },
-      film_id: { type: GraphQLID },
+      film: { type: MovieType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getMovieById, [parent.film_id]);
+          return result.rows[0]
+        }
+      },
       store_id: { type: GraphQLID },
       last_update: { type: GraphQLString }
   }),

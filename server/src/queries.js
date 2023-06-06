@@ -2,7 +2,12 @@ const getMovies = `SELECT *
                     FROM film
                     `
 
-const getMovieInfoById = 'SELECT * FROM film WHERE film_id = $1'
+const getRentalById = `select * from rental r where rental_id = $1`
+const getCustomerById = `select * from customer c where customer_id = $1`
+const getInventoryById = `select * from inventory i where inventory_id = $1`
+const getLanguageById = `select * from language where language_id = $1`
+
+const getMovieById = 'SELECT * FROM film WHERE film_id = $1'
 
 const moviesAvailabilityCondition = `(film_id in ( 
                             select film_id 
@@ -23,7 +28,11 @@ const moviesByCategoryCondition = `(film_id in (select film_id
 
 module.exports = {
     getMovies,
-    getMovieInfoById,
+    getRentalById,
+    getCustomerById,
+    getInventoryById,
+    getLanguageById,
+    getMovieById,
     moviesAvailabilityCondition,
     moviesByTitleCondition,
     moviesByCategoryCondition
