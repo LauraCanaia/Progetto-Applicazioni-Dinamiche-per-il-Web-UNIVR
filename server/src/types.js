@@ -83,6 +83,13 @@ const MovieType = new GraphQLObjectType({
           return result.rows
         }
       },
+      store_availability: {
+        type: new GraphQLList(StoreType), 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getStoreByFilmId, [parent.film_id]);
+          return result.rows
+        }
+      }
   }),
 });
 
@@ -160,7 +167,12 @@ const StoreType = new GraphQLObjectType({
   fields: () => ({
       store_id: { type: GraphQLID },
       manager_staff_id: { type: GraphQLID },
-      aderess_id: { type: GraphQLID },
+      address: { type: AddressType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getAddressById, [parent.address_id]);
+          return result.rows[0]
+        }
+      },
       last_update: { type: GraphQLString }
   }),
 });
@@ -180,6 +192,23 @@ const InventoryType = new GraphQLObjectType({
       last_update: { type: GraphQLString }
   }),
 });
+
+
+const AddressType = new GraphQLObjectType({
+  name: 'Address',
+  description: 'AddressType',
+  fields: () => ({
+      address_id: { type: GraphQLID },
+      address: { type: GraphQLString },
+      address2: { type: GraphQLString },
+      district: { type: GraphQLString },
+      city_id: { type: GraphQLID },
+      postal_code: { type: GraphQLString },
+      phone: { type: GraphQLString },
+      last_update: { type: GraphQLString }
+  }),
+});
+
 
 
 
