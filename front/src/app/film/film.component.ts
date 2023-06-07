@@ -71,4 +71,20 @@ DoCheck, OnDestroy{
   onClick(e : any) {
     console.log(e)
   }
+
+  onSearch(name : any)
+  {
+    console.log(name.target.value)
+    this.apollo
+      .watchQuery({
+        query : MOVIES,
+        variables : {
+          film_title :  name.target.value,
+        }
+      }).valueChanges.subscribe((result : any) => {
+      this.movies = result?.data?.movies;
+      this.loading = result.loading;
+      this.error = result.error;
+    });
+  }
 }

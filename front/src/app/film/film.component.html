@@ -4,7 +4,7 @@
     Film Selector
   </mat-label>
   <!-- Sto andando a prendere un evento come input -->
-  <input matInput placeholder="Film Name" [(ngModel)] = "reset">
+  <input matInput placeholder="Film Title" (keyup)="onSearch($event)" [(ngModel)] = "reset">
 </mat-form-field>
 
 <div *ngIf="loading">
