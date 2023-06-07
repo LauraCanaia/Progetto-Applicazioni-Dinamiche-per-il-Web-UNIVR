@@ -1,4 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  DoCheck, OnDestroy,
+  OnInit
+} from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {MOVIES} from '../graphql/graphql.movies';
 
@@ -8,7 +16,10 @@ import {MOVIES} from '../graphql/graphql.movies';
   styleUrls: ['./film.component.css'],
 })
 
-export class FilmComponent implements OnInit{
+export class FilmComponent implements OnInit, AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
+DoCheck, OnDestroy{
+
+  reset = ""
 
   // 3 things I need to talk with the graphql api
   movies : any[] = [];
@@ -19,14 +30,42 @@ export class FilmComponent implements OnInit{
   }
 
   ngOnInit(): void {
+
     this.apollo
       .watchQuery({
         query : MOVIES,
       }).valueChanges.subscribe((result : any) => {
-        this.movies = result.post;
+        this.movies = result?.data?.movies;
         this.loading = result.loading;
         this.error = result.error;
     });
+
   }
 
+  ngAfterContentChecked(): void {
+  }
+
+  ngAfterContentInit(): void {
+  }
+
+  ngAfterViewChecked(): void {
+  }
+
+  ngAfterViewInit(): void {
+  }
+
+  ngDoCheck(): void {
+  }
+
+  ngOnDestroy(): void {
+  }
+
+// Taking the string of the filter -> HTMLInputElement is a casting
+  onInput(event : Event) {
+    this.reset = (<HTMLInputElement>event.target).value
+  }
+
+  onClick(e : any) {
+    console.log(e)
+  }
 }

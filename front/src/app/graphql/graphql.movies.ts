@@ -2,7 +2,9 @@ import {gql} from 'apollo-angular';
 
 const MOVIES = gql`query{
   movies{
-    title
+    title,
+    description,
+    release_year
   }
 }`
 ;
