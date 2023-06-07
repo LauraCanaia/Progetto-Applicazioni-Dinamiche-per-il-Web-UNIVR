@@ -66,6 +66,17 @@ DoCheck, OnDestroy{
 // Taking the string of the filter -> HTMLInputElement is a casting
   onInput(event : Event) {
     this.reset = (<HTMLInputElement>event.target).value
+    this.apollo
+      .watchQuery({
+        query : MOVIES,
+        variables : {
+          film_title :  "",
+        }
+      }).valueChanges.subscribe((result : any) => {
+      this.movies = result?.data?.movies;
+      this.loading = result.loading;
+      this.error = result.error;
+    });
   }
 
   onClick(e : any) {

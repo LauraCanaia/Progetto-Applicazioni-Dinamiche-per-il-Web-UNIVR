@@ -5,7 +5,7 @@ import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {path : 'Login', component : LoginComponent},
-  {path : 'Film', component : FilmComponent}
+  {path : '', component : FilmComponent}
 ];
 
 @NgModule({
