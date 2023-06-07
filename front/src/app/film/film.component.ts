@@ -34,6 +34,9 @@ DoCheck, OnDestroy{
     this.apollo
       .watchQuery({
         query : MOVIES,
+        variables : {
+          film_title :  "",
+        }
       }).valueChanges.subscribe((result : any) => {
         this.movies = result?.data?.movies;
         this.loading = result.loading;
