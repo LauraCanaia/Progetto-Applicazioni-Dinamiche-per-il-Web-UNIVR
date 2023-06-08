@@ -17,13 +17,15 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { NavbarComponent } from './navbar/navbar.component';
+import { FilmFormComponent } from './film-form/film-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FilmComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    FilmFormComponent
   ],
     imports: [
         BrowserModule,

@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/app.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +28,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2Ph0Sqis0Iz6IhfrvijYsreEKp5" />
   <component name="ProjectLevelVcsManager">
@@ -84,7 +86,7 @@
       <workItem from="1686139508002" duration="8072000" />
       <workItem from="1686155610408" duration="276000" />
       <workItem from="1686173620116" duration="168000" />
-      <workItem from="1686204905292" duration="5152000" />
+      <workItem from="1686204905292" duration="7680000" />
     </task>
     <servers />
   </component>
