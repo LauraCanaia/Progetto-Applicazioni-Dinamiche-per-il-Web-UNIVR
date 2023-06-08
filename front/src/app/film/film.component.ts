@@ -29,19 +29,23 @@ DoCheck, OnDestroy{
   constructor(private apollo : Apollo) {
   }
 
-  ngOnInit(): void {
-
+  apolloCheck(title : string){
     this.apollo
       .watchQuery({
         query : MOVIES,
         variables : {
-          film_title :  "",
+          film_title :  title,
         }
       }).valueChanges.subscribe((result : any) => {
-        this.movies = result?.data?.movies;
-        this.loading = result.loading;
-        this.error = result.error;
+      this.movies = result?.data?.movies;
+      this.loading = result.loading;
+      this.error = result.error;
     });
+  }
+
+  ngOnInit(): void {
+
+    this.apolloCheck("")
 
   }
 
@@ -66,17 +70,7 @@ DoCheck, OnDestroy{
 // Taking the string of the filter -> HTMLInputElement is a casting
   onInput(event : Event) {
     this.reset = (<HTMLInputElement>event.target).value
-    this.apollo
-      .watchQuery({
-        query : MOVIES,
-        variables : {
-          film_title :  "",
-        }
-      }).valueChanges.subscribe((result : any) => {
-      this.movies = result?.data?.movies;
-      this.loading = result.loading;
-      this.error = result.error;
-    });
+    this.apolloCheck("")
   }
 
   onClick(e : any) {
@@ -85,17 +79,6 @@ DoCheck, OnDestroy{
 
   onSearch(name : any)
   {
-    console.log(name.target.value)
-    this.apollo
-      .watchQuery({
-        query : MOVIES,
-        variables : {
-          film_title :  name.target.value,
-        }
-      }).valueChanges.subscribe((result : any) => {
-      this.movies = result?.data?.movies;
-      this.loading = result.loading;
-      this.error = result.error;
-    });
+    this.apolloCheck(name.target.value)
   }
 }

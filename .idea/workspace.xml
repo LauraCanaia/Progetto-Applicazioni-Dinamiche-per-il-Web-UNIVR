@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +45,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/laura/Scrivania/Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR/front/node_modules/typescript/lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Laura\\Desktop\\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\\front\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -78,6 +77,8 @@
       <workItem from="1685955163327" duration="2650000" />
       <workItem from="1686139508002" duration="8072000" />
       <workItem from="1686155610408" duration="276000" />
+      <workItem from="1686173620116" duration="168000" />
+      <workItem from="1686204905292" duration="897000" />
     </task>
     <servers />
   </component>
