@@ -5,8 +5,8 @@ import {LoginComponent} from "./login/login.component";
 import {FilmFormComponent} from "./film-form/film-form.component";
 
 const routes: Routes = [
-  {path : 'Login', component : LoginComponent},
-  {path : '', component : FilmComponent},
+  {path : '', component : LoginComponent},
+  {path : 'films', component : FilmComponent},
   {path : 'filmForm', component : FilmFormComponent}
 ];
 
