@@ -5,11 +5,14 @@ import {
   AfterViewInit,
   Component,
   DoCheck, OnDestroy,
-  OnInit
+  OnInit, Output
 } from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {MOVIES} from '../graphql/graphql.movies';
+import {util} from "protobufjs";
+import EventEmitter = util.EventEmitter;
 
+// @ts-ignore
 @Component({
   selector: 'app-film',
   templateUrl: './film.component.html',
@@ -25,6 +28,8 @@ DoCheck, OnDestroy{
   movies : any[] = [];
   loading = true;
   error : any;
+
+
 
   constructor(private apollo : Apollo) {
   }
