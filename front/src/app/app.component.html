@@ -3,14 +3,8 @@
     FilmFinder
   </div>
   <div>
-    <span><button mat-button>Home</button></span>
-    <span><button mat-button>Sign In</button></span>
-    <span><button mat-button>Log In</button></span>
+    <app-navbar (idEvent)="receivedName($event)"></app-navbar>
   </div>
 </mat-toolbar>
 
-<main>
-  <div class = container>
-    <app-film></app-film>
-  </div>
-</main>
+<router-outlet></router-outlet>

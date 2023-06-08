@@ -4,7 +4,7 @@
     Film Selector
   </mat-label>
   <!-- Sto andando a prendere un evento come input -->
-  <input matInput placeholder="Film Name" [(ngModel)] = "reset">
+  <input matInput placeholder="Film Title" (keyup)="onSearch($event)" [(ngModel)] = "reset">
 </mat-form-field>
 
 <div *ngIf="loading">
@@ -15,23 +15,21 @@
 </div>
 <main>
   <div *ngIf = "movies">
-    <ul>
-      <li *ngFor="let movie of movies">
-        <mat-card class="film-card">
-          <mat-card-header>
-            <mat-card-title>{{movie.title}}</mat-card-title>
-            <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>{{movie.description}}</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button class = "book" (click)= "onClick(this)">
-              BOOK
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </li>
-    </ul>
+    <li *ngFor="let movie of movies">
+      <mat-card class="film-card">
+        <mat-card-header>
+          <mat-card-title>{{movie.title}}</mat-card-title>
+          <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{movie.description}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button class = "book" (click)= "onClick(this)">
+            BOOK
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </li>
   </div>
 </main>

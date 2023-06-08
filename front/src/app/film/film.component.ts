@@ -5,11 +5,14 @@ import {
   AfterViewInit,
   Component,
   DoCheck, OnDestroy,
-  OnInit
+  OnInit, Output
 } from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {MOVIES} from '../graphql/graphql.movies';
+import {util} from "protobufjs";
+import EventEmitter = util.EventEmitter;
 
+// @ts-ignore
 @Component({
   selector: 'app-film',
   templateUrl: './film.component.html',
@@ -26,19 +29,28 @@ DoCheck, OnDestroy{
   loading = true;
   error : any;
 
+
+
   constructor(private apollo : Apollo) {
+  }
+
+  apolloCheck(title : string){
+    this.apollo
+      .watchQuery({
+        query : MOVIES,
+        variables : {
+          film_title :  title,
+        }
+      }).valueChanges.subscribe((result : any) => {
+      this.movies = result?.data?.movies;
+      this.loading = result.loading;
+      this.error = result.error;
+    });
   }
 
   ngOnInit(): void {
 
-    this.apollo
-      .watchQuery({
-        query : MOVIES,
-      }).valueChanges.subscribe((result : any) => {
-        this.movies = result?.data?.movies;
-        this.loading = result.loading;
-        this.error = result.error;
-    });
+    this.apolloCheck("")
 
   }
 
@@ -63,9 +75,15 @@ DoCheck, OnDestroy{
 // Taking the string of the filter -> HTMLInputElement is a casting
   onInput(event : Event) {
     this.reset = (<HTMLInputElement>event.target).value
+    this.apolloCheck("")
   }
 
   onClick(e : any) {
     console.log(e)
+  }
+
+  onSearch(name : any)
+  {
+    this.apolloCheck(name.target.value)
   }
 }
