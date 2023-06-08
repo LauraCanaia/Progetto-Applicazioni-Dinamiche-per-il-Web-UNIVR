@@ -1,5 +1,32 @@
-.film-card {
-  max-width: 400px;
-  justify-content: center;
+
+.book{
+  color: deeppink;
+  font-weight: bolder;
+  cursor: pointer;
 }
 
+.reset{
+  font-weight: bold;
+}
+
+li{
+  margin-bottom: 20px;
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.reset{
+  margin: 20px 5px 20px 20px;
+}
+
+.filter{
+  margin-top: 20px;
+}
+
+.film-card{
+  width: 100%;
+  align-items: center;
+}

@@ -4,7 +4,7 @@ const queries = require('../src/queries')
 const {
   CategoryType,
   MovieType,
-  RentalType
+  PaymentType
 }  = require('../src/types');
 
 
@@ -107,11 +107,15 @@ const RootQuery = new GraphQLObjectType({
 
 
         pecunia_pagata:{
-          type: MovieType,
-          description: 'TODO',
+          type: new GraphQLList(PaymentType),
+          description: 'list of payment',
           args: { 
             costumer_id: { type: GraphQLID }
          },
+         resolve: async (parent, args) => {
+          const result = await query("select * from payment p where customer_id = $1", [args.costumer_id])
+          return result.rows
+        }  
         }
     },
   });

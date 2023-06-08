@@ -10,6 +10,7 @@ const {
   } = require('graphql');
 
 const query = require('../config/db')
+const queries = require('../src/queries')
 
 
 const ActorType = new GraphQLObjectType({
@@ -55,7 +56,7 @@ const MovieType = new GraphQLObjectType({
       language: { 
         type: LanguageType,
         resolve: async (parent, args) => {
-          const result = await query("select * from language where language_id = $1", [parent.language_id]);
+          const result = await query(queries.getLanguageById, [parent.language_id]);
           console.log(result.rows)
           return result.rows[0]
         }
@@ -82,6 +83,13 @@ const MovieType = new GraphQLObjectType({
           return result.rows
         }
       },
+      store_availability: {
+        type: new GraphQLList(StoreType), 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getStoreByFilmId, [parent.film_id]);
+          return result.rows
+        }
+      }
   }),
 });
 
@@ -93,8 +101,18 @@ const RentalType = new GraphQLObjectType({
   fields: () => ({
       rental_id: { type: GraphQLID },
       rental_date: { type: GraphQLString },
-      inventory_id: { type: GraphQLID },
-      costumer_id: { type: GraphQLID },
+      inventory: { type: InventoryType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getInventoryById, [parent.inventory_id]);
+          return result.rows[0]
+        }
+      },
+      customer: { type: CustomerType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getCustomerById, [parent.customer_id]);
+          return result.rows[0]
+        }
+      },
       return_date: { type: GraphQLString },
       staff_id: { type: GraphQLID },
       last_update: { type: GraphQLString }
@@ -106,9 +124,19 @@ const PaymentType = new GraphQLObjectType({
   description: 'PaymentType',
   fields: () => ({
       payment_id: { type: GraphQLID },
-      costumer_id: { type: GraphQLID },
+      customer: { type: CustomerType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getCustomerById, [parent.customer_id]);
+          return result.rows[0]
+        }
+      },
       staff_id: { type: GraphQLID },
-      rental_id: { type: GraphQLID },
+      rental: { type: RentalType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getRentalById, [parent.rental_id]);
+          return result.rows[0]
+        }
+      },
       amount: { type: GraphQLString },
       payment_date: { type: GraphQLString }
   }),
@@ -119,12 +147,12 @@ const CustomerType = new GraphQLObjectType({
   name: 'Customer',
   description: 'CustomerType',
   fields: () => ({
-      costumer_id: { type: GraphQLID },
+      customer_id: { type: GraphQLID },
       store_id: { type: GraphQLID },
       first_name: { type: GraphQLString },
       last_name: { type: GraphQLString },
       email: { type: GraphQLString },
-      adress_id: { type: GraphQLID },
+      address_id: { type: GraphQLID },
       activebool: { type: GraphQLString },
       create_date: { type: GraphQLString },
       last_update: { type: GraphQLString },
@@ -139,16 +167,53 @@ const StoreType = new GraphQLObjectType({
   fields: () => ({
       store_id: { type: GraphQLID },
       manager_staff_id: { type: GraphQLID },
-      aderess_id: { type: GraphQLID },
+      address: { type: AddressType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getAddressById, [parent.address_id]);
+          return result.rows[0]
+        }
+      },
+      last_update: { type: GraphQLString }
+  }),
+});
+
+const InventoryType = new GraphQLObjectType({
+  name: 'Inventory',
+  description: 'InventoryType',
+  fields: () => ({
+      inventory_id: { type: GraphQLID },
+      film: { type: MovieType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getMovieById, [parent.film_id]);
+          return result.rows[0]
+        }
+      },
+      store_id: { type: GraphQLID },
+      last_update: { type: GraphQLString }
+  }),
+});
+
+
+const AddressType = new GraphQLObjectType({
+  name: 'Address',
+  description: 'AddressType',
+  fields: () => ({
+      address_id: { type: GraphQLID },
+      address: { type: GraphQLString },
+      address2: { type: GraphQLString },
+      district: { type: GraphQLString },
+      city_id: { type: GraphQLID },
+      postal_code: { type: GraphQLString },
+      phone: { type: GraphQLString },
       last_update: { type: GraphQLString }
   }),
 });
 
 
 
+
 module.exports  = {
-    ActorType,
     CategoryType,
-    LanguageType, 
+    PaymentType,
     MovieType
 }
