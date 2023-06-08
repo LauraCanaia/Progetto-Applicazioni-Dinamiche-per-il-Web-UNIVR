@@ -1,0 +1,36 @@
+.yes{
+  color: #ff4081;
+  font-size-adjust: inherit;
+  font-weight: bolder;
+}
+
+.no{
+  font-weight: bolder;
+}
+
+button{
+  cursor: pointer;
+  border: 2px solid #ff4081;
+}
+
+.film-form{
+  width: 100%;
+  align-items: center;
+}
+
+main{
+  margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+p{
+  width: 100%;
+  text-align: center;
+}
+
+span {
+  /*creates space around an element's content*/
+  padding-right: 1rem;
+}
+
