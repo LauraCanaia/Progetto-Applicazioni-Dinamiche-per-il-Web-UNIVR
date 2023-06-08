@@ -2,6 +2,7 @@
 .book{
   color: deeppink;
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .reset{
@@ -29,4 +30,3 @@ li{
   width: 100%;
   align-items: center;
 }
-
