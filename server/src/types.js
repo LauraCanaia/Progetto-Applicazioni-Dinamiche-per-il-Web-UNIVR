@@ -210,10 +210,22 @@ const AddressType = new GraphQLObjectType({
 });
 
 
+const UserType = new GraphQLObjectType({
+  name: 'User',
+  description: 'UserType',
+  fields: () => ({
+      user_id: { type: GraphQLID },
+      username: { type: GraphQLString },
+      customer_id: { type: GraphQLID }
+  }),
+});
+
+
 
 
 module.exports  = {
     CategoryType,
     PaymentType,
-    MovieType
+    MovieType,
+    UserType
 }

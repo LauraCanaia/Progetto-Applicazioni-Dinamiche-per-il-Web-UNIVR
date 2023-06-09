@@ -1,10 +1,12 @@
+const bcrypt = require('bcrypt')
 const query = require('../config/db')
 // import * as from '../db.js'
 const queries = require('../src/queries')
 const {
   CategoryType,
   MovieType,
-  PaymentType
+  PaymentType,
+  UserType
 }  = require('../src/types');
 
 
@@ -21,7 +23,7 @@ const {
   } = require('graphql');
 
 
-const RootQuery = new GraphQLObjectType({
+const RootQueryType = new GraphQLObjectType({
     name: 'RootQueryType',
     description: 'this is a root query',
     fields: {
@@ -116,12 +118,54 @@ const RootQuery = new GraphQLObjectType({
           const result = await query("select * from payment p where customer_id = $1", [args.costumer_id])
           return result.rows
         }  
-        }
+      }
+  },
+});
+
+let userData = [] 
+
+const RootMutationType = new GraphQLObjectType({
+  name: 'RootMutationType',
+  description: 'this is a root mutation',
+  fields: {
+    login:{
+      type: GraphQLString,
+      description: 'testiamo il login',
+      args: { 
+        username: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: async (parent, args, {SECRET}) => {
+        const dati = userData.find(data => data.username === args.username)
+        console.log(dati.password)
+        const valid = await bcrypt.compare(args.password, dati.password)
+
+        // const result = await query("")
+        return valid
+      }   
     },
-  });
+    
+    register:{
+      type: GraphQLString,
+      description: 'testiamo il register',
+      args: { 
+        username: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+        customer_id: { type: GraphQLID }
+      },
+      resolve: async (parent, args, ) => {
+        // const result = await query("")
+        let password = await bcrypt.hash(args.password, 10)
+        userData.push({'username': args.username, 'password':password, 'unhashedpassword': args.password})
+        console.log(userData)
+        return "test register"
+      }   
+    }
+  }
+})
 
 
-  module.exports = new GraphQLSchema ({
-    query: RootQuery
-  })
-  
+module.exports = new GraphQLSchema ({
+  query: RootQueryType,
+  mutation: RootMutationType
+})
