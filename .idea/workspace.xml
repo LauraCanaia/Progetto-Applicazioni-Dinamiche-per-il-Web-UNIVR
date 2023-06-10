@@ -5,14 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/front/src/app/graphql/graphql.movie.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/schema/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/schema/schema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,7 +91,7 @@
       <workItem from="1686204905292" duration="8895000" />
       <workItem from="1686237802995" duration="232000" />
       <workItem from="1686241154804" duration="765000" />
-      <workItem from="1686396454634" duration="195000" />
+      <workItem from="1686396454634" duration="2668000" />
     </task>
     <servers />
   </component>
