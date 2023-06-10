@@ -1,7 +1,10 @@
 const bcrypt = require('bcrypt')
 const query = require('../config/db')
-// import * as from '../db.js'
+const query_credentials = require('../config/db_credentials')
+const jwt = require('jsonwebtoken')
 const queries = require('../src/queries')
+const _ = require('lodash')
+
 const {
   CategoryType,
   MovieType,
@@ -20,6 +23,7 @@ const {
     GraphQLBoolean,
     GraphQLNonNull,
     GraphQLEnumType,
+    GraphQLError
   } = require('graphql');
 
 
@@ -111,23 +115,40 @@ const RootQueryType = new GraphQLObjectType({
         pecunia_pagata:{
           type: new GraphQLList(PaymentType),
           description: 'list of payment',
-          args: { 
-            costumer_id: { type: GraphQLID }
-         },
-         resolve: async (parent, args) => {
-          const result = await query("select * from payment p where customer_id = $1", [args.costumer_id])
-          return result.rows
+         resolve: async (parent, args, {user}) => {
+          if (user){
+            const result = await query("select * from payment p where customer_id = $1", [user.customer_id])
+            return result.rows
+          }
+          return null
+
         }  
       }
   },
 });
 
-let userData = [] 
+
 
 const RootMutationType = new GraphQLObjectType({
   name: 'RootMutationType',
   description: 'this is a root mutation',
   fields: {
+    // register:{
+    //   type: GraphQLString,
+    //   description: 'testiamo il register',
+    //   args: { 
+    //     username: { type: new GraphQLNonNull(GraphQLString) },
+    //     password: { type: new GraphQLNonNull(GraphQLString) },
+    //     customer_id: { type: GraphQLID }
+    //   },
+    //   resolve: async (parent, args, ) => {
+    //     let password = await bcrypt.hash(args.password, 10)
+    //     console.log(password)
+    //     return "test register"
+    //   }   
+    // },
+
+
     login:{
       type: GraphQLString,
       description: 'testiamo il login',
@@ -135,32 +156,26 @@ const RootMutationType = new GraphQLObjectType({
         username: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve: async (parent, args, {SECRET}) => {
-        const dati = userData.find(data => data.username === args.username)
-        console.log(dati.password)
-        const valid = await bcrypt.compare(args.password, dati.password)
-
-        // const result = await query("")
-        return valid
+      resolve: async (parent, {username, password}, {SECRET}) => {
+        
+        const user = await query_credentials(`select * from public."user" u where username like $1`, [username])
+        
+        const valid = await bcrypt.compare(password, user.rows[0].password)
+        if (!valid){  
+          throw new Error('Incorret user or password');
+        }
+        const token = jwt.sign(
+          {
+            user: _.pick(user.rows[0], ['user_id', 'customer_id'])
+          },
+          SECRET,
+          {
+            expiresIn: '1y'
+          }
+        );
+        return token
       }   
     },
-    
-    register:{
-      type: GraphQLString,
-      description: 'testiamo il register',
-      args: { 
-        username: { type: new GraphQLNonNull(GraphQLString) },
-        password: { type: new GraphQLNonNull(GraphQLString) },
-        customer_id: { type: GraphQLID }
-      },
-      resolve: async (parent, args, ) => {
-        // const result = await query("")
-        let password = await bcrypt.hash(args.password, 10)
-        userData.push({'username': args.username, 'password':password, 'unhashedpassword': args.password})
-        console.log(userData)
-        return "test register"
-      }   
-    }
   }
 })
 
