@@ -41,47 +41,47 @@ const RootQueryType = new GraphQLObjectType({
             only_available: { type: GraphQLBoolean,
                             description: 'return only available movies'}
           },
-          resolve: async (parent, args) => {
-            let conditionNumber = 0
-            let newQuery = queries.getMovies
-            let paramsList = []
+          resolve: async (parent, args, {user}) => {
+            if (user){
+              let conditionNumber = 0
+              let newQuery = queries.getMovies
+              let paramsList = []
 
-            if (args.film_title != null){
-              if (conditionNumber == 0){
-                newQuery += " WHERE " 
-              }else{
-                newQuery += " AND "
+              if (args.film_title != null){
+                if (conditionNumber == 0){
+                  newQuery += " WHERE " 
+                }else{
+                  newQuery += " AND "
+                }
+                conditionNumber++
+                newQuery += queries.moviesByTitleCondition.replace("$1", "$"+conditionNumber); 
+                paramsList.push('%' + args.film_title + '%');
               }
-              conditionNumber++
-              newQuery += queries.moviesByTitleCondition.replace("$1", "$"+conditionNumber); 
-              paramsList.push('%' + args.film_title + '%');
-            }
 
-            if (args.film_category != null){
-              if (conditionNumber == 0){
-                newQuery += " WHERE "
-              }else{
-                newQuery += " AND "
+              if (args.film_category != null){
+                if (conditionNumber == 0){
+                  newQuery += " WHERE "
+                }else{
+                  newQuery += " AND "
+                }
+                conditionNumber++
+                newQuery += queries.moviesByCategoryCondition.replace("$1", "$"+conditionNumber); 
+                paramsList.push(args.film_category);
               }
-              conditionNumber++
-              newQuery += queries.moviesByCategoryCondition.replace("$1", "$"+conditionNumber); 
-              paramsList.push(args.film_category);
-            }
 
-            if (args.only_available != null && args.only_available==true){
-              if (conditionNumber == 0){
-                newQuery += " WHERE "
-              }else{
-                newQuery += " AND "
+              if (args.only_available != null && args.only_available==true){
+                if (conditionNumber == 0){
+                  newQuery += " WHERE "
+                }else{
+                  newQuery += " AND "
+                }
+                conditionNumber++
+                newQuery += queries.moviesAvailabilityCondition; 
               }
-              conditionNumber++
-              newQuery += queries.moviesAvailabilityCondition; 
+              const result = await query(newQuery, paramsList)
+              return result.rows
             }
-
-            console.log(newQuery)
-            const result = await query(newQuery, paramsList)
-            console.log(result.rows)
-            return result.rows
+            return null
             
           }          
         },
@@ -92,12 +92,15 @@ const RootQueryType = new GraphQLObjectType({
           args: { 
             film_id: { type: GraphQLID },
          },
-          resolve: async (parent, args) => {
-            let result = ""
-            if (args.film_id != null){
-              result = await query(queries.getMovieInfoById, [args.film_id])
+          resolve: async (parent, args, {user}) => {
+            if (user){
+              let result = ""
+              if (args.film_id != null){
+                result = await query(queries.getMovieInfoById, [args.film_id])
+              }
+              return result.rows[0]
             }
-            return result.rows[0]
+            return null
           }
         },
 
@@ -105,9 +108,12 @@ const RootQueryType = new GraphQLObjectType({
         categories: {
           type: new GraphQLList(CategoryType),
           description: 'get all categories',
-          resolve: async () => {
-            const result = await query("select * from category c group by category_id")
-            return result.rows
+          resolve: async ( {user}) => {
+            if (user){
+              const result = await query("select * from category c group by category_id")
+              return result.rows
+            }
+            return null
           }          
         },
 
@@ -158,7 +164,8 @@ const RootMutationType = new GraphQLObjectType({
       },
       resolve: async (parent, {username, password}, {SECRET}) => {
         
-        const user = await query_credentials(`select * from public."user" u where username like $1`, [username])
+        const user = await query_credentials(`select * from public."user" u where username like $1`, [username]) || ""
+        console.log(user)
         
         const valid = await bcrypt.compare(password, user.rows[0].password)
         if (!valid){  
