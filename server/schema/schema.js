@@ -89,7 +89,7 @@ const RootQuery = new GraphQLObjectType({
           resolve: async (parent, args) => {
             let result = ""
             if (args.film_id != null){
-              result = await query(queries.getMovieInfoById, [args.film_id])
+              result = await query(queries.getMovieById, [args.film_id])
             }
             return result.rows[0]
           }
