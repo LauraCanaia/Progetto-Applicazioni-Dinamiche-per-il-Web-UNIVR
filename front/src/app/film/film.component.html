@@ -1,35 +1,40 @@
-<button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)">RESET</button>
-<mat-form-field class = 'filter' appearance="fill">
-  <mat-label>
-    Film Selector
-  </mat-label>
-  <!-- Sto andando a prendere un evento come input -->
-  <input matInput placeholder="Film Title" (keyup)="onSearch($event)" [(ngModel)] = "reset">
-</mat-form-field>
+<div *ngIf="!ismovie; else movie">
+  <button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)">RESET</button>
+  <mat-form-field class = 'filter' appearance="fill">
+    <mat-label>
+      Film Selector
+    </mat-label>
+    <!-- Sto andando a prendere un evento come input -->
+    <input matInput placeholder="Film Title" (keyup)="onSearch($event)" [(ngModel)] = "reset">
+  </mat-form-field>
 
-<div *ngIf="loading">
-  Loading ...
-</div>
-<div *ngIf="error">
-  Error :(
-</div>
-<main>
-  <div *ngIf = "movies">
-    <li *ngFor="let movie of movies">
-      <mat-card class="film-card">
-        <mat-card-header>
-          <mat-card-title>{{movie.title}}</mat-card-title>
-          <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{movie.description}}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button class = "book" (click)= "onClick(this)">
-            BOOK
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </li>
+  <div *ngIf="loading">
+    Loading ...
   </div>
-</main>
+  <div *ngIf="error">
+    Error :(
+  </div>
+  <main>
+    <div *ngIf = "movies">
+      <li *ngFor="let movie of movies">
+        <mat-card class="film-card">
+          <mat-card-header>
+            <mat-card-title>{{movie.title}}</mat-card-title>
+            <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{movie.description}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
+              DETAILS
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </li>
+    </div>
+  </main>
+</div>
+<ng-template #movie>
+  <p>Profilo di tua mamma</p>
+</ng-template>
