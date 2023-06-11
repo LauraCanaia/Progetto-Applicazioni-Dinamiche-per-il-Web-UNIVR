@@ -2,14 +2,14 @@
   <li *ngFor="let movie of movies">
     <mat-card class = "film-form">
       <mat-card-header>
-        <mat-card-title> <p>{{movie.title}} </p></mat-card-title>
+        <mat-card-title> <p>Title : {{movie.title}} </p></mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>Description</p>
-        <p>language</p>
-        <p>Rental Duration</p>
-        <p>Replacement Cost</p>
-        <p>Category</p>
+        <p>Description : {{movie.description}}</p>
+        <p>Language : {{movie.language.name}}</p>
+        <p>Rental Duration : {{movie.rental_duration}} days</p>
+        <p>Replacement Cost : {{movie.replacement_cost}} $</p>
+        <p>Category : {{movie.category[0].name}}</p>
       </mat-card-content>
       <mat-card-actions>
         <span>Want to book that Film?</span>

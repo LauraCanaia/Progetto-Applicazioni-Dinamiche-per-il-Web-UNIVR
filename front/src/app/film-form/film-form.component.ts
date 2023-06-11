@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Apollo} from "apollo-angular";
-import {MOVIE} from "../graphql/graphql.movie";
 import {query} from "@angular/animations";
 import {Router} from "@angular/router";
-import {MOVIES} from "../graphql/graphql.movies";
+import {MOVIE} from "../graphql/graphql.movies";
 
 @Component({
   selector: 'app-film-form',
@@ -18,7 +17,7 @@ export class FilmFormComponent implements OnInit{
   apolloCheck(title : string){
     this.apollo
       .watchQuery({
-        query : MOVIES,
+        query : MOVIE,
         variables : {
           film_title :  title,
         }
