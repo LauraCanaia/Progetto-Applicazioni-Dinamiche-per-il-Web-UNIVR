@@ -44,7 +44,6 @@ DoCheck, OnDestroy{
         }
       }).valueChanges.subscribe((result : any) => {
       this.movies = result?.data?.movies;
-      console.log(this.movies)
       this.loading = result.loading;
       this.error = result.error;
     });
@@ -80,7 +79,7 @@ DoCheck, OnDestroy{
   }
 
   onClick(e : any, title : string) {
-    this._router.navigateByUrl('films/filmForm');
+    this._router.navigateByUrl('films/filmForm/'.concat(title));
   }
 
   onSearch(name : any)

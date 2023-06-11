@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Apollo} from "apollo-angular";
 import {MOVIE} from "../graphql/graphql.movie";
 import {query} from "@angular/animations";
+import {Router} from "@angular/router";
+import {MOVIES} from "../graphql/graphql.movies";
 
 @Component({
   selector: 'app-film-form',
@@ -11,16 +13,25 @@ import {query} from "@angular/animations";
 export class FilmFormComponent implements OnInit{
 
   movies: any[] = [];
-  constructor(private apollo : Apollo){
+  title : any;
+
+  apolloCheck(title : string){
+    this.apollo
+      .watchQuery({
+        query : MOVIES,
+        variables : {
+          film_title :  title,
+        }
+      }).valueChanges.subscribe((result : any) => {
+      this.movies = result?.data?.movies;
+    });
+
+  }
+  constructor(private apollo : Apollo, private router : Router){
   }
 
   ngOnInit(): void {
-    this.apollo.watchQuery({
-      query : MOVIE,
-      variables : {film_id : 133}}
-    ).valueChanges.subscribe((data : any) =>
-    {
-      this.movies = data;
-    });
+    this.title = this.router.url.split('/').pop()?.replace("%20", ' ');
+    this.apolloCheck(this.title.toString())
   }
 }

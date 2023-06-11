@@ -10,7 +10,7 @@ import {FilmFormComponent} from "./film-form/film-form.component";
 const routes: Routes = [
   {path : '', component : LoginComponent},
   {path : 'films', component : FilmComponent},
-  {path : 'films/filmForm', component : FilmFormComponent}
+  {path : 'films/filmForm/:title', component : FilmFormComponent}
 ];
 
 @NgModule({

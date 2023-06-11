@@ -1,19 +1,21 @@
 <main>
-  <mat-card class = "film-form">
-    <mat-card-header>
-      <mat-card-title> <p>FIlm Title </p></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <p>Description</p>
-      <p>language</p>
-      <p>Rental Duration</p>
-      <p>Replacement Cost</p>
-      <p>Category</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <span>Want to book that Film?</span>
-      <span><button mat-raised-button class = "yes">Yes</button></span>
-      <span><button mat-raised-button class = "no" color="accent" routerLink="/films">No</button></span>
-    </mat-card-actions>
-  </mat-card>
+  <li *ngFor="let movie of movies">
+    <mat-card class = "film-form">
+      <mat-card-header>
+        <mat-card-title> <p>{{movie.title}} </p></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Description</p>
+        <p>language</p>
+        <p>Rental Duration</p>
+        <p>Replacement Cost</p>
+        <p>Category</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <span>Want to book that Film?</span>
+        <span><button mat-raised-button class = "yes">Yes</button></span>
+        <span><button mat-raised-button class = "no" color="accent" routerLink="/films">No</button></span>
+      </mat-card-actions>
+    </mat-card>
+  </li>
 </main>
