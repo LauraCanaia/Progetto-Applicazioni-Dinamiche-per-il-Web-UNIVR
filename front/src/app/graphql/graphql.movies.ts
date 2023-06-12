@@ -26,11 +26,5 @@ const MOVIE = gql`query($film_title : String!){
 ;
 
 
-
-const LOGIN = gql`mutation Login($username : String!, $password : String!){
-  login(username : $username, password : $password)
-}`;
-
 export {MOVIES};
 export {MOVIE};
-export {LOGIN};

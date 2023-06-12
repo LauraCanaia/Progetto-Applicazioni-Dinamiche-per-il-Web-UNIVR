@@ -3,7 +3,7 @@ import {
   OnInit
 } from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {LOGIN} from '../graphql/graphql.movies';
+import {LOGIN} from '../graphql/graphql.mutations';
 import {ActivatedRoute, Router} from "@angular/router";
 import { NgForm } from '@angular/forms';
 
@@ -23,22 +23,22 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     console.log(form)
-    const username = form.value.username
+    const email = form.value.username
     const password = form.value.password
 
-    this.apolloCheck(username, password)
+    this.apolloCheck(email, password)
 
 
   }
 
-  apolloCheck(username : string, password : string){
+  apolloCheck(email : string, password : string){
 
 
     this.apollo
       .mutate({
         mutation : LOGIN,
         variables : {
-          username :  username,
+          email :  email,
           password :  password,
         }
       }).subscribe((result : any) => {
