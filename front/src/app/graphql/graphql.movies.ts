@@ -25,5 +25,21 @@ const MOVIE = gql`query($film_title : String!){
 }`
 ;
 
+const RENTAL_HISTORY = gql`query(){
+  pecunia_pagata(){
+    rental{
+      rental_date,
+      inventory{
+        film
+      }
+      return_date
+    },
+    amount,
+    payment_date
+  }
+}`
+;
+
 export {MOVIES};
 export {MOVIE};
+export {RENTAL_HISTORY};

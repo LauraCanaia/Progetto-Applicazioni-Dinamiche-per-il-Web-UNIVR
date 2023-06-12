@@ -18,6 +18,7 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilmFormComponent } from './film-form/film-form.component';
+import { RentalHistoryComponent } from './rental-history/rental-history.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FilmFormComponent } from './film-form/film-form.component';
     FilmComponent,
     LoginComponent,
     NavbarComponent,
-    FilmFormComponent
+    FilmFormComponent,
+    RentalHistoryComponent
   ],
     imports: [
         BrowserModule,
