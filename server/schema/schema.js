@@ -159,12 +159,12 @@ const RootMutationType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'testiamo il login',
       args: { 
-        username: { type: new GraphQLNonNull(GraphQLString) },
+        email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve: async (parent, {username, password}, {SECRET}) => {
+      resolve: async (parent, {email, password}, {SECRET}) => {
         
-        const user = await query_credentials(`select * from public."user" u where username like $1`, [username]) || ""
+        const user = await query_credentials(`select * from public."user" u where email like $1`, [email]) ||  ""
         console.log(user)
         
         const valid = await bcrypt.compare(password, user.rows[0].password)

@@ -18,11 +18,9 @@ app.use(logger('dev'))
 const checkUser = async (req, res) => {
   const token = req.headers["authorization"] || ""
   console.log(token)
-  // const result = await query_credentials(`select * from public."user" u where user_id = $1`, [1])
-  // console.log(result.rows)
+
   try{
     const {user} = await jwt.verify(token, SECRET);
-    console.log(user)
     req.user = user
   }catch(err){
     console.log(err)
