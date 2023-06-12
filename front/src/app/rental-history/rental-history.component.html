@@ -1,1 +1,33 @@
-<p>rental-history works!</p>
+<div *ngIf="!ishistory; else movie">
+
+  <div *ngIf="loading">
+    Loading ...
+  </div>
+  <div *ngIf="error">
+    Error :(
+  </div>
+  <main>
+    <div *ngIf = "history">
+      <li *ngFor="let rental of history">
+        <mat-card class="film-card">
+          <mat-card-header>
+            <mat-card-title>payment_date : {{toDate(rental.payment_date)}}</mat-card-title>
+            <mat-card-subtitle>amount: {{rental.amount}}</mat-card-subtitle>
+            <mat-card-subtitle>film: {{rental.rental.inventory.film.title}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{rental.description}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <!-- <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
+              DETAILS
+            </button> -->
+          </mat-card-actions>
+        </mat-card>
+      </li>
+    </div>
+  </main>
+</div>
+<ng-template #movie>
+  <p>Profilo di tua mamma</p>
+</ng-template>

@@ -20,13 +20,21 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./rental-history.component.css']
 })
 export class RentalHistoryComponent implements OnInit{
+  toDate(timemillis: string) {
+    let date = new Date(timemillis);
+    let dateString = date.toString();
+    console.log(dateString)
+    return date
+
+  }
+
+  ishistory = false
 
 
   reset = ""
   // @ts-ignore
-  ismovie : boolean;
   // 3 things I need to talk with the graphql api
-  movies : any[] = [];
+  history : any[] = [];
   loading = true;
   error : any;
 
@@ -43,9 +51,11 @@ export class RentalHistoryComponent implements OnInit{
           headers: new HttpHeaders().set("authorization", this.token),
         }
       }).valueChanges.subscribe((result : any) => {
-        console.log(result)
-        console.log(result?.data)
-      this.movies = result?.data?.rental;
+      this.history = result?.data?.pecunia_pagata;
+      console.log("uno " + this.history)
+      console.log("due " + this.history[0])
+      console.log("due " + this.history[0].rental.inventory.film.title)
+
       this.loading = result.loading;
       this.error = result.error;
     });
