@@ -1,10 +1,15 @@
+const bcrypt = require('bcrypt')
 const query = require('../config/db')
-// import * as from '../db.js'
+const query_credentials = require('../config/db_credentials')
+const jwt = require('jsonwebtoken')
 const queries = require('../src/queries')
+const _ = require('lodash')
+
 const {
   CategoryType,
   MovieType,
-  PaymentType
+  PaymentType,
+  UserType
 }  = require('../src/types');
 
 
@@ -18,10 +23,11 @@ const {
     GraphQLBoolean,
     GraphQLNonNull,
     GraphQLEnumType,
+    GraphQLError
   } = require('graphql');
 
 
-const RootQuery = new GraphQLObjectType({
+const RootQueryType = new GraphQLObjectType({
     name: 'RootQueryType',
     description: 'this is a root query',
     fields: {
@@ -35,7 +41,8 @@ const RootQuery = new GraphQLObjectType({
             only_available: { type: GraphQLBoolean,
                             description: 'return only available movies'}
           },
-          resolve: async (parent, args) => {
+          resolve: async (parent, args, {user}) => {
+            if (user){
             let conditionNumber = 0
             let newQuery = queries.getMovies
             let paramsList = []
@@ -71,11 +78,10 @@ const RootQuery = new GraphQLObjectType({
               conditionNumber++
               newQuery += queries.moviesAvailabilityCondition; 
             }
-
-            console.log(newQuery)
             const result = await query(newQuery, paramsList)
-            console.log(result.rows)
             return result.rows
+            }
+            return null
             
           }          
         },
@@ -86,12 +92,15 @@ const RootQuery = new GraphQLObjectType({
           args: { 
             film_id: { type: GraphQLID },
          },
-          resolve: async (parent, args) => {
+          resolve: async (parent, args, {user}) => {
+            if (user){
             let result = ""
             if (args.film_id != null){
               result = await query(queries.getMovieById, [args.film_id])
             }
             return result.rows[0]
+          }
+            return null
           }
         },
 
@@ -99,9 +108,12 @@ const RootQuery = new GraphQLObjectType({
         categories: {
           type: new GraphQLList(CategoryType),
           description: 'get all categories',
-          resolve: async () => {
+          resolve: async ( {user}) => {
+            if (user){
             const result = await query("select * from category c group by category_id")
             return result.rows
+          }          
+            return null
           }          
         },
 
@@ -109,19 +121,72 @@ const RootQuery = new GraphQLObjectType({
         pecunia_pagata:{
           type: new GraphQLList(PaymentType),
           description: 'list of payment',
-          args: { 
-            costumer_id: { type: GraphQLID }
-         },
-         resolve: async (parent, args) => {
-          const result = await query("select * from payment p where customer_id = $1", [args.costumer_id])
+         resolve: async (parent, args, {user}) => {
+          if (user){
+            const result = await query("select * from payment p where customer_id = $1", [user.customer_id])
           return result.rows
+        }  
+          return null
+
         }  
         }
     },
   });
 
 
-  module.exports = new GraphQLSchema ({
-    query: RootQuery
+
+const RootMutationType = new GraphQLObjectType({
+  name: 'RootMutationType',
+  description: 'this is a root mutation',
+  fields: {
+    // register:{
+    //   type: GraphQLString,
+    //   description: 'testiamo il register',
+    //   args: { 
+    //     username: { type: new GraphQLNonNull(GraphQLString) },
+    //     password: { type: new GraphQLNonNull(GraphQLString) },
+    //     customer_id: { type: GraphQLID }
+    //   },
+    //   resolve: async (parent, args, ) => {
+    //     let password = await bcrypt.hash(args.password, 10)
+    //     console.log(password)
+    //     return "test register"
+    //   }   
+    // },
+
+
+    login:{
+      type: GraphQLString,
+      description: 'testiamo il login',
+      args: { 
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) }
+      },
+      resolve: async (parent, {email, password}, {SECRET}) => {
+        
+        const user = await query_credentials(`select * from public."user" u where email like $1`, [email]) ||  ""
+        console.log(user)
+        
+        const valid = await bcrypt.compare(password, user.rows[0].password)
+        if (!valid){  
+          throw new Error('Incorret user or password');
+        }
+        const token = jwt.sign(
+          {
+            user: _.pick(user.rows[0], ['user_id', 'customer_id'])
+          },
+          SECRET,
+          {
+            expiresIn: '1y'
+          }
+        );
+        return token
+      }   
+    },
+  }
   })
   
+module.exports = new GraphQLSchema ({
+  query: RootQueryType,
+  mutation: RootMutationType
+})

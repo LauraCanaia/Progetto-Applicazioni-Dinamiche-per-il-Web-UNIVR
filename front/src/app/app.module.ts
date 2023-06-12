@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 // modules
 import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
@@ -39,7 +41,10 @@ import { RentalHistoryComponent } from './rental-history/rental-history.componen
         MatCardModule,
         MatToolbarModule,
         MatInputModule,
-        FormsModule
+        FormsModule,
+        MatSelectModule,
+        MatFormFieldModule
+
     ],
   providers: [],
   bootstrap: [AppComponent]

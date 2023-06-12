@@ -1,24 +1,19 @@
 <main>
-  <mat-card>
-    <mat-card-content>
-      <table class = "username" cellspacing="0">
-        <!-- td creates the cell -->
-        <td>
-          <mat-form-field class = "username_form">
-            <mat-label>Username</mat-label>
-            <input matInput>
-          </mat-form-field>
-        </td>
-      </table>
-      <table>
-        <td>
-          <mat-form-field class = "password_form">
-            <mat-label>Password</mat-label>
-            <input type = "password" matInput>
-          </mat-form-field>
-        </td>
-      </table>
-      <button mat-raised-button color="accent">Login</button>
-    </mat-card-content>
-  </mat-card>
-</main>
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+    <div class="login">
+      <mat-card>
+      <mat-form-field class = "username_form">
+        <mat-label>Username</mat-label>
+        <input matInput type="text" name="username" ngModel required>
+      </mat-form-field>
+      <mat-form-field class = "password_form">
+        <mat-label >Password</mat-label >
+        <input type = "password" matInput type="password" name="password" ngModel required>
+
+      </mat-form-field>
+      <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid">Login</button>
+
+    </mat-card>
+    </div>
+  </form>
+<main>
