@@ -25,12 +25,14 @@ const MOVIE = gql`query($film_title : String!){
 }`
 ;
 
-const RENTAL_HISTORY = gql`query(){
-  pecunia_pagata(){
+const RENTAL_HISTORY = gql`query{
+  pecunia_pagata{
     rental{
       rental_date,
       inventory{
-        film
+        film{
+          title
+        }
       }
       return_date
     },
