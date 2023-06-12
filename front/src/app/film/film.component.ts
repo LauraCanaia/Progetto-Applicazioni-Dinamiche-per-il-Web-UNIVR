@@ -12,6 +12,7 @@ import {MOVIES} from '../graphql/graphql.movies';
 import {util} from "protobufjs";
 import EventEmitter = util.EventEmitter;
 import {ActivatedRoute, Router} from "@angular/router";
+import { HttpHeaders } from '@angular/common/http';
 
 // @ts-ignore
 @Component({
@@ -31,6 +32,7 @@ DoCheck, OnDestroy{
   loading = true;
   error : any;
 
+  token = sessionStorage.getItem('token') || "";
 
   constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router) {
   }
@@ -41,6 +43,9 @@ DoCheck, OnDestroy{
         query : MOVIES,
         variables : {
           film_title :  title,
+        },
+        context: {
+          headers: new HttpHeaders().set("authorization", this.token),
         }
       }).valueChanges.subscribe((result : any) => {
       this.movies = result?.data?.movies;
