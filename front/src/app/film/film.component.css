@@ -4,6 +4,9 @@
   font-weight: bolder;
   cursor: pointer;
 }
+book ng-tns-c1351155106-2{
+  text-align: center;
+}
 
 .reset{
   font-weight: bold;
@@ -28,5 +31,15 @@ li{
 
 .film-card{
   width: 100%;
+  align-items: center;
+}
+
+mat-accordion{
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+mat-content ng-tns-c1351155106-2 mat-content-hide-toggle{
   align-items: center;
 }

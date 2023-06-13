@@ -20,6 +20,7 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilmFormComponent } from './film-form/film-form.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FilmFormComponent } from './film-form/film-form.component';
         MatInputModule,
         FormsModule,
         MatSelectModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatExpansionModule
 
     ],
   providers: [],

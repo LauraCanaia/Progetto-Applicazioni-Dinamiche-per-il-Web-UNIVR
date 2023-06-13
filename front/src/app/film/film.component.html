@@ -30,10 +30,22 @@
           </mat-card-content>
           <mat-card-actions>
             <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
-              DETAILS
+              BOOK
             </button>
           </mat-card-actions>
         </mat-card>
+        <mat-accordion>
+          <mat-expansion-panel hideToggle>
+            <mat-panel-title>
+              <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
+                BOOK
+              </button>
+            </mat-panel-title>
+            <mat-expansion-panel-header>
+              <div class = "book">DETAILS</div>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
       </li>
     </div>
   </main>
