@@ -25,8 +25,6 @@ export class RentalHistoryComponent implements OnInit{
     var date = parseInt(timemillis);
     var d = new Date(date);
     var ds = d.toLocaleString();
-    // alert(ds);
-    console.log(ds);
     return ds
   }
 
