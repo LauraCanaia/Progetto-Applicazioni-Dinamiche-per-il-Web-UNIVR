@@ -21,6 +21,7 @@ import {FormsModule} from "@angular/forms";
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilmFormComponent } from './film-form/film-form.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatChipsModule} from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -30,22 +31,23 @@ import {MatExpansionModule} from "@angular/material/expansion";
     NavbarComponent,
     FilmFormComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        GraphQLModule,
-        HttpClientModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatInputModule,
-        FormsModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatExpansionModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    GraphQLModule,
+    HttpClientModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatInputModule,
+    FormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatExpansionModule,
+    MatChipsModule
 
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
