@@ -42,10 +42,26 @@
         </mat-card>
         <mat-accordion>
           <mat-expansion-panel hideToggle>
+            <mat-panel-description>
+              <mat-card class = "layer-card">
+                <mat-card-content>
+                  <p>Description : {{movie.description}}</p>
+                  <p>Release Year : {{movie.release_year}}</p>
+                  <p>Rental duration : {{movie.rental_duration}} days</p>
+                  <p>Film length : {{movie.length}} minutes</p>
+                  <p>Actors :
+                    <div *ngFor="let entity of movie.actor">
+                      <p>{{entity.first_name}} {{entity.last_name}}</p>
+                    </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-panel-description>
             <mat-panel-title>
-              <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
-                BOOK
-              </button>
+              <div>
+                <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
+                  BOOK
+                </button>
+              </div>
             </mat-panel-title>
             <mat-expansion-panel-header>
               <div class = "book">DETAILS</div>
