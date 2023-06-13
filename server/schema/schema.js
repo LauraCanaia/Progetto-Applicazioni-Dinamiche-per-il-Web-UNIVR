@@ -9,7 +9,8 @@ const {
   CategoryType,
   MovieType,
   PaymentType,
-  UserType
+  UserType,
+  BasketType
 }  = require('../src/types');
 
 
@@ -35,11 +36,12 @@ const RootQueryType = new GraphQLObjectType({
           type: new GraphQLList(MovieType),
           description: 'get list of all movies',
           args: { 
-            film_title: { type: GraphQLString },
+            film_title: { type: GraphQLString,
+              description: 'list of movies that matches argument'},
             film_category: { type : new GraphQLList(GraphQLID),
-                            description: 'list of id of wanted categories'},
+              description: 'list of id of wanted categories'},
             only_available: { type: GraphQLBoolean,
-                            description: 'return only available movies'}
+               description: 'return only available movies'}
           },
           resolve: async (parent, args, {user}) => {
             if (user){
@@ -133,6 +135,7 @@ const RootQueryType = new GraphQLObjectType({
     },
   });
 
+  let basket = []
 
 
 const RootMutationType = new GraphQLObjectType({
@@ -153,6 +156,55 @@ const RootMutationType = new GraphQLObjectType({
     //     return "test register"
     //   }   
     // },
+
+    addToBasket:{
+      type: GraphQLBoolean,
+      description: 'add movie to basket of a customer',
+      args: { 
+        film_id: { type: new GraphQLNonNull(GraphQLID) },
+        description: 'list of payment',
+      },
+      resolve: async (parent, args, {user}) => {
+        if (user){
+          try{
+            await query_credentials(`INSERT INTO public.basket (customer_id, film_id) VALUES($1, $2);`, [user.customer_id, args.film_id])
+          }catch(e){
+            return false
+          }
+          return true
+        }  
+        return null
+      }
+    },
+
+    removeFromBasket:{
+      type: GraphQLBoolean,
+      description: 'remove movie from basket of a customer',
+      args: { 
+        film_id: { type: GraphQLID},
+        description: 'id of movie to remove, remove all otherwise',
+      },
+      resolve: async (parent, args, {user}) => {
+        if (user){
+          if (args.film_id){
+            try{
+              await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1 AND film_id=$2;`, [user.customer_id, args.film_id])
+            }catch(e){
+              return false
+            }
+            return true
+          }
+          try{
+            await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
+          }catch(e){
+            return false
+          }
+          return true
+          
+        }  
+        return null
+      }
+    },
 
 
     login:{
