@@ -3,8 +3,15 @@ import {gql} from 'apollo-angular';
 const MOVIES = gql`query($film_title : String!){
   movies(film_title : $film_title){
     title,
-    description,
-    release_year
+    release_year,
+    rating,
+    category{
+      name
+    },
+    language{
+      name
+    },
+    replacement_cost
   }
 }`
 ;

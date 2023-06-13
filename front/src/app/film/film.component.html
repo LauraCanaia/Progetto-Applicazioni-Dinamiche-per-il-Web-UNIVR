@@ -23,7 +23,10 @@
             <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <p>{{movie.description}}</p>
+            <p>Rating : {{movie.rating}}</p>
+            <p>Genre : {{movie.category[0].name}}</p>
+            <p>Language/Languages : {{movie.language.name}}</p>
+            <p>Cost : {{movie.replacement_cost}}$</p>
           </mat-card-content>
           <mat-card-actions>
             <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
