@@ -4,23 +4,37 @@ const MOVIES = gql`query($film_title : String!){
   movies(film_title : $film_title){
     title,
     description,
-    release_year
+    release_year,
+    rating,
+    rental_duration,
+    length,
+    category{
+      name
+    },
+    actor{
+      first_name,
+      last_name
+    },
+    language{
+      name
+    },
+    replacement_cost
   }
 }`
 ;
 
-const MOVIE = gql`query($film_title : String!){
-  movies(film_title : $film_title){
+const CATFILTER = gql`query($film_category : [ID]!){
+  movies(film_category : $film_category){
     title,
-    description,
+    release_year,
+    rating,
+    category{
+      name
+    },
     language{
       name
     },
-    rental_duration,
-    replacement_cost,
-    category{
-      name
-    }
+    replacement_cost
   }
 }`
 ;
@@ -43,5 +57,9 @@ const RENTAL_HISTORY = gql`query{
 ;
 
 export {MOVIES};
+<<<<<<< HEAD
 export {MOVIE};
 export {RENTAL_HISTORY};
+=======
+export {CATFILTER};
+>>>>>>> develop

@@ -8,11 +8,11 @@ import {
   OnInit, Output
 } from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {MOVIES} from '../graphql/graphql.movies';
-import {util} from "protobufjs";
-import EventEmitter = util.EventEmitter;
+import {CATFILTER, MOVIES} from '../graphql/graphql.movies';
+import {CATEGORIES} from "../graphql/graphql.categories";
 import {ActivatedRoute, Router} from "@angular/router";
 import { HttpHeaders } from '@angular/common/http';
+import {MatChipSelectionChange} from "@angular/material/chips";
 
 // @ts-ignore
 @Component({
@@ -32,11 +32,45 @@ DoCheck, OnDestroy{
   loading = true;
   error : any;
 
+  categories : any[] = [];
+
   token = sessionStorage.getItem('token') || "";
 
   constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router) {
   }
 
+  categoriesApollo()
+  {
+    this.apollo
+      .watchQuery({
+        query : CATEGORIES,
+        context: {
+          headers: new HttpHeaders().set("authorization", this.token),
+        }
+      }).valueChanges.subscribe((result : any) => {
+        this.categories = result?.data?.categories;
+    });
+  }
+
+
+  apolloCheckCat(categories : any){
+    this.apollo
+      .watchQuery({
+        query : CATFILTER,
+        variables : {
+          film_category :  categories,
+        },
+        context: {
+          headers: new HttpHeaders().set("authorization", this.token),
+        }
+      }).valueChanges.subscribe((result : any) => {
+      this.movies = result?.data?.movies;
+      console.log(this.movies)
+      this.loading = result.loading;
+      this.error = result.error;
+    });
+
+  }
   apolloCheck(title : string){
     this.apollo
       .watchQuery({
@@ -57,6 +91,7 @@ DoCheck, OnDestroy{
 
   ngOnInit(): void {
     this.apolloCheck("")
+    this.categoriesApollo();
   }
 
   ngAfterContentChecked(): void {
@@ -92,4 +127,8 @@ DoCheck, OnDestroy{
     this.apolloCheck(name.target.value)
   }
 
+  onSearchCat(category : any) {
+    console.log(category.category_id)
+    this.apolloCheckCat([category.category_id])
+  }
 }

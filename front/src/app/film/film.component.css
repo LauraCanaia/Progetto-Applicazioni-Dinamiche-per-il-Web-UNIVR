@@ -3,6 +3,11 @@
   color: deeppink;
   font-weight: bolder;
   cursor: pointer;
+  margin-top: 5px;
+  align-items: center;
+}
+book ng-tns-c1351155106-2{
+  text-align: center;
 }
 
 .reset{
@@ -27,6 +32,23 @@ li{
 }
 
 .film-card{
+  width: 100%;
+  align-items: center;
+}
+
+mat-accordion{
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+mat-content ng-tns-c1351155106-2 mat-content-hide-toggle{
+  align-items: center;
+}
+
+.layer-card{
+  font-weight: normal;
+  color: black;
   width: 100%;
   align-items: center;
 }

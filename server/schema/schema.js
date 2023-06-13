@@ -108,7 +108,7 @@ const RootQueryType = new GraphQLObjectType({
         categories: {
           type: new GraphQLList(CategoryType),
           description: 'get all categories',
-          resolve: async ( {user}) => {
+          resolve: async ( parent, args, {user}) => {
             if (user){
             const result = await query("select * from category c group by category_id")
             return result.rows

@@ -8,6 +8,12 @@
     <input matInput placeholder="Film Title" (keyup)="onSearch($event)" [(ngModel)] = "reset">
   </mat-form-field>
 
+  <mat-chip-listbox aria-label = "category-selection">
+    <li *ngFor = "let cat of categories">
+      <mat-chip-option color = "accent" (selectionChange)="onSearchCat(cat)">{{cat.name}}</mat-chip-option>
+    </li>
+  </mat-chip-listbox>
+
   <div *ngIf="loading">
     Loading ...
   </div>
@@ -23,18 +29,50 @@
             <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <p>{{movie.description}}</p>
+            <p>Rating : {{movie.rating}}</p>
+            <p>Genre : {{movie.category[0].name}}</p>
+            <p>Language/Languages : {{movie.language.name}}</p>
+            <p>Cost : {{movie.replacement_cost}}$</p>
           </mat-card-content>
           <mat-card-actions>
             <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
-              DETAILS
+              BOOK
             </button>
           </mat-card-actions>
         </mat-card>
+        <mat-accordion>
+          <mat-expansion-panel hideToggle>
+            <mat-panel-description>
+              <mat-card class = "layer-card">
+                <mat-card-content>
+                  <p>Description : {{movie.description}}</p>
+                  <p>Release Year : {{movie.release_year}}</p>
+                  <p>Rental duration : {{movie.rental_duration}} days</p>
+                  <p>Film length : {{movie.length}} minutes</p>
+                  <p>Actors :
+                    <div *ngFor="let entity of movie.actor">
+                      <p>{{entity.first_name}} {{entity.last_name}}</p>
+                    </div>
+                </mat-card-content>
+              </mat-card>
+            </mat-panel-description>
+            <mat-panel-title>
+              <div>
+                <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
+                  BOOK
+                </button>
+              </div>
+            </mat-panel-title>
+            <mat-expansion-panel-header>
+              <div class = "book">DETAILS</div>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
       </li>
     </div>
   </main>
 </div>
 <ng-template #movie>
-  <p>Profilo di tua mamma</p>
+  <p>...
+  </p>
 </ng-template>
