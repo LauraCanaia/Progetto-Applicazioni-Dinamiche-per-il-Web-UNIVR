@@ -57,9 +57,5 @@ const RENTAL_HISTORY = gql`query{
 ;
 
 export {MOVIES};
-<<<<<<< HEAD
-export {MOVIE};
-export {RENTAL_HISTORY};
-=======
 export {CATFILTER};
->>>>>>> develop
+export {RENTAL_HISTORY};
