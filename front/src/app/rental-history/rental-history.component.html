@@ -8,26 +8,39 @@
   </div>
   <main>
     <div *ngIf = "history">
-      <li *ngFor="let rental of history">
-        <mat-card class="film-card">
+      <li *ngFor="let rental_event of history; index as i">
+        <mat-card class="rental-card">
           <mat-card-header>
-            <mat-card-title>payment_date : {{toDate(rental.payment_date)}}</mat-card-title>
-            <mat-card-subtitle>amount: {{rental.amount}}</mat-card-subtitle>
-            <mat-card-subtitle>film: {{rental.rental.inventory.film.title}}</mat-card-subtitle>
+            <mat-card-title>Rental No. {{i+1}}</mat-card-title>
+            <!-- <mat-card-subtitle>amount: {{rental_event.amount}}</mat-card-subtitle> -->
           </mat-card-header>
           <mat-card-content>
-            <p>{{rental.description}}</p>
+            <p> payment date : {{toDate(rental_event.payment_date)}} </p>
+            <p> duration: {{getDuration(rental_event.rental.return_date-rental_event.rental.rental_date)}} </p>
+            <p> amount: {{rental_event.amount}} </p>
           </mat-card-content>
-          <mat-card-actions>
-            <!-- <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
-              DETAILS
-            </button> -->
-          </mat-card-actions>
+          <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-panel-description>
+                <mat-card class = "layer-card">
+                  <mat-card-content>
+                    <p>Film : {{rental_event.rental.inventory.film.title}}</p>
+
+                  </mat-card-content>
+                </mat-card>
+              </mat-panel-description>
+              <mat-expansion-panel-header>
+                <div class = "book"> DETAILS</div>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
         </mat-card>
       </li>
     </div>
   </main>
 </div>
 <ng-template #movie>
-  <p>Profilo di tua mamma</p>
+  <p>...</p>
 </ng-template>
+
+

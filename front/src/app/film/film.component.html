@@ -22,7 +22,7 @@
   </div>
   <main>
     <div *ngIf = "movies">
-      <li *ngFor="let movie of movies">
+      <li *ngFor="let movie of movies" | async >
         <mat-card class="film-card">
           <mat-card-header>
             <mat-card-title>{{movie.title}}</mat-card-title>
