@@ -9,10 +9,17 @@ Andando alla ciccia:
 CONFIGURAZIONE NECESSARIA PRIMA DI FARLO PARTIRE:
 
 - scaricare database (https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/) e importarlo in Postgres
+- creare un secondo db (per gli utenti) chiamato "dvdrental_user", con una tabella "user" con i seguenti campi:
+    user_id (int4)
+    username (text)
+    password (text)
+    customer_id (int4)
+
 - modificare il file server/.env con i dettagli di configurazione del proprio database Postgres
 
 
-PER FARLO FUNZIONARE:
+
+COMANDI PER FARLO FUNZIONARE:
 
 aprire il terminale e usare i seguenti comandi
 - npm install (scarica i pacchetti necessari)
@@ -20,18 +27,6 @@ aprire il terminale e usare i seguenti comandi
 
 per testare grapgql:
 http://localhost:PORT/graphql
-
-graphql endpoint:
-movies(film_title: String, film_category: [String], only_available: Boolean)    : [Movie]
-movie(film_id: ID, film_title: String)                                          : Movie
-categories                                                                      : [Category]
-
-
-esempi:
-{movies{film_title}} -> lista di titoli di tutti i film
-{movies(only_available : true){film_title}} -> lista di titoli di tutti i film disponibili
-
-
 
 
 
