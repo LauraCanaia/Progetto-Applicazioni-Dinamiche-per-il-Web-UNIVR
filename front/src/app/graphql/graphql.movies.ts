@@ -16,22 +16,22 @@ const MOVIES = gql`query($film_title : String!){
 }`
 ;
 
-const MOVIE = gql`query($film_title : String!){
-  movies(film_title : $film_title){
+const CATFILTER = gql`query($film_category : [ID]!){
+  movies(film_category : $film_category){
     title,
-    description,
+    release_year,
+    rating,
+    category{
+      name
+    },
     language{
       name
     },
-    rental_duration,
-    replacement_cost,
-    category{
-      name
+    replacement_cost
     }
-  }
 }`
 ;
 
 
 export {MOVIES};
-export {MOVIE};
+export {CATFILTER};
