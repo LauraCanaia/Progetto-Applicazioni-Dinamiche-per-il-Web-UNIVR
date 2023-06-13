@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Apollo} from "apollo-angular";
 import {query} from "@angular/animations";
 import {Router} from "@angular/router";
-import {MOVIE} from "../graphql/graphql.movies";
 import { HttpHeaders } from '@angular/common/http';
 
 @Component({
@@ -18,7 +17,7 @@ export class FilmFormComponent implements OnInit{
   token = sessionStorage.getItem('token') || "";
 
 
-  apolloCheck(title : string){
+ /*apolloCheck(title : string){
     this.apollo
       .watchQuery({
         query : MOVIE,
@@ -32,13 +31,13 @@ export class FilmFormComponent implements OnInit{
         this.movies = result?.data?.movies;
     });
 
-  }
+  }*/
 
   constructor(private apollo : Apollo, private router : Router){
   }
 
   ngOnInit(): void {
     this.title = this.router.url.split('/').pop()?.replace("%20", ' ');
-    this.apolloCheck(this.title.toString())
+    //this.apolloCheck(this.title.toString())
   }
 }
