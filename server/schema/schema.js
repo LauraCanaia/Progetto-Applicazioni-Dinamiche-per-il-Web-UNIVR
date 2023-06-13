@@ -123,15 +123,35 @@ const RootQueryType = new GraphQLObjectType({
         pecunia_pagata:{
           type: new GraphQLList(PaymentType),
           description: 'list of payment',
-         resolve: async (parent, args, {user}) => {
-          if (user){
-            const result = await query("select * from payment p where customer_id = $1", [user.customer_id])
-          return result.rows
-        }  
-          return null
+          resolve: async (parent, args, {user}) => {
+            if (user){
+              const result = await query("select * from payment p where customer_id = $1", [user.customer_id])
+              return result.rows
+            }  
+            return null
+          }  
+        },
 
-        }  
+        basket:{
+          type: new GraphQLList(BasketType),
+          description: 'list movie in basket',
+          resolve: async (parent, args, {user}) => {
+            if (user){
+              const result = await query_credentials("SELECT customer_id, film_id FROM public.basket WHERE customer_id = $1", [user.customer_id])
+              console.log (result.rows)
+              let resulto = result.rows.map(a => a.film_id);
+              const basket = [{
+                'customer_id': user.customer_id,
+                'film_id': resulto                 
+              }]
+
+              return basket
+            }  
+            return null
+
+          }  
         }
+
     },
   });
 
@@ -161,8 +181,9 @@ const RootMutationType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'add movie to basket of a customer',
       args: { 
-        film_id: { type: new GraphQLNonNull(GraphQLID) },
-        description: 'list of payment',
+        film_id: { type: new GraphQLNonNull(GraphQLID),
+        description: 'list of payment' },
+        
       },
       resolve: async (parent, args, {user}) => {
         if (user){
@@ -181,8 +202,9 @@ const RootMutationType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'remove movie from basket of a customer',
       args: { 
-        film_id: { type: GraphQLID},
-        description: 'id of movie to remove, remove all otherwise',
+        film_id: { type: GraphQLID,
+        description: 'id of movie to remove, remove all otherwise',},
+        
       },
       resolve: async (parent, args, {user}) => {
         if (user){

@@ -233,10 +233,12 @@ const BasketType = new GraphQLObjectType({
       },
       film: { type: new GraphQLList(MovieType), 
         resolve: async (parent, args) => {
-          const result = await query(queries.getMovieById, [parent.film_id]);
-          return result.rows[0]
+          const result = await query('SELECT * FROM film WHERE film_id = ANY ($1)', [parent.film_id]);
+          return result.rows
         }
       }
+      
+
   }),
 });
 
