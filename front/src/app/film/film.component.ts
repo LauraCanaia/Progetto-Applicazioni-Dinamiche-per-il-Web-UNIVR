@@ -11,6 +11,8 @@ import {Apollo} from 'apollo-angular';
 import {MOVIES} from '../graphql/graphql.movies';
 import {util} from "protobufjs";
 import EventEmitter = util.EventEmitter;
+import {ActivatedRoute, Router} from "@angular/router";
+import { HttpHeaders } from '@angular/common/http';
 
 // @ts-ignore
 @Component({
@@ -23,15 +25,16 @@ export class FilmComponent implements OnInit, AfterContentChecked, AfterContentI
 DoCheck, OnDestroy{
 
   reset = ""
-
+  // @ts-ignore
+  ismovie : boolean;
   // 3 things I need to talk with the graphql api
   movies : any[] = [];
   loading = true;
   error : any;
 
+  token = sessionStorage.getItem('token') || "";
 
-
-  constructor(private apollo : Apollo) {
+  constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router) {
   }
 
   apolloCheck(title : string){
@@ -40,18 +43,20 @@ DoCheck, OnDestroy{
         query : MOVIES,
         variables : {
           film_title :  title,
+        },
+        context: {
+          headers: new HttpHeaders().set("authorization", this.token),
         }
       }).valueChanges.subscribe((result : any) => {
       this.movies = result?.data?.movies;
       this.loading = result.loading;
       this.error = result.error;
     });
+
   }
 
   ngOnInit(): void {
-
     this.apolloCheck("")
-
   }
 
   ngAfterContentChecked(): void {
@@ -78,12 +83,13 @@ DoCheck, OnDestroy{
     this.apolloCheck("")
   }
 
-  onClick(e : any) {
-    console.log(e)
+  onClick(e : any, title : string) {
+    this._router.navigateByUrl('films/filmForm/'.concat(title));
   }
 
   onSearch(name : any)
   {
     this.apolloCheck(name.target.value)
   }
+
 }

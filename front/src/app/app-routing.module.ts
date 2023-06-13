@@ -4,10 +4,13 @@ import {FilmComponent} from "./film/film.component";
 import {LoginComponent} from "./login/login.component";
 import {FilmFormComponent} from "./film-form/film-form.component";
 
+// essenzialmente app-routing è la "zona di lavoro" della web-app
+
+// tutti le "pagine" delle mie routes
 const routes: Routes = [
   {path : '', component : LoginComponent},
   {path : 'films', component : FilmComponent},
-  {path : 'filmForm', component : FilmFormComponent}
+  {path : 'films/filmForm/:title', component : FilmFormComponent}
 ];
 
 @NgModule({
