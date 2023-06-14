@@ -77,6 +77,7 @@ export class FilmComponent implements OnInit{
 // Taking the string of the filter -> HTMLInputElement is a casting
   onInput(event : Event) {
     this.reset = (<HTMLInputElement>event.target).value
+    this.title = ""
     this.selectedCategories = []  // È GIUSTO COSI?????????????????????????????
     this.apolloCheck()
   }
