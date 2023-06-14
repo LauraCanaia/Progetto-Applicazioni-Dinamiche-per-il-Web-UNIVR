@@ -39,47 +39,53 @@ const RootQueryType = new GraphQLObjectType({
             film_category: { type : new GraphQLList(GraphQLID),
                             description: 'list of id of wanted categories'},
             only_available: { type: GraphQLBoolean,
-                            description: 'return only available movies'}
+                            description: 'return only available movies'},
+            limit: { type: GraphQLInt,
+                              description: 'how may movie to return'}
           },
           resolve: async (parent, args, {user}) => {
             if (user){
-            let conditionNumber = 0
-            let newQuery = queries.getMovies
-            let paramsList = []
+              let conditionNumber = 0
+              let newQuery = queries.getMovies
+              let paramsList = []
 
-            if (args.film_title != null){
-              if (conditionNumber == 0){
-                newQuery += " WHERE " 
-              }else{
-                newQuery += " AND "
+              if (args.film_title != null && args.film_title!=""){
+                if (conditionNumber == 0){
+                  newQuery += " WHERE " 
+                }else{
+                  newQuery += " AND "
+                }
+                conditionNumber++
+                newQuery += queries.moviesByTitleCondition.replace("$1", "$"+conditionNumber); 
+                paramsList.push('%' + args.film_title + '%');
               }
-              conditionNumber++
-              newQuery += queries.moviesByTitleCondition.replace("$1", "$"+conditionNumber); 
-              paramsList.push('%' + args.film_title + '%');
-            }
 
-            if (args.film_category != null){
-              if (conditionNumber == 0){
-                newQuery += " WHERE "
-              }else{
-                newQuery += " AND "
+              if (args.film_category != undefined && args.film_category.length != 0){
+                if (conditionNumber == 0){
+                  newQuery += " WHERE "
+                }else{
+                  newQuery += " AND "
+                }
+                conditionNumber++
+                newQuery += queries.moviesByCategoryCondition.replace("$1", "$"+conditionNumber); 
+                paramsList.push(args.film_category);
               }
-              conditionNumber++
-              newQuery += queries.moviesByCategoryCondition.replace("$1", "$"+conditionNumber); 
-              paramsList.push(args.film_category);
-            }
 
-            if (args.only_available != null && args.only_available==true){
-              if (conditionNumber == 0){
-                newQuery += " WHERE "
-              }else{
-                newQuery += " AND "
+              if (args.only_available != null && args.only_available==true){
+                if (conditionNumber == 0){
+                  newQuery += " WHERE "
+                }else{
+                  newQuery += " AND "
+                }
+                conditionNumber++
+                newQuery += queries.moviesAvailabilityCondition; 
               }
-              conditionNumber++
-              newQuery += queries.moviesAvailabilityCondition; 
-            }
-            const result = await query(newQuery, paramsList)
-            return result.rows
+              if (args.limit != null){
+                // newQuery += " LIMIT 100"
+              }
+newQuery += " LIMIT 50"
+              const result = await query(newQuery, paramsList)
+              return result.rows
             }
             return null
             

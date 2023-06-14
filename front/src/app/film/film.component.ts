@@ -8,7 +8,7 @@ import {
   OnInit, Output
 } from '@angular/core';
 import {Apollo} from 'apollo-angular';
-import {CATFILTER, MOVIES} from '../graphql/graphql.movies';
+import {MOVIES} from '../graphql/graphql.movies';
 import {CATEGORIES} from "../graphql/graphql.categories";
 import {ActivatedRoute, Router} from "@angular/router";
 import { HttpHeaders } from '@angular/common/http';
@@ -34,6 +34,9 @@ DoCheck, OnDestroy{
 
   categories : any[] = [];
 
+  selectedCategories : number[] = [];
+  title : string = ""
+
   token = sessionStorage.getItem('token') || "";
 
   constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router) {
@@ -52,31 +55,13 @@ DoCheck, OnDestroy{
     });
   }
 
-
-  apolloCheckCat(categories : any){
-    this.apollo
-      .watchQuery({
-        query : CATFILTER,
-        variables : {
-          film_category :  categories,
-        },
-        context: {
-          headers: new HttpHeaders().set("authorization", this.token),
-        }
-      }).valueChanges.subscribe((result : any) => {
-      this.movies = result?.data?.movies;
-      console.log(this.movies)
-      this.loading = result.loading;
-      this.error = result.error;
-    });
-
-  }
-  apolloCheck(title : string){
+  apolloCheck(){
     this.apollo
       .watchQuery({
         query : MOVIES,
         variables : {
-          film_title :  title,
+          film_title :  this.title,
+          film_category :  this.selectedCategories,
         },
         context: {
           headers: new HttpHeaders().set("authorization", this.token),
@@ -90,7 +75,7 @@ DoCheck, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.apolloCheck("")
+    this.apolloCheck()
     this.categoriesApollo();
   }
 
@@ -115,7 +100,8 @@ DoCheck, OnDestroy{
 // Taking the string of the filter -> HTMLInputElement is a casting
   onInput(event : Event) {
     this.reset = (<HTMLInputElement>event.target).value
-    this.apolloCheck("")
+    this.selectedCategories = []  // È GIUSTO COSI?????????????????????????????
+    this.apolloCheck()
   }
 
   onClick(e : any, title : string) {
@@ -124,11 +110,18 @@ DoCheck, OnDestroy{
 
   onSearch(name : any)
   {
-    this.apolloCheck(name.target.value)
+    this.title = name.target.value
+    this.apolloCheck()
   }
 
-  onSearchCat(category : any) {
-    console.log(category.category_id)
-    this.apolloCheckCat([category.category_id])
+  onSearchCat(selected: boolean, category_id : number) {
+
+    if (selected){
+      this.selectedCategories = [category_id]
+    }else{
+      this.selectedCategories = []
+    }
+
+    this.apolloCheck()
   }
 }

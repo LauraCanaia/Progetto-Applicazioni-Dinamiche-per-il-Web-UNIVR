@@ -23,7 +23,7 @@ const checkUser = async (req, res) => {
     const {user} = await jwt.verify(token, SECRET);
     req.user = user
   }catch(err){
-    console.log(err)
+    // console.log(err)
   }
   req.next();
 };
