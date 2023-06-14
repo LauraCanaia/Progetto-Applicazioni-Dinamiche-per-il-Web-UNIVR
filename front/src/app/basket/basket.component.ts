@@ -61,8 +61,6 @@ maxDate: Date = new Date();
 
   ngOnInit(): void {
     this.apolloBasket()
-
-    var result = new Date();
     this.maxDate.setDate(this.maxDate.getDate() + 2);
 
   }
@@ -76,10 +74,7 @@ maxDate: Date = new Date();
   }
 
   onClickDelete($event: MouseEvent, film_id: number) {
-    console.log(film_id)
-
     this.apolloRemoveFromBasket(film_id)
-    this.apolloBasket()
   }
 
 

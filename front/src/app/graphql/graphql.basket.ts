@@ -20,6 +20,16 @@ const BASKET = gql `query Basket {
 }
 `;
 
+const FILMINBASKET = gql `query Basket {
+  basket {
+      film {
+          film_id
+
+      }
+  }
+}
+`;
 
 
-export {BASKET};
+
+export {BASKET, FILMINBASKET};

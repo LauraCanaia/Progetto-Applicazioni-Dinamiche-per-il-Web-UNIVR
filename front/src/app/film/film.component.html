@@ -35,8 +35,8 @@
             <p>Cost : {{movie.replacement_cost}}$</p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)">
-              BOOK
+            <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">
+              <ng-template *ngIf="isIdInSelectedMovies(movie.film_id); then ifbooked else ifnotbooked"></ng-template>
             </button>
           </mat-card-actions>
         </mat-card>
@@ -58,8 +58,8 @@
             </mat-panel-description>
             <mat-panel-title>
               <div>
-                <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)">
-                  BOOK
+                <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">
+                  <ng-template *ngIf="isIdInSelectedMovies(movie.film_id); then ifbooked else ifnotbooked"></ng-template>
                 </button>
               </div>
             </mat-panel-title>
@@ -75,4 +75,11 @@
 <ng-template #movie>
   <p>...
   </p>
+</ng-template>
+
+<ng-template #ifbooked>
+  <p>Booked</p>
+</ng-template>
+<ng-template #ifnotbooked>
+  <p>Book</p>
 </ng-template>

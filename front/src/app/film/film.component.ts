@@ -5,6 +5,7 @@ import {
 import {Apollo} from 'apollo-angular';
 import {MOVIES} from '../graphql/graphql.movies';
 import {CATEGORIES} from "../graphql/graphql.categories";
+import {FILMINBASKET} from "../graphql/graphql.basket";
 import {ActivatedRoute, Router} from "@angular/router";
 import { HttpHeaders } from '@angular/common/http';
 import {ADDTOBASKET} from "../graphql/graphql.mutations";
@@ -30,6 +31,8 @@ export class FilmComponent implements OnInit{
 
   selectedCategories : number[] = [];
   title : string = ""
+
+  selectedMovies : number[] = [];
 
   token = sessionStorage.getItem('token') || "";
 
@@ -79,18 +82,33 @@ export class FilmComponent implements OnInit{
         context: {
           headers: new HttpHeaders().set("authorization", this.token),
         },
-        // refetchQueries: [MOVIES],
+        refetchQueries: [FILMINBASKET],
       }).subscribe((result : any) => {
         console.log(result)
-        console.log(result?.data)
 
+    });
+  }
+
+  apolloFilmInBasket(){
+    this.apollo
+      .watchQuery({
+        query : FILMINBASKET,
+        context: {
+          headers: new HttpHeaders().set("authorization", this.token),
+        },
+
+      }).valueChanges.subscribe((result : any) => {
+        this.selectedMovies = result?.data?.basket?.film.map((a: { film_id: any; }) => a.film_id) ;
+        this.loading = result.loading;
+        this.error = result.error;
 
     });
   }
 
   ngOnInit(): void {
-    this.apolloCheck()
     this.categoriesApollo();
+    this.apolloCheck()
+    this.apolloFilmInBasket();
   }
 
 
@@ -105,6 +123,11 @@ export class FilmComponent implements OnInit{
   onClickBook(e : any, film_id : number) {
     this.apolloAddToBasket(film_id)
   }
+
+  isIdInSelectedMovies(film_id : number) {
+    return this.selectedMovies.includes(film_id);
+  }
+
 
   onSearch(name : any)
   {
