@@ -20,7 +20,7 @@ const BASKET = gql `query Basket {
 }
 `;
 
-const FILMINBASKET = gql `query Basket {
+const FILMINBASKET = gql `query FILMINBASKET {
   basket {
       film {
           film_id
