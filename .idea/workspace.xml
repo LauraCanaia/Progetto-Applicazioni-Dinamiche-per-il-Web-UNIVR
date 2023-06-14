@@ -5,13 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/front/src/app/notfound/notfound.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/notfound/notfound.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/notfound/notfound.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front/src/app/notfound/notfound.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/auth/auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/auth/auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/auth/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/auth/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/login/login.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +64,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Laura\Desktop\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\front\src\app\errori" />
       <recent name="C:\Users\Laura\Desktop\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\front\src\app" />
       <recent name="C:\Users\Laura\Desktop\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\front\src" />
     </key>
@@ -104,7 +106,7 @@
       <workItem from="1686729264607" duration="154000" />
       <workItem from="1686747808810" duration="1233000" />
       <workItem from="1686749078007" duration="477000" />
-      <workItem from="1686749789763" duration="843000" />
+      <workItem from="1686749789763" duration="4605000" />
     </task>
     <servers />
   </component>

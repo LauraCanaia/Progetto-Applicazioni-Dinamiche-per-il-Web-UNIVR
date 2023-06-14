@@ -4,7 +4,8 @@ import {FilmComponent} from "./film/film.component";
 import {LoginComponent} from "./login/login.component";
 import {FilmFormComponent} from "./film-form/film-form.component";
 import {RentalHistoryComponent} from "./rental-history/rental-history.component";
-import {NotfoundComponent} from "./notfound/notfound.component";
+import {NotfoundComponent} from "./errori/notfound/notfound.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 // essenzialmente app-routing è la "zona di lavoro" della web-app
 
@@ -12,9 +13,9 @@ import {NotfoundComponent} from "./notfound/notfound.component";
 const routes: Routes = [
   {path : '', pathMatch : 'full' ,redirectTo : '/login'},
   {path : 'login', component : LoginComponent},
-  {path : 'films', component : FilmComponent},
-  {path : 'films/filmForm/:title', component : FilmFormComponent},
-  {path : 'history', component : RentalHistoryComponent},
+  {path : 'films', component : FilmComponent, canActivate : [AuthGuard]},
+  {path : 'films/filmForm/:title', component : FilmFormComponent, canActivate : [AuthGuard]},
+  {path : 'history', component : RentalHistoryComponent,canActivate : [AuthGuard]},
   {path : '404', component : NotfoundComponent},
   {path : '**', redirectTo : '/404'}
 ];

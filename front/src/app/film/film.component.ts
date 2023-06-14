@@ -78,7 +78,7 @@ export class FilmComponent implements OnInit{
   onInput(event : Event) {
     this.reset = (<HTMLInputElement>event.target).value
     this.title = ""
-    this.selectedCategories = []  // È GIUSTO COSI?????????????????????????????
+    this.selectedCategories = []
     this.apolloCheck()
   }
 
