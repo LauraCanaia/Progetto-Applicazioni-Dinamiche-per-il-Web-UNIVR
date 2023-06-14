@@ -23,6 +23,7 @@ import { FilmFormComponent } from './film-form/film-form.component';
 import { RentalHistoryComponent } from './rental-history/rental-history.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatChipsModule} from "@angular/material/chips";
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {MatChipsModule} from "@angular/material/chips";
     LoginComponent,
     NavbarComponent,
     FilmFormComponent,
-    RentalHistoryComponent
+    RentalHistoryComponent,
+    NotfoundComponent
   ],
     imports: [
         BrowserModule,
