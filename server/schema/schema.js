@@ -198,6 +198,35 @@ const RootMutationType = new GraphQLObjectType({
       }
     },
 
+
+    rentMovies:{
+      type: GraphQLBoolean,
+      description: 'add movie to basket of a customer',
+      args: { 
+        film_id: { type: new GraphQLNonNull(new GraphQLList(GraphQLID)),
+                    description: 'list of movies to rent' },
+        store_id: { type: new GraphQLNonNull(new GraphQLList(GraphQLID)),
+                    description: 'list of movies to rent' },
+        
+      },
+      resolve: async (parent, args, {user}) => {
+        if (user){
+          try{
+            // await query_credentials(`INSERT INTO public.basket (customer_id, film_id) VALUES($1, $2);`, [user.customer_id, args.film_id])  //inserire in rent
+          }catch(e){
+            return false
+          }
+          try {
+            await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
+          }catch(e){
+            return false
+          }
+          return true
+        }  
+        return null
+      }
+    },
+
     removeFromBasket:{
       type: GraphQLBoolean,
       description: 'remove movie from basket of a customer',
