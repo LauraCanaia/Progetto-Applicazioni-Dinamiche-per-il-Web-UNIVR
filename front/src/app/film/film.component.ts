@@ -1,11 +1,6 @@
 import {
-  AfterContentChecked,
-  AfterContentInit,
-  AfterViewChecked,
-  AfterViewInit,
   Component,
-  DoCheck, OnDestroy,
-  OnInit, Output
+  OnInit
 } from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {MOVIES} from '../graphql/graphql.movies';
@@ -21,8 +16,7 @@ import {MatChipSelectionChange} from "@angular/material/chips";
   styleUrls: ['./film.component.css'],
 })
 
-export class FilmComponent implements OnInit, AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit,
-DoCheck, OnDestroy{
+export class FilmComponent implements OnInit{
 
   reset = ""
   // @ts-ignore
@@ -79,23 +73,6 @@ DoCheck, OnDestroy{
     this.categoriesApollo();
   }
 
-  ngAfterContentChecked(): void {
-  }
-
-  ngAfterContentInit(): void {
-  }
-
-  ngAfterViewChecked(): void {
-  }
-
-  ngAfterViewInit(): void {
-  }
-
-  ngDoCheck(): void {
-  }
-
-  ngOnDestroy(): void {
-  }
 
 // Taking the string of the filter -> HTMLInputElement is a casting
   onInput(event : Event) {
