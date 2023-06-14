@@ -220,12 +220,33 @@ const UserType = new GraphQLObjectType({
   }),
 });
 
+const BasketType = new GraphQLObjectType({
+  name: 'Basket',
+  description: 'basket of a customer',
+  fields: () => ({
 
+      customer: { type: CustomerType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getCustomerById, [parent.customer_id]);
+          return result.rows[0]
+        }
+      },
+      film: { type: new GraphQLList(MovieType), 
+        resolve: async (parent, args) => {
+          const result = await query('SELECT * FROM film WHERE film_id = ANY ($1)', [parent.film_id]);
+          return result.rows
+        }
+      }
+      
+
+  }),
+});
 
 
 module.exports  = {
     CategoryType,
     PaymentType,
     MovieType,
-    UserType
+    UserType,
+    BasketType
 }
