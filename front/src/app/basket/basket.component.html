@@ -1,0 +1,46 @@
+<div *ngIf="loading">
+  Loading ...
+</div>
+<div *ngIf="error">
+  Error :(
+</div>
+<main>
+
+  <!-- <div *ngIf = "basket"> -->
+    <li *ngFor="let movie of basket; index as i">
+      <mat-card class="film-card">
+        <mat-card-header>
+          <mat-card-title>Movie {{i+1}}: {{movie.title}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>rental_rate : {{movie.rental_rate}}</p>
+          <p>rental_duration : {{movie.rental_duration}}</p>
+          <p>datepicker qua : INSERT DATEPICKER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
+          <p>store_availability :
+            <mat-chip-listbox aria-label = "store_availability-selection">
+              <div *ngFor="let store of movie.store_availability; index as j">
+                <mat-chip-option color = "accent" (selectionChange)="onSelectStore($event.selected, store.store_id, movie.title)">{{store.address.address + ", " + store.address.district}}</mat-chip-option>
+              </div>
+            </mat-chip-listbox>
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button class = "book" (click)="onClickDelete($event, movie.film_id)">
+            Delete {{movie.title}}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </li>
+
+    <mat-card-actions>
+      <button mat-raised-button class = "book" (click)="onClickRent($event)">
+        Rent
+      </button>
+    </mat-card-actions>
+  <!-- </div> -->
+</main>
+
+<ng-template #movie>
+<p>...
+</p>
+</ng-template>

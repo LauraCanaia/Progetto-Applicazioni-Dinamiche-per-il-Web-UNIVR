@@ -39,7 +39,7 @@ const RootQueryType = new GraphQLObjectType({
             film_title: { type: GraphQLString,
               description: 'list of movies that matches argument'},
             film_category: { type : new GraphQLList(GraphQLID),
-              description: 'list of id of wanted categories'},
+                            description: 'list of id of wanted categories'},
             only_available: { type: GraphQLBoolean,
                             description: 'return only available movies'},
             limit: { type: GraphQLInt,
@@ -129,39 +129,37 @@ newQuery += " LIMIT 50"
         pecunia_pagata:{
           type: new GraphQLList(PaymentType),
           description: 'list of payment',
-          resolve: async (parent, args, {user}) => {
-            if (user){
-              const result = await query("select * from payment p where customer_id = $1", [user.customer_id])
-              return result.rows
-            }  
-            return null
+         resolve: async (parent, args, {user}) => {
+          if (user){
+            const result = await query("select * from payment p where customer_id = $1", [user.customer_id])
+          return result.rows
+        }  
+          return null
           }  
         },
 
         basket:{
-          type: new GraphQLList(BasketType),
+          type: BasketType,
           description: 'list movie in basket',
           resolve: async (parent, args, {user}) => {
             if (user){
               const result = await query_credentials("SELECT customer_id, film_id FROM public.basket WHERE customer_id = $1", [user.customer_id])
               console.log (result.rows)
-              let resulto = result.rows.map(a => a.film_id);
-              const basket = [{
+              const basket = {
                 'customer_id': user.customer_id,
-                'film_id': resulto                 
-              }]
+                'film_id': result.rows.map(a => a.film_id)               
+              }
 
               return basket
-            }  
+        }  
             return null
 
-          }  
+        }
         }
 
     },
   });
 
-  let basket = []
 
 
 const RootMutationType = new GraphQLObjectType({
@@ -213,6 +211,8 @@ const RootMutationType = new GraphQLObjectType({
                     description: 'list of movies to rent' },
         store_id: { type: new GraphQLNonNull(new GraphQLList(GraphQLID)),
                     description: 'list of movies to rent' },
+        dates: { type: new GraphQLNonNull(new GraphQLList(GraphQLID)),
+                      description: 'list of movies to rent' },
         
       },
       resolve: async (parent, args, {user}) => {
@@ -238,14 +238,20 @@ const RootMutationType = new GraphQLObjectType({
       description: 'remove movie from basket of a customer',
       args: { 
         film_id: { type: GraphQLID,
-        description: 'id of movie to remove, remove all otherwise',},
-        
+        description: 'id of movie to remove, remove all otherwise'},
       },
       resolve: async (parent, args, {user}) => {
+
         if (user){
           if (args.film_id){
+
+            console.log(args)
+            console.log(user.customer_id)
+            console.log(args.film_id)
+
             try{
               await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1 AND film_id=$2;`, [user.customer_id, args.film_id])
+              console.log("cancello " + user.customer_id, args.film_id)
             }catch(e){
               return false
             }
@@ -253,13 +259,14 @@ const RootMutationType = new GraphQLObjectType({
           }
           try{
             await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
+            console.log("cancello tutto" + user.customer_id, args.film_id)
           }catch(e){
             return false
           }
           return true
           
         }  
-        return null
+        return "null"
       }
     },
 
