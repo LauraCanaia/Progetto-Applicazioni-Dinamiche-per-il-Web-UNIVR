@@ -7,7 +7,7 @@ import {MOVIES} from '../graphql/graphql.movies';
 import {CATEGORIES} from "../graphql/graphql.categories";
 import {ActivatedRoute, Router} from "@angular/router";
 import { HttpHeaders } from '@angular/common/http';
-import {MatChipSelectionChange} from "@angular/material/chips";
+import {ADDTOBASKET} from "../graphql/graphql.mutations";
 
 // @ts-ignore
 @Component({
@@ -68,6 +68,26 @@ export class FilmComponent implements OnInit{
 
   }
 
+
+  apolloAddToBasket(film_id: number){
+    this.apollo
+      .mutate({
+        mutation : ADDTOBASKET,
+        variables : {
+          film_id :  film_id
+        },
+        context: {
+          headers: new HttpHeaders().set("authorization", this.token),
+        },
+        // refetchQueries: [MOVIES],
+      }).subscribe((result : any) => {
+        console.log(result)
+        console.log(result?.data)
+
+
+    });
+  }
+
   ngOnInit(): void {
     this.apolloCheck()
     this.categoriesApollo();
@@ -82,8 +102,8 @@ export class FilmComponent implements OnInit{
     this.apolloCheck()
   }
 
-  onClick(e : any, title : string) {
-    this._router.navigateByUrl('films/filmForm/'.concat(title));
+  onClickBook(e : any, film_id : number) {
+    this.apolloAddToBasket(film_id)
   }
 
   onSearch(name : any)

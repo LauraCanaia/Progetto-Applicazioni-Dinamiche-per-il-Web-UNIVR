@@ -12,4 +12,10 @@ const REMOVEFROMBASKET = gql`mutation RemoveFromBasket($film_id : ID) {
 }`;
 
 
-export {LOGIN, REMOVEFROMBASKET};
+const ADDTOBASKET = gql`mutation AddToBasket($film_id : ID!){
+  addToBasket(film_id: $film_id)
+}`;
+
+
+
+export {LOGIN, REMOVEFROMBASKET, ADDTOBASKET};

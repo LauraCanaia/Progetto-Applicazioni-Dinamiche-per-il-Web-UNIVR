@@ -35,7 +35,7 @@
             <p>Cost : {{movie.replacement_cost}}$</p>
           </mat-card-content>
           <mat-card-actions>
-            <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
+            <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)">
               BOOK
             </button>
           </mat-card-actions>
@@ -58,7 +58,7 @@
             </mat-panel-description>
             <mat-panel-title>
               <div>
-                <button mat-raised-button class = "book" (click)="onClick($event, movie.title)">
+                <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)">
                   BOOK
                 </button>
               </div>

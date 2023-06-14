@@ -15,7 +15,13 @@
         <mat-card-content>
           <p>rental_rate : {{movie.rental_rate}}</p>
           <p>rental_duration : {{movie.rental_duration}}</p>
-          <p>datepicker qua : INSERT DATEPICKER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</p>
+          <p>rental start date: </p>
+          <mat-form-field class="calendar">
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <button mat-raised-button (click)="picker.open()">Open</button>
+
           <p>store_availability :
             <mat-chip-listbox aria-label = "store_availability-selection">
               <div *ngFor="let store of movie.store_availability; index as j">

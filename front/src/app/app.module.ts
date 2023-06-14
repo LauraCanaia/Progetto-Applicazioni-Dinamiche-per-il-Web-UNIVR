@@ -24,7 +24,9 @@ import { RentalHistoryComponent } from './rental-history/rental-history.componen
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatChipsModule} from "@angular/material/chips";
 import { BasketComponent } from './basket/basket.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,9 @@ import { BasketComponent } from './basket/basket.component';
         MatSelectModule,
     MatFormFieldModule,
     MatExpansionModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 
     ],
   providers: [],

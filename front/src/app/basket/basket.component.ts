@@ -18,6 +18,8 @@ export class BasketComponent {
   basket: any[] = [];
   loading: any;
   error: any;
+minDate: Date= new Date();
+maxDate: Date = new Date();
 
   apolloBasket(){
     this.apollo
@@ -59,6 +61,10 @@ export class BasketComponent {
 
   ngOnInit(): void {
     this.apolloBasket()
+
+    var result = new Date();
+    this.maxDate.setDate(this.maxDate.getDate() + 2);
+
   }
 
   onClickRent($event: MouseEvent) {
@@ -75,4 +81,8 @@ export class BasketComponent {
     this.apolloRemoveFromBasket(film_id)
     this.apolloBasket()
   }
+
+
+
+
 }
