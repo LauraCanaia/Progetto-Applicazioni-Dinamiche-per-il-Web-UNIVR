@@ -10,7 +10,7 @@
 
   <mat-chip-listbox aria-label = "category-selection">
     <li *ngFor = "let cat of categories">
-      <mat-chip-option color = "accent" (selectionChange)="onSearchCat(cat)">{{cat.name}}</mat-chip-option>
+      <mat-chip-option color = "accent" (selectionChange)="onSearchCat($event.selected, cat.category_id)">{{cat.name}}</mat-chip-option>
     </li>
   </mat-chip-listbox>
 

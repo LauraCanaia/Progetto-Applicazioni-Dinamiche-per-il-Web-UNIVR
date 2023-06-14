@@ -1,7 +1,7 @@
 import {gql} from 'apollo-angular';
 
-const MOVIES = gql`query($film_title : String!){
-  movies(film_title : $film_title){
+const MOVIES = gql`query($film_title : String, $film_category : [ID]){
+  movies(film_title : $film_title, film_category : $film_category){
     title,
     description,
     release_year,
@@ -23,22 +23,22 @@ const MOVIES = gql`query($film_title : String!){
 }`
 ;
 
-const CATFILTER = gql`query($film_category : [ID]!){
-  movies(film_category : $film_category){
-    title,
-    release_year,
-    rating,
-    category{
-      name
-    },
-    language{
-      name
-    },
-    replacement_cost
-  }
-}`
-;
+// const CATFILTER = gql`query($film_category : [ID]!){
+//   movies(film_category : $film_category){
+//     title,
+//     release_year,
+//     rating,
+//     category{
+//       name
+//     },
+//     language{
+//       name
+//     },
+//     replacement_cost
+//   }
+// }`
+// ;
 
 
 export {MOVIES};
-export {CATFILTER};
+// export {CATFILTER};
