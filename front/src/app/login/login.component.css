@@ -12,3 +12,7 @@ main{
   align-items: center;
 }
 
+p{
+  text-align: center;
+  color: red;
+}

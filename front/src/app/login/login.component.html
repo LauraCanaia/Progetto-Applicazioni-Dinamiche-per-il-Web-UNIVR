@@ -10,6 +10,9 @@
         <mat-label >Password</mat-label >
         <input type = "password" matInput type="password" name="password" ngModel required>
       </mat-form-field>
+        <div *ngIf="error">
+          <p>{{errorMessage}}</p>
+        </div>
       <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid" (click)="onClick()">Login</button>
     </mat-card>
     </div>

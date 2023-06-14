@@ -7,6 +7,7 @@ import {LOGIN} from '../graphql/graphql.mutations';
 import {ActivatedRoute, Router} from "@angular/router";
 import { NgForm } from '@angular/forms';
 import {AuthService} from "../auth/auth/auth.service";
+import {onError} from "@apollo/client/link/error";
 
 @Component({
   selector: 'app-login',
@@ -52,7 +53,11 @@ export class LoginComponent implements OnInit {
           this._router.navigateByUrl('/films');
           this.authService.isLoggedIn = true;
         }
-    });
+    }
+    , error => {
+        this.error = true;
+        this.errorMessage = "error in authentication, please retry inserting the credentials"
+      });
 
   }
 
@@ -64,4 +69,5 @@ export class LoginComponent implements OnInit {
 
   onClick(){
   }
+
 }
