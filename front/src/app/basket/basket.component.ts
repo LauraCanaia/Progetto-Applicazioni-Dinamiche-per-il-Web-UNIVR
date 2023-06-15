@@ -77,7 +77,8 @@ export class BasketComponent {
   }
 
   onClickRent($event: MouseEvent) {
-    throw new Error('Method not implemented.');
+    console.log(this.selectedFilmMap)
+    // throw new Error('Method not implemented.');
   }
 
   onSelectStore(selected: boolean, store_id: number,film_id: number) {

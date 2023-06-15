@@ -5,7 +5,6 @@
   Error :(
 </div>
 <main>
-
   <!-- <div *ngIf = "basket"> -->
     <li *ngFor="let movie of basket; index as i">
       <mat-card class="film-card">
@@ -17,19 +16,17 @@
           <p>rental_duration : {{movie.rental_duration}}</p>
           <p>rental start date: </p>
           <mat-form-field class="calendar">
-              <!-- <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (dateChange)="updateDate($event.value, movie.film_id)" placeholder="Choose a date"> -->
-              <input matInput [min]="minDate" [max]="maxDate" [(ngModel)]="date.value" [matDatepicker]="picker" (dateChange)="updateDate($event.value, movie.film_id)" placeholder="Choose a date">
+              <input matInput [min]="minDate" [max]="maxDate" [(ngModel)]="selectedFilmMap.get(movie.film_id)!.date" [matDatepicker]="picker" placeholder="Choose a date">
               <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <button mat-raised-button (click)="picker.open()">Open</button>
 
-          <p>store_availability :
-            <mat-chip-listbox aria-label = "store_availability-selection">
-              <div *ngFor="let store of movie.store_availability">
-                <mat-chip-option color = "accent" [selected]="isStoreSelected(movie.film_id, store.store_id)" (selectionChange)="onSelectStore($event.selected, store.store_id, movie.film_id)">{{store.address.address + ", " + store.address.district}}</mat-chip-option>
-              </div>
-            </mat-chip-listbox>
-          </p>
+          <p>store_availability : </p>
+
+            <mat-radio-group aria-label="Choose store to rent from" [(ngModel)]="selectedFilmMap.get(movie.film_id)!.store_id">
+              <mat-radio-button *ngFor="let store of movie.store_availability" [value]="store.store_id">{{store.address.address + ", " + store.address.district}}</mat-radio-button>
+            </mat-radio-group>
+
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button class = "Delete" (click)="onClickDelete(movie.film_id)">
