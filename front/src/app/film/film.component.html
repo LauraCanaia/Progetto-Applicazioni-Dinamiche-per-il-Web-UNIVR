@@ -32,7 +32,7 @@
             <p>Rating : {{movie.rating}}</p>
             <p>Genre : {{movie.category[0].name}}</p>
             <p>Language/Languages : {{movie.language.name}}</p>
-            <p>Cost : {{movie.replacement_cost}}$</p>
+            <p>Cost : {{movie.rental_rate}}$</p>
           </mat-card-content>
           <mat-card-actions>
             <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">

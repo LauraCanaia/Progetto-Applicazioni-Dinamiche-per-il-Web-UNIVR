@@ -8,6 +8,7 @@ const MOVIES = gql`query($film_title : String, $film_category : [ID]){
     release_year,
     rating,
     rental_duration,
+    rental_rate,
     length,
     category{
       name
@@ -18,8 +19,7 @@ const MOVIES = gql`query($film_title : String, $film_category : [ID]){
     },
     language{
       name
-    },
-    replacement_cost
+    }
   }
 }`
 ;
