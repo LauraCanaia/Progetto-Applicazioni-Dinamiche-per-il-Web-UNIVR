@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     const email = form.value.email
     const password = form.value.password
-
     this.apolloCheck(email, password)
 
 
@@ -46,9 +45,9 @@ export class LoginComponent implements OnInit {
           password :  password,
         }
       }).subscribe((result : any) => {
-
         if (result?.data?.login){
           sessionStorage.setItem('token', result?.data?.login);
+          console.log(result.data)
           this._router.navigateByUrl('/films');
           this.authService.isLoggedIn = true;
         }
