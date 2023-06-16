@@ -5,6 +5,14 @@ mat-card{
   justify-items: center;
 }
 
+mat-form-field{
+  margin-top: 10px;
+}
+
+button{
+  margin-bottom: 10px;
+}
+
 main{
   margin-top: 50px;
   margin-left: 50px;
