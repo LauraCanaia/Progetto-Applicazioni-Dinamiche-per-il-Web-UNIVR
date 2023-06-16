@@ -35,6 +35,7 @@ export class RentalHistoryComponent implements OnInit{
     return days
   };
 
+  totalExpense:number=0
 
   ishistory = false
 
@@ -61,6 +62,15 @@ export class RentalHistoryComponent implements OnInit{
 
       this.loading = result.loading;
       this.error = result.error;
+
+      for (let i = 0; i < this.history.length; i++) {
+        console.log(this.history[i])
+        console.log(this.history[i].amount)
+        this.totalExpense+=this.history[i].amount
+        console.log(this.totalExpense)
+
+        // this.getFillSelectedBook(this.basket[i])
+      }
     });
 
   }
