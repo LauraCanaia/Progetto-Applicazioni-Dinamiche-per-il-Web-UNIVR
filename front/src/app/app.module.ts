@@ -37,7 +37,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     NavbarComponent,
     FilmFormComponent,
     RentalHistoryComponent,
-    BasketComponent
+    BasketComponent,
     RentalHistoryComponent,
     NotfoundComponent
   ],

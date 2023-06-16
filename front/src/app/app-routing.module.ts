@@ -11,10 +11,11 @@ import {AuthGuard} from "./auth/auth.guard";
 
 // tutti le "pagine" delle mie routes
 const routes: Routes = [
-  {path : '', pathMatch : 'full' ,redirectTo : '/login'},
+  {path : '', pathMatch : 'full' ,redirectTo : 'login'},
+  {path : 'login', component : LoginComponent},
   {path : 'films', component : FilmComponent},
   {path : 'history', component : RentalHistoryComponent},
-  {path : 'basket', component : BasketComponent}
+  {path : 'basket', component : BasketComponent},
   {path : '404', component : NotfoundComponent},
   {path : '**', redirectTo : '/404'}
 ];
