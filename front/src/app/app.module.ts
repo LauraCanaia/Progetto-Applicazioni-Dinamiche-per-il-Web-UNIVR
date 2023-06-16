@@ -28,6 +28,7 @@ import { BasketComponent } from './basket/basket.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
+import { CdkTableModule } from '@angular/cdk/table';
 
 import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
@@ -60,7 +61,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule,
     MatRadioModule,
-    MatTableModule
+    MatTableModule,
+    CdkTableModule
 
     ],
   providers: [],
