@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,11 +7,13 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class NavbarComponent implements OnInit{
 
+
+
   @Output() idEvent = new EventEmitter<string>();
 
   nome = "Giovanni"
 
-  constructor() {
+  constructor(private _router : Router) {
   }
 
   ngOnInit(): void {
@@ -20,4 +22,10 @@ export class NavbarComponent implements OnInit{
   sendName(){
     this.idEvent.emit(this.nome)
   }
+
+  onClickLogout() {
+    sessionStorage.clear();
+    this._router.navigateByUrl('/');
+  }
+
 }
