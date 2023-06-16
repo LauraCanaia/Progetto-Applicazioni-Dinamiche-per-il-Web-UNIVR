@@ -166,20 +166,25 @@ const RootMutationType = new GraphQLObjectType({
   name: 'RootMutationType',
   description: 'this is a root mutation',
   fields: {
-    // register:{
-    //   type: GraphQLString,
-    //   description: 'testiamo il register',
-    //   args: { 
-    //     username: { type: new GraphQLNonNull(GraphQLString) },
-    //     password: { type: new GraphQLNonNull(GraphQLString) },
-    //     customer_id: { type: GraphQLID }
-    //   },
-    //   resolve: async (parent, args, ) => {
-    //     let password = await bcrypt.hash(args.password, 10)
-    //     console.log(password)
-    //     return "test register"
-    //   }   
-    // },
+    register:{
+      type: GraphQLString,
+      description: 'testiamo il register',
+      args: { 
+        email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
+        customer_id: { type: GraphQLID }
+      },
+      resolve: async (parent, args, ) => {
+        let password = await bcrypt.hash(args.password, 10)
+
+        await query_credentials(    `INSERT INTO public."user"
+        (email, "password", customer_id)
+        VALUES($1, $2, $3);`, [args.email, password, args.customer_id])
+
+        console.log(password)
+        return "test register"
+      }   
+    },
 
     addToBasket:{
       type: GraphQLBoolean,
