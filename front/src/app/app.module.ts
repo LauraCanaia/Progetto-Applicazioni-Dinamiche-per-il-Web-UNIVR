@@ -23,6 +23,7 @@ import { FilmFormComponent } from './film-form/film-form.component';
 import { RentalHistoryComponent } from './rental-history/rental-history.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatChipsModule} from "@angular/material/chips";
+import { NotfoundComponent } from './errori/notfound/notfound.component';
 import { BasketComponent } from './basket/basket.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
@@ -37,6 +38,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     FilmFormComponent,
     RentalHistoryComponent,
     BasketComponent
+    RentalHistoryComponent,
+    NotfoundComponent
   ],
     imports: [
         BrowserModule,

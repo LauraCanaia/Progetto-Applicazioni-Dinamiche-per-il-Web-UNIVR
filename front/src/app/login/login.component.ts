@@ -6,6 +6,8 @@ import {Apollo} from 'apollo-angular';
 import {LOGIN} from '../graphql/graphql.mutations';
 import {ActivatedRoute, Router} from "@angular/router";
 import { NgForm } from '@angular/forms';
+import {AuthService} from "../auth/auth/auth.service";
+import {onError} from "@apollo/client/link/error";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,10 @@ export class LoginComponent implements OnInit {
   loading = true;
   error : any;
 
-  constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router) {
+  errorMessage: string | null = null;
+
+
+  constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router, private authService : AuthService, private router : Router) {
   }
 
   onSubmit(form: NgForm) {
@@ -41,15 +46,17 @@ export class LoginComponent implements OnInit {
           password :  password,
         }
       }).subscribe((result : any) => {
-        console.log(result)
-
 
         if (result?.data?.login){
           sessionStorage.setItem('token', result?.data?.login);
           this._router.navigateByUrl('/films');
+          this.authService.isLoggedIn = true;
         }
-        // TODO else scrivi messaggio errore
-    });
+    }
+    , error => {
+        this.error = true;
+        this.errorMessage = "error in authentication, please retry inserting the credentials"
+      });
 
   }
 
@@ -60,6 +67,6 @@ export class LoginComponent implements OnInit {
   }
 
   onClick(){
-
   }
+
 }
