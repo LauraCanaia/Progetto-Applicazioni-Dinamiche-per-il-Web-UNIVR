@@ -25,7 +25,9 @@ aprire il terminale e usare i seguenti comandi
 - npm install (scarica i pacchetti necessari)
 - npm run dev (fa partire il server in ascolto sulla porta 4000) 
 
-per testare grapgql:
+(consigliato: npm update --save)
+
+per testare graphql:
 http://localhost:PORT/graphql
 
 
@@ -35,3 +37,11 @@ TODO:
 //pensare azioni in comune come middleware
 
 // inserire autocompletamento parole (non ogni cambio di parola, ma ogni x millisecondi) guarda tutorial searchhearos
+
+
+
+
+BUGs trovati:
+- in film cliccando su categoria e poi reset, chip categoria rimane selezionata
+- nel basket rent fa una chiamata a vuoto, non inserisce nulla nel db
+- nel basket ognitanto non viene eliminato (non so perché)
