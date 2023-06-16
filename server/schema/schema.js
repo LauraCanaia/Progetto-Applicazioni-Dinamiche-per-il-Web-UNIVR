@@ -207,12 +207,6 @@ const RootMutationType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'add movie to basket of a customer',
       args: { 
-        film_id: { type: new GraphQLNonNull(new GraphQLList(GraphQLID)),
-                    description: 'list of movies to rent' },
-        store_id: { type: new GraphQLNonNull(new GraphQLList(GraphQLID)),
-                    description: 'list of movies to rent' },
-        dates: { type: new GraphQLNonNull(new GraphQLList(GraphQLID)),
-                      description: 'list of movies to rent' },
         
       },
       resolve: async (parent, args, {user}) => {

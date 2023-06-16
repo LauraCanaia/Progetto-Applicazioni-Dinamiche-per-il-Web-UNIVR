@@ -3,9 +3,8 @@ import {Apollo} from "apollo-angular";
 import {Router} from "@angular/router";
 import { HttpHeaders } from '@angular/common/http';
 import {BASKET} from "../graphql/graphql.basket";
-import {REMOVEFROMBASKET} from "../graphql/graphql.mutations";
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {REMOVEFROMBASKET, RENTMOVIES} from "../graphql/graphql.mutations";
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-basket',
@@ -67,6 +66,22 @@ export class BasketComponent {
     });
   }
 
+  apolloRentMovies(){
+    this.apollo
+      .mutate({
+        mutation : RENTMOVIES,
+        context: {
+          headers: new HttpHeaders().set("authorization", this.token),
+        },
+        refetchQueries: [BASKET],
+      }).subscribe((result : any) => {
+        console.log(result)
+        console.log(result?.data)///IF SUCCESS, DILLO!!!!!
+
+
+    });
+  }
+
   constructor(private apollo : Apollo, private router : Router){
   }
 
@@ -76,10 +91,7 @@ export class BasketComponent {
 
   }
 
-  onClickRent($event: MouseEvent) {
-    console.log(this.selectedFilmMap)
-    // throw new Error('Method not implemented.');
-  }
+
 
   onSelectStore(selected: boolean, store_id: number,film_id: number) {
 
@@ -127,6 +139,12 @@ export class BasketComponent {
       console.log(film_id)
       throw new Error("non possibile")
     }
+  }
+
+  onClickRent($event: MouseEvent) {
+    console.log(this.selectedFilmMap)
+    this.apolloRentMovies()
+    // throw new Error('Method not implemented.');
   }
 
 

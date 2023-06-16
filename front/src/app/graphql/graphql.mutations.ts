@@ -16,6 +16,9 @@ const ADDTOBASKET = gql`mutation AddToBasket($film_id : ID!){
   addToBasket(film_id: $film_id)
 }`;
 
+const RENTMOVIES = gql`mutation RentMovies {
+  rentMovies
+}`;
 
 
-export {LOGIN, REMOVEFROMBASKET, ADDTOBASKET};
+export {LOGIN, REMOVEFROMBASKET, ADDTOBASKET, RENTMOVIES};
