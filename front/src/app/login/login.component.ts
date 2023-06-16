@@ -22,8 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log(form)
-    const email = form.value.username
+    const email = form.value.email
     const password = form.value.password
 
     this.apolloCheck(email, password)

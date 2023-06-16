@@ -2,9 +2,9 @@
   <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
     <div class="login">
       <mat-card>
-      <mat-form-field class = "username_form">
-        <mat-label>Username</mat-label>
-        <input matInput type="text" name="username" ngModel required>
+      <mat-form-field class = "email_form">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" name="email" ngModel required email>
       </mat-form-field>
       <mat-form-field class = "password_form">
         <mat-label >Password</mat-label >
