@@ -7,7 +7,7 @@
 <main>
   <!-- <div *ngIf = "basket"> -->
     <li *ngFor="let movie of basket; index as i">
-      <mat-card class="film-card">
+      <mat-card class="film-card" aria-label="button needed to see the details about the film">
         <mat-card-header>
           <mat-card-title>{{movie.title}}</mat-card-title>
         </mat-card-header>
@@ -19,7 +19,7 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <button mat-raised-button (click)="picker.open()">Open</button>
+            <button mat-raised-button (click)="picker.open()" aria-label="open button">Open</button>
           </p>
           <p>choose the store:
 
@@ -29,13 +29,13 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button class = "Delete" (click)="onClickDelete(movie.film_id)"> Delete {{movie.title}} from basket </button>
+          <button mat-raised-button class = "Delete" (click)="onClickDelete(movie.film_id)"aria-label="delete button"> Delete {{movie.title}} from basket </button>
         </mat-card-actions>
       </mat-card>
     </li>
 
     <mat-card-actions>
-      <button mat-raised-button class = "Rent" (click)="onClickRent($event)">
+      <button mat-raised-button class = "Rent" (click)="onClickRent($event)" aria-label="button needed to rent the movie">
         Rent {{basket.length}} movies
       </button>
     </mat-card-actions>

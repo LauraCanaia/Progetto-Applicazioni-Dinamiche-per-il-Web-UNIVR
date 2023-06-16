@@ -9,7 +9,7 @@
   <main>
     <div *ngIf = "history">
       <li *ngFor="let rental_event of history; index as i">
-        <mat-card class="rental-card">
+        <mat-card class="rental-card" aria-label="film'srent history description">
           <mat-card-header>
             <mat-card-title>Rental No. {{i+1}}</mat-card-title>
             <!-- <mat-card-subtitle>amount: {{rental_event.amount}}</mat-card-subtitle> -->
@@ -22,7 +22,7 @@
           <mat-accordion>
             <mat-expansion-panel hideToggle>
               <mat-panel-description>
-                <mat-card class = "layer-card">
+                <mat-card class = "layer-card" aria-label="detail about the film">
                   <mat-card-content>
                     <p>Film : {{rental_event.rental.inventory.film.title}}</p>
 
@@ -30,7 +30,7 @@
                 </mat-card>
               </mat-panel-description>
               <mat-expansion-panel-header>
-                <div class = "book"> DETAILS</div>
+                <div class = "book" aria-label="want to see details? press here"> DETAILS</div>
               </mat-expansion-panel-header>
             </mat-expansion-panel>
           </mat-accordion>
