@@ -1,6 +1,6 @@
 <html lang="en">
-  <div *ngIf="!ismovie; else movie">
-    <button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)" aria-label="Input for film search by name" >RESET</button>
+  <div *ngIf="!ismovie; else movie" aria-label="section with film's descriptions in it">
+    <button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)" aria-label="Resetting the filter" >RESET</button>
     <mat-form-field class = 'filter' appearance="fill">
       <mat-label>
         Film Selector
@@ -24,7 +24,7 @@
     <main>
       <div *ngIf = "movies">
         <li *ngFor="let movie of movies">
-          <mat-card class="film-card" aria-label="section with film's descriptions in it">
+          <mat-card class="film-card">
             <mat-card-header>
               <mat-card-title>{{movie.title}}</mat-card-title>
               <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
