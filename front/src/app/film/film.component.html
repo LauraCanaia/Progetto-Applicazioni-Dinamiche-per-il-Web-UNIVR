@@ -52,10 +52,16 @@
                     <p>Release Year : {{movie.release_year}}</p>
                     <p>Rental duration : {{movie.rental_duration}} days</p>
                     <p>Film length : {{movie.length}} minutes</p>
-                    <p>Actors :
+                    <p>ACTORS :</p>
                       <div *ngFor="let entity of movie.actor">
                         <p>{{entity.first_name}} {{entity.last_name}}</p>
                       </div>
+                  </mat-card-content>
+                  <mat-card-content>
+                    <p>STORES AVAILABLE : </p>
+                    <div *ngFor="let store of movie.store_availability">
+                      <p>{{store.address.address}}</p>
+                    </div>
                   </mat-card-content>
                 </mat-card>
               </mat-panel-description>

@@ -19,6 +19,11 @@ const MOVIES = gql`query($film_title : String, $film_category : [ID]){
     },
     language{
       name
+    },
+    store_availability{
+      address{
+        address
+      }
     }
   }
 }`

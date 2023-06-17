@@ -45,3 +45,5 @@ BUGs trovati:
 - in film cliccando su categoria e poi reset, chip categoria rimane selezionata
 - nel basket rent fa una chiamata a vuoto, non inserisce nulla nel db
 - nel basket ognitanto non viene eliminato (non so perché)
+
+contrast ratio tool : https://webaim.org/resources/contrastchecker/
