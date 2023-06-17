@@ -1,0 +1,21 @@
+const {
+    GraphQLID,
+    GraphQLString,
+    GraphQLNonNull,
+    GraphQLInputObjectType
+  } = require('graphql'); 
+ 
+
+
+    const RentInputType = new GraphQLInputObjectType({
+        name: 'RentInput',
+        fields: {
+            id: { type: new GraphQLNonNull(GraphQLID) },
+            store_id: { type: new GraphQLNonNull(GraphQLID) },
+            rental_date: { type: new GraphQLNonNull(GraphQLString) },
+    }
+    });
+
+module.exports  = {
+    RentInputType
+}

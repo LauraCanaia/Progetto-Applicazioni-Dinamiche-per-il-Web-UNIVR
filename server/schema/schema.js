@@ -4,6 +4,7 @@ const query_credentials = require('../config/db_credentials')
 const jwt = require('jsonwebtoken')
 const queries = require('../src/queries')
 const _ = require('lodash')
+const {RentInputType} = require('../src/inputTypes')
 
 const {
   CategoryType,
@@ -24,8 +25,16 @@ const {
     GraphQLBoolean,
     GraphQLNonNull,
     GraphQLEnumType,
-    GraphQLError
+    GraphQLError,
+    GraphQLInputObjectType
   } = require('graphql');
+
+  //   const PersonInputType = new GraphQLInputObjectType({
+  //   name: 'PersonInput',
+  //   fields: {
+  //     id: { type: new GraphQLNonNull(GraphQLID) },
+  //   }
+  // });
 
 
 const RootQueryType = new GraphQLObjectType({
@@ -222,17 +231,19 @@ const RootMutationType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'add movie to basket of a customer',
       args: { 
-        
+        rentObj: { type: new GraphQLNonNull(new GraphQLList(RentInputType)) },
       },
       resolve: async (parent, args, {user}) => {
         if (user){
+
+          console.log(args)
           try{
             // await query_credentials(`INSERT INTO public.basket (customer_id, film_id) VALUES($1, $2);`, [user.customer_id, args.film_id])  //inserire in rent
           }catch(e){
             return false
           }
           try {
-            await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
+            // await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
           }catch(e){
             return false
           }

@@ -16,9 +16,23 @@ const ADDTOBASKET = gql`mutation AddToBasket($film_id : ID!){
   addToBasket(film_id: $film_id)
 }`;
 
-const RENTMOVIES = gql`mutation RentMovies {
-  rentMovies
-}`;
+const RENTMOVIES = gql`mutation RentMovies($rentInput : RentInput!) {
+  rentMovies(rentInput: $rentInput)
+}
+
+const input RentInput {
+  id: ID
+}
+
+const RentInputType = new GraphQLInputObjectType({
+  name: 'RentInput',
+  fields: {
+      id: { type: new GraphQLNonNull(GraphQLID) },
+      store_id: { type: new GraphQLNonNull(GraphQLID) },
+      rental_date: { type: new GraphQLNonNull(GraphQLString) },
+}
+});`;
+
 
 
 export {LOGIN, REMOVEFROMBASKET, ADDTOBASKET, RENTMOVIES};

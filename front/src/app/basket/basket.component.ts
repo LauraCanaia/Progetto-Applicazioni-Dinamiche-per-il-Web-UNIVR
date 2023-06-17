@@ -70,6 +70,9 @@ export class BasketComponent {
     this.apollo
       .mutate({
         mutation : RENTMOVIES,
+        variables : {
+          rentInput : {id : 1}
+        },
         context: {
           headers: new HttpHeaders().set("authorization", this.token),
         },
