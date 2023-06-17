@@ -116,7 +116,7 @@ export class FilmComponent implements OnInit{
   onInput(event : Event) {
     this.reset = (<HTMLInputElement>event.target).value
     this.title = ""
-    this.selectedCategories = []
+    this.selectedCategories.pop();
     this.apolloCheck()
   }
 
@@ -138,11 +138,7 @@ export class FilmComponent implements OnInit{
   onSearchCat(selected: boolean, category_id : number) {
 
     if (selected){
-      this.selectedCategories = [category_id]
-    }else{
-      this.selectedCategories = []
-    }
-
+      this.selectedCategories = [category_id]}
     this.apolloCheck()
   }
 }
