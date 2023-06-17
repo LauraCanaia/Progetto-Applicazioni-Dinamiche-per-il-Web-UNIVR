@@ -15,7 +15,7 @@
             <div *ngIf="error">
               <p>{{errorMessage}}</p>
             </div>
-          <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid" (click)="onClick()">Login</button>
+          <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid" (click)="onClick()" role="button">Login</button>
         </mat-card>
         </div>
       </form>
