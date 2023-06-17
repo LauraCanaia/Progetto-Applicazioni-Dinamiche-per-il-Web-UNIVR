@@ -7,5 +7,24 @@
   /*property controls what happens to content that's too big to fit in the area*/
   overflow: auto;
   font-size : larger;
+  /*forcing width of navbar -> as bigger as the viewport*/
+  width : 100vw;
 }
 
+.components{
+  display : inline;
+}
+
+@media only screen and (max-width: 819px){
+  .navbar{
+    display: block;
+    justify-content: flex-start;
+    overflow: unset;
+    height: fit-content;
+  }
+
+  .components{
+    display : block;
+    justify-items: flex-start;
+  }
+}
