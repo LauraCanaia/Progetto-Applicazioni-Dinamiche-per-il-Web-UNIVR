@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +47,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "accessibility",
+    "git-widget-placeholder": "develop",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Laura/Desktop/Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR",
     "node.js.detected.package.eslint": "true",
