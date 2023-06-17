@@ -37,6 +37,8 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class RentalHistoryComponent implements OnInit{
 
+  history : PAYMENT[] = [];
+
   toDate(timemillis: string) {
     var date = parseInt(timemillis);
     var d = new Date(date);
@@ -44,10 +46,13 @@ export class RentalHistoryComponent implements OnInit{
     return ds
 }
   @ViewChild(MatSort) sort!: MatSort;
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+  // dataSource = new MatTableDataSource(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<PAYMENT>(this.history);
+  // columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
+   columnsToDisplay = ['amount', 'payment_date', 'rental_date', 'return_date','title'];
 
-  expandedElement!: PeriodicElement | null;
+  expandedElement!: PAYMENT | null;
+  // expandedElement!: PeriodicElement | null;
   isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
 
   getDuration(milli: any){
@@ -63,7 +68,7 @@ export class RentalHistoryComponent implements OnInit{
 
   // @ts-ignore
   // 3 things I need to talk with the graphql api
-  history : any[] = [];
+
   loading = true;
   error : any;
 
@@ -81,19 +86,32 @@ export class RentalHistoryComponent implements OnInit{
           headers: new HttpHeaders().set("authorization", this.token),
 }
       }).valueChanges.subscribe((result : any) => {
-      this.history = result?.data?.pecunia_pagata;
+        console.log(result)
+
+      // this.history = result?.data?.pecunia_pagata;
 
       this.loading = result.loading;
       this.error = result.error;
 
-      for (let i = 0; i < this.history.length; i++) {
-        console.log(this.history[i])
-        console.log(this.history[i].amount)
-        this.totalExpense+=this.history[i].amount
-        console.log(this.totalExpense)
+      let temp = result?.data?.pecunia_pagata
+
+      for (let i = 0; i < result?.data?.pecunia_pagata.length; i++) {
+        this.history[i] = {
+          amount: temp[i].amount,
+          payment_date: temp[i].payment_date,
+          rental_date: temp[i].rental.rental_date,
+          return_date: temp[i].rental.return_date,
+          title: temp[i].rental.inventory.film.title
+        }
+        this.dataSource = new MatTableDataSource<PAYMENT>(this.history);
+        // console.log(this.history[i])
+        // console.log(this.history[i].amount)
+        // this.totalExpense+=this.history[i].amount
+        // console.log(this.totalExpense)
 
         // this.getFillSelectedBook(this.basket[i])
       }
+      console.log (this.history)
     });
 
   }
@@ -111,6 +129,37 @@ export class RentalHistoryComponent implements OnInit{
 
 
 }
+
+
+export interface DATATYPE {
+  pecuniapagata:PAYMENT
+}
+
+export interface PAYMENT {
+  amount: number;
+  payment_date: string;
+  rental_date: string;
+  return_date:string
+  title:string
+
+}
+
+// export interface RENTAL {
+//   rental_date:string
+//   inventory:INVENTORY
+//   return_date:string
+// }
+
+// export interface INVENTORY {
+
+//   movie:MOVIE
+// }
+
+
+// export interface MOVIE {
+//   title:string
+// }
+
 
 export interface PeriodicElement {
   name: string;
