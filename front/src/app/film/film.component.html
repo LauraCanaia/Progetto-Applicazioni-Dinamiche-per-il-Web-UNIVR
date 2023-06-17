@@ -1,85 +1,87 @@
-<div *ngIf="!ismovie; else movie">
-  <button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)">RESET</button>
-  <mat-form-field class = 'filter' appearance="fill">
-    <mat-label>
-      Film Selector
-    </mat-label>
-    <!-- Sto andando a prendere un evento come input -->
-    <input matInput placeholder="Film Title" (keyup)="onSearch($event)" [(ngModel)] = "reset">
-  </mat-form-field>
-
-  <mat-chip-listbox aria-label = "category-selection">
-    <li *ngFor = "let cat of categories">
-      <mat-chip-option color = "accent" (selectionChange)="onSearchCat($event.selected, cat.category_id)">{{cat.name}}</mat-chip-option>
-    </li>
-  </mat-chip-listbox>
-
-  <div *ngIf="loading">
-    Loading ...
-  </div>
-  <div *ngIf="error">
-    Error :(
-  </div>
-  <main>
-    <div *ngIf = "movies">
-      <li *ngFor="let movie of movies">
-        <mat-card class="film-card">
-          <mat-card-header>
-            <mat-card-title>{{movie.title}}</mat-card-title>
-            <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p>Rating : {{movie.rating}}</p>
-            <p>Genre : {{movie.category[0].name}}</p>
-            <p>Language/Languages : {{movie.language.name}}</p>
-            <p>Cost : {{movie.rental_rate}}$</p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">
-              <ng-template *ngIf="isIdInSelectedMovies(movie.film_id); then ifbooked else ifnotbooked"></ng-template>
-            </button>
-          </mat-card-actions>
-        </mat-card>
-        <mat-accordion>
-          <mat-expansion-panel hideToggle>
-            <mat-panel-description>
-              <mat-card class = "layer-card">
-                <mat-card-content>
-                  <p>Description : {{movie.description}}</p>
-                  <p>Release Year : {{movie.release_year}}</p>
-                  <p>Rental duration : {{movie.rental_duration}} days</p>
-                  <p>Film length : {{movie.length}} minutes</p>
-                  <p>Actors :
-                    <div *ngFor="let entity of movie.actor">
-                      <p>{{entity.first_name}} {{entity.last_name}}</p>
-                    </div>
-                </mat-card-content>
-              </mat-card>
-            </mat-panel-description>
-            <mat-panel-title>
-              <div>
-                <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">
-                  <ng-template *ngIf="isIdInSelectedMovies(movie.film_id); then ifbooked else ifnotbooked"></ng-template>
-                </button>
-              </div>
-            </mat-panel-title>
-            <mat-expansion-panel-header>
-              <div class = "book">DETAILS</div>
-            </mat-expansion-panel-header>
-          </mat-expansion-panel>
-        </mat-accordion>
+<html lang="en">
+  <div *ngIf="!ismovie; else movie" aria-label="section with film's descriptions in it">
+    <button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)" aria-label="Resetting the filter" >RESET</button>
+    <mat-form-field class = 'filter' appearance="fill">
+      <mat-label>
+        Film Selector
+      </mat-label>
+      <!-- Sto andando a prendere un evento come input -->
+      <input matInput placeholder="Film Title" (keyup)="onSearch($event)" [(ngModel)] = "reset">
+    </mat-form-field>
+    <p>Category filter:</p>
+    <mat-chip-listbox aria-label = "category-selection">
+      <li *ngFor = "let cat of categories">
+        <mat-chip-option color = "accent" (selectionChange)="onSearchCat($event.selected, cat.category_id)">{{cat.name}}</mat-chip-option>
       </li>
-    </div>
-  </main>
-</div>
-<ng-template #movie>
-  <p>...
-  </p>
-</ng-template>
+    </mat-chip-listbox>
 
-<ng-template #ifbooked>
-  <p>Booked</p>
-</ng-template>
-<ng-template #ifnotbooked>
-  <p>Book</p>
-</ng-template>
+    <div *ngIf="loading">
+      Loading ...
+    </div>
+    <div *ngIf="error">
+      Error :(
+    </div>
+    <main>
+      <div *ngIf = "movies">
+        <li *ngFor="let movie of movies">
+          <mat-card class="film-card">
+            <mat-card-header>
+              <mat-card-title>{{movie.title}}</mat-card-title>
+              <mat-card-subtitle>Release year: {{movie.release_year}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>Rating : {{movie.rating}}</p>
+              <p>Genre : {{movie.category[0].name}}</p>
+              <p>Language/Languages : {{movie.language.name}}</p>
+              <p>Cost : {{movie.rental_rate}}$</p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">
+                <ng-template *ngIf="isIdInSelectedMovies(movie.film_id); then ifbooked else ifnotbooked"></ng-template>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+          <mat-accordion>
+            <mat-expansion-panel hideToggle>
+              <mat-panel-description>
+                <mat-card class = "layer-card" aria-label="more informations about the film">
+                  <mat-card-content>
+                    <p>Description : {{movie.description}}</p>
+                    <p>Release Year : {{movie.release_year}}</p>
+                    <p>Rental duration : {{movie.rental_duration}} days</p>
+                    <p>Film length : {{movie.length}} minutes</p>
+                    <p>Actors :
+                      <div *ngFor="let entity of movie.actor">
+                        <p>{{entity.first_name}} {{entity.last_name}}</p>
+                      </div>
+                  </mat-card-content>
+                </mat-card>
+              </mat-panel-description>
+              <mat-panel-title>
+                <div>
+                  <button mat-raised-button aria-label="button to book a film" class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">
+                    <ng-template *ngIf="isIdInSelectedMovies(movie.film_id); then ifbooked else ifnotbooked"></ng-template>
+                  </button>
+                </div>
+              </mat-panel-title>
+              <mat-expansion-panel-header>
+                <div class = "book" aria-label="section that, if it's clicked, is needed to see more details">DETAILS</div>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </li>
+      </div>
+    </main>
+  </div>
+  <ng-template #movie>
+    <p>...
+    </p>
+  </ng-template>
+
+  <ng-template #ifbooked>
+    <p>Booked</p>
+  </ng-template>
+  <ng-template #ifnotbooked>
+    <p>Book</p>
+  </ng-template>
+</html>
