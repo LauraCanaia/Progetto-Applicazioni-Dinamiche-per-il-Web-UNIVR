@@ -24,3 +24,8 @@ p{
   text-align: center;
   color: red;
 }
+
+.login-butt{
+  color: #efefef;
+  font-weight: bold;
+}
