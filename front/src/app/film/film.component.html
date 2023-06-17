@@ -1,6 +1,6 @@
 <html lang="en">
   <div *ngIf="!ismovie; else movie" aria-label="section with film's descriptions in it">
-    <button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)" aria-label="Resetting the filter" >RESET</button>
+    <button mat-raised-button class = "reset" color="accent" (click) = "onInput($event)" aria-label="Resetting the filter" role="button" >RESET</button>
     <mat-form-field class = 'filter' appearance="fill">
       <mat-label>
         Film Selector
@@ -22,7 +22,7 @@
       Error :(
     </div>
     <main>
-      <div *ngIf = "movies">
+      <div *ngIf = "movies" role="list">
         <li *ngFor="let movie of movies">
           <mat-card class="film-card">
             <mat-card-header>
@@ -36,7 +36,7 @@
               <p>Cost : {{movie.rental_rate}}$</p>
             </mat-card-content>
             <mat-card-actions>
-              <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">
+              <button mat-raised-button class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)" role="button">
                 <ng-template *ngIf="isIdInSelectedMovies(movie.film_id); then ifbooked else ifnotbooked"></ng-template>
               </button>
             </mat-card-actions>
@@ -59,13 +59,13 @@
               </mat-panel-description>
               <mat-panel-title>
                 <div>
-                  <button mat-raised-button aria-label="button to book a film" class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)">
+                  <button mat-raised-button aria-label="button to book a film" class = "book" (click)="onClickBook($event, movie.film_id)" [disabled]="isIdInSelectedMovies(movie.film_id)" role="button">
                     <ng-template *ngIf="isIdInSelectedMovies(movie.film_id); then ifbooked else ifnotbooked"></ng-template>
                   </button>
                 </div>
               </mat-panel-title>
               <mat-expansion-panel-header>
-                <div class = "book" aria-label="section that, if it's clicked, is needed to see more details">DETAILS</div>
+                <div class = "book" aria-label="section that, if it's clicked, is needed to see more details" role="button">DETAILS</div>
               </mat-expansion-panel-header>
             </mat-expansion-panel>
           </mat-accordion>

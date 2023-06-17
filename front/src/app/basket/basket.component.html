@@ -5,7 +5,7 @@
   <div *ngIf="error">
     Error :(
   </div>
-  <main>
+  <main role = "main" aria-label="film booked from homepage">
     <!-- <div *ngIf = "basket"> -->
       <li *ngFor="let movie of basket; index as i">
         <mat-card class="film-card" aria-label="button needed to see the details about the film">
