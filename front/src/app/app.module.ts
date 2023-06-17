@@ -33,6 +33,7 @@ import {MatSortModule} from '@angular/material/sort';
 
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +67,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatTableModule,
     CdkTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonToggleModule
 
   ],
   providers: [],

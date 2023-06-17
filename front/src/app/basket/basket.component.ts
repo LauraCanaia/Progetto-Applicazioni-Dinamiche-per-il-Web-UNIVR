@@ -26,6 +26,8 @@ export class BasketComponent {
 
   date: any = new FormControl(new Date());
 
+  clicked = false;
+
   apolloBasket(){
     this.apollo
       .watchQuery({
@@ -145,6 +147,7 @@ export class BasketComponent {
     console.log(this.selectedFilmMap)
     this.apolloRentMovies()
     // throw new Error('Method not implemented.');
+    this.clicked = true;
   }
 
 

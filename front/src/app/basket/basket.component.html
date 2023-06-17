@@ -42,11 +42,11 @@
           Rent {{basket.length}} movies
         </button>
       </mat-card-actions>
+      <mat-card-content>
+        <div *ngIf="clicked" (selectionchange)="clicked = !clicked" class = "rentok" aria-label="phrase">
+          Renting success
+        </div>
+      </mat-card-content>
     <!-- </div> -->
   </main>
-
-  <ng-template #movie>
-  <p>...
-  </p>
-  </ng-template>
 </html>
