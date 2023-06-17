@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/basket/basket.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/basket/basket.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/rental-history/rental-history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/rental-history/rental-history.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/schema/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/schema/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app-routing.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +55,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/home/laura/Scrivania/Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR/front/node_modules/typescript/lib",
+    "ts.external.directory.path": "C:\\Users\\Laura\\Desktop\\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\\front\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
