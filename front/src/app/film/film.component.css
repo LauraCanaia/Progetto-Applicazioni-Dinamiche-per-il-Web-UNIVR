@@ -1,4 +1,9 @@
 
+h1{
+  max-width: 100%;
+  text-align: center;
+}
+
 .book{
   color: #ff4081;
   font-weight: bolder;
