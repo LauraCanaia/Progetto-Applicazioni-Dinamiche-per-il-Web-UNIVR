@@ -20,14 +20,26 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilmFormComponent } from './film-form/film-form.component';
+import { RentalHistoryComponent } from './rental-history/rental-history.component';
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatChipsModule} from "@angular/material/chips";
+import { NotfoundComponent } from './errori/notfound/notfound.component';
+import { BasketComponent } from './basket/basket.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatRadioModule} from '@angular/material/radio';
 
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
     FilmComponent,
     LoginComponent,
     NavbarComponent,
-    FilmFormComponent
+    FilmFormComponent,
+    RentalHistoryComponent,
+    BasketComponent,
+    RentalHistoryComponent,
+    NotfoundComponent
   ],
     imports: [
         BrowserModule,
@@ -41,7 +53,12 @@ import { FilmFormComponent } from './film-form/film-form.component';
         MatInputModule,
         FormsModule,
         MatSelectModule,
-        MatFormFieldModule
+    MatFormFieldModule,
+    MatExpansionModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule
 
     ],
   providers: [],

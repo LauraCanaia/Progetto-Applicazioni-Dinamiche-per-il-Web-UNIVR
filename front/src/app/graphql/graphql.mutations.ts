@@ -7,4 +7,18 @@ const LOGIN = gql`mutation Login($email : String!, $password : String!){
 }`;
 
 
-export {LOGIN};
+const REMOVEFROMBASKET = gql`mutation RemoveFromBasket($film_id : ID) {
+  removeFromBasket(film_id: $film_id)
+}`;
+
+
+const ADDTOBASKET = gql`mutation AddToBasket($film_id : ID!){
+  addToBasket(film_id: $film_id)
+}`;
+
+const RENTMOVIES = gql`mutation RentMovies {
+  rentMovies
+}`;
+
+
+export {LOGIN, REMOVEFROMBASKET, ADDTOBASKET, RENTMOVIES};

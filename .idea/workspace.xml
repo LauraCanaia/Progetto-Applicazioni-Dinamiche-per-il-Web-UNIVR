@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film-form/film-form.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/graphql/graphql.movie.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/graphql/graphql.movies.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/graphql/graphql.movies.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/server/package.json" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -47,7 +48,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;front3&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Laura/Desktop/Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -55,14 +56,47 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\Laura\\Desktop\\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\\front\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/laura/Scrivania/Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR/front/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Laura\Desktop\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\front\src\app\errori" />
+      <recent name="C:\Users\Laura\Desktop\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\front\src\app" />
       <recent name="C:\Users\Laura\Desktop\Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR\front\src" />
     </key>
+  </component>
+  <component name="RunManager" selected="npm.dev">
+    <configuration name="Unnamed" type="ShConfigurationType" nameIsGenerated="true">
+      <option name="SCRIPT_TEXT" value="ng serve" />
+      <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
+      <option name="SCRIPT_PATH" value="" />
+      <option name="SCRIPT_OPTIONS" value="" />
+      <option name="INDEPENDENT_SCRIPT_WORKING_DIRECTORY" value="true" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INDEPENDENT_INTERPRETER_PATH" value="true" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="EXECUTE_IN_TERMINAL" value="true" />
+      <option name="EXECUTE_SCRIPT_FILE" value="false" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/server/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="npm.dev" />
+      <item itemvalue="Shell Script.Unnamed" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -94,6 +128,17 @@
       <workItem from="1686396454634" duration="3441000" />
       <workItem from="1686399977308" duration="1411000" />
       <workItem from="1686466618253" duration="8974000" />
+      <workItem from="1686645867412" duration="1198000" />
+      <workItem from="1686669659110" duration="1950000" />
+      <workItem from="1686691704134" duration="210000" />
+      <workItem from="1686692158490" duration="107000" />
+      <workItem from="1686729264607" duration="154000" />
+      <workItem from="1686747808810" duration="1233000" />
+      <workItem from="1686749078007" duration="477000" />
+      <workItem from="1686749789763" duration="6772000" />
+      <workItem from="1686904378823" duration="1016000" />
+      <workItem from="1686905411073" duration="823000" />
+      <workItem from="1686906517126" duration="3381000" />
     </task>
     <servers />
   </component>

@@ -9,7 +9,7 @@ const cors = require('cors')
 const logger = require('morgan');
 const schema = require('./schema/schema')
 
-const SECRET = 'ASDFfgasg251fdaFEEEFDR5315asrwhaqr'//CAMBIALO, CERCA ONLINE COME CRARE UN SECRET
+const SECRET = process.env.JWTSECRET
 
 const app = express()
 app.use(logger('dev'))
@@ -23,7 +23,7 @@ const checkUser = async (req, res) => {
     const {user} = await jwt.verify(token, SECRET);
     req.user = user
   }catch(err){
-    console.log(err)
+    // console.log(err)
   }
   req.next();
 };
