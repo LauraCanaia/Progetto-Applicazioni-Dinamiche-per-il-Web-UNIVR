@@ -24,6 +24,11 @@
     </div>
     <main>
       <h1>Film list</h1>
+      <mat-paginator [length]="movies.length"
+                     [pageSize]="10"
+                     [pageSizeOptions]="[10, 25, 100]"
+                     aria-label="Select page">
+      </mat-paginator>
       <div *ngIf = "movies" role="list">
         <li *ngFor="let movie of movies">
           <mat-card class="film-card">
