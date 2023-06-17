@@ -29,6 +29,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatTableModule} from '@angular/material/table';
 import { CdkTableModule } from '@angular/cdk/table';
+import {MatSortModule} from '@angular/material/sort';
 
 import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
@@ -55,14 +56,15 @@ import { MatNativeDateModule } from '@angular/material/core';
         MatInputModule,
         FormsModule,
         MatSelectModule,
-    MatFormFieldModule,
-    MatExpansionModule,
-    MatChipsModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatRadioModule,
-    MatTableModule,
-    CdkTableModule
+        MatFormFieldModule,
+        MatExpansionModule,
+        MatChipsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatRadioModule,
+        MatTableModule,
+        CdkTableModule,
+        MatSortModule
 
     ],
   providers: [],
