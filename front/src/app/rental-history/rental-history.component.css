@@ -1,54 +1,47 @@
-
-.book{
-  color: deeppink;
-  font-weight: bolder;
-  cursor: pointer;
-  margin-top: 5px;
-  align-items: center;
-}
-book ng-tns-c1351155106-2{
-  text-align: center;
+table {
+  width: 100%;
 }
 
-.reset{
-  font-weight: bold;
+tr.example-detail-row {
+  height: 0;
 }
 
-li{
-  margin-bottom: 20px;
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
   display: flex;
-  text-align: center;
-  flex-wrap: wrap;
-  margin-right: 20px;
-  margin-left: 20px;
 }
 
-.reset{
-  margin: 20px 5px 20px 20px;
+/* .example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+} */
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
 }
 
-.filter{
-  margin-top: 20px;
+.example-element-description {
+  padding: 16px;
 }
 
-.rental-card{
-  width: 100%;
-  align-items: center;
-}
-
-mat-accordion{
-  width: 100%;
-  align-items: center;
-  text-align: center;
-}
-
-mat-content ng-tns-c1351155106-2 mat-content-hide-toggle{
-  align-items: center;
-}
-
-.layer-card{
-  font-weight: normal;
-  color: black;
-  width: 100%;
-  align-items: center;
+.example-element-description-attribution {
+  opacity: 0.5;
 }
