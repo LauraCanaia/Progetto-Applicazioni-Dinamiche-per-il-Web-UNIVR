@@ -43,7 +43,9 @@ const RootQueryType = new GraphQLObjectType({
             only_available: { type: GraphQLBoolean,
                             description: 'return only available movies'},
             limit: { type: GraphQLInt,
-                              description: 'how may movie to return'}
+                              description: 'how many movie to return'},
+            offset: { type: GraphQLInt,
+                                description: 'how much offset from the first element in list'}
           },
           resolve: async (parent, args, {user}) => {
             if (user){
@@ -79,13 +81,21 @@ const RootQueryType = new GraphQLObjectType({
                 }else{
                   newQuery += " AND "
                 }
-                conditionNumber++
                 newQuery += queries.moviesAvailabilityCondition; 
+
               }
-              if (args.limit != null){
-                // newQuery += " LIMIT 100"
+              if (args.limit != null && args.limit != undefined){
+                conditionNumber++
+                newQuery += " LIMIT $1".replace("$1", "$"+conditionNumber);
+                paramsList.push(args.limit);
               }
-newQuery += " LIMIT 50"
+
+              if (args.offset != null && args.offset != undefined){
+                conditionNumber++
+                newQuery += " OFFSET $1".replace("$1", "$"+conditionNumber);
+                paramsList.push(args.offset);
+              }
+
               const result = await query(newQuery, paramsList)
               return result.rows
             }
