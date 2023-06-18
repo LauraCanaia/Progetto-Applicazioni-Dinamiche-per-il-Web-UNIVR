@@ -59,6 +59,7 @@ export class FilmComponent implements OnInit{
         variables : {
           film_title :  this.title,
           film_category :  this.selectedCategories,
+          only_available : true
         },
         context: {
           headers: new HttpHeaders().set("authorization", this.token),

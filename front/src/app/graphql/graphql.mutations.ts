@@ -16,9 +16,11 @@ const ADDTOBASKET = gql`mutation AddToBasket($film_id : ID!){
   addToBasket(film_id: $film_id)
 }`;
 
-const RENTMOVIES = gql`mutation RentMovies {
-  rentMovies
-}`;
+const RENTMOVIES = gql`mutation RentMovies($rentInput : [RentInput]!) {
+  rentMovies(rentObj: $rentInput)
+}
+`;
+
 
 
 export {LOGIN, REMOVEFROMBASKET, ADDTOBASKET, RENTMOVIES};

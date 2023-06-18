@@ -22,7 +22,7 @@ export class BasketComponent {
   minDate: Date= new Date();
   maxDate: Date = new Date();
 
-  selectedFilmMap = new Map<number, {film_id: number; store_id: number; date: Date}>
+  selectedFilmMap = new Map<number, {film_id: number; store_id: number; rental_date: Date}>
 
   date: any = new FormControl(new Date());
 
@@ -68,10 +68,13 @@ export class BasketComponent {
     });
   }
 
-  apolloRentMovies(){
+  apolloRentMovies(values: { film_id: number; store_id: number; rental_date: Date; }[]){
     this.apollo
       .mutate({
         mutation : RENTMOVIES,
+        variables : {
+          "rentInput" : values
+        },
         context: {
           headers: new HttpHeaders().set("authorization", this.token),
         },
@@ -106,9 +109,9 @@ export class BasketComponent {
     }
   }
 
-  updateDate(date: Date, film_id: number) {
+  updateDate(rental_date: Date, film_id: number) {
     if (this.selectedFilmMap.get(film_id) != undefined ){
-      this.selectedFilmMap.get(film_id)!.date = date
+      this.selectedFilmMap.get(film_id)!.rental_date = rental_date
     }else{
       console.log(this.selectedFilmMap)
       console.log(film_id)
@@ -126,7 +129,7 @@ export class BasketComponent {
       this.selectedFilmMap.set(movie.film_id, {
         film_id: movie.film_id,
         store_id: movie.store_availability[0].store_id,
-        date: new Date()
+        rental_date: new Date()
       })
 
       console.log(this.selectedFilmMap)
@@ -144,10 +147,16 @@ export class BasketComponent {
   }
 
   onClickRent($event: MouseEvent) {
+<<<<<<< HEAD
     console.log(this.selectedFilmMap)
     this.apolloRentMovies()
     // throw new Error('Method not implemented.');
     this.clicked = true;
+=======
+    const values = Array.from(this.selectedFilmMap.values());
+
+    this.apolloRentMovies(values)
+>>>>>>> develop
   }
 
 
