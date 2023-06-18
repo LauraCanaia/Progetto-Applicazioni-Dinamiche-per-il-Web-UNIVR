@@ -26,6 +26,8 @@ export class BasketComponent {
 
   date: any = new FormControl(new Date());
 
+  clicked = false;
+
   apolloBasket(){
     this.apollo
       .watchQuery({
@@ -36,7 +38,6 @@ export class BasketComponent {
 
       }).valueChanges.subscribe((result : any) => {
         this.basket = result?.data?.basket?.film;
-        console.log(this.basket.length)
         this.loading = result.loading;
         this.error = result.error;
 
@@ -60,8 +61,6 @@ export class BasketComponent {
         refetchQueries: [BASKET],
       }).subscribe((result : any) => {
         console.log(result)
-        console.log(result?.data)
-
 
     });
   }
@@ -78,9 +77,7 @@ export class BasketComponent {
         },
         refetchQueries: [BASKET],
       }).subscribe((result : any) => {
-        console.log(result)
         console.log(result?.data)///IF SUCCESS, DILLO!!!!!
-
 
     });
   }
@@ -101,8 +98,6 @@ export class BasketComponent {
     if (this.selectedFilmMap.get(film_id) != undefined){
       this.selectedFilmMap.get(film_id)!.store_id = store_id
     }else{
-      console.log(this.selectedFilmMap)
-      console.log(film_id)
       throw new Error("non possibile")
     }
   }
@@ -111,8 +106,6 @@ export class BasketComponent {
     if (this.selectedFilmMap.get(film_id) != undefined ){
       this.selectedFilmMap.get(film_id)!.rental_date = rental_date
     }else{
-      console.log(this.selectedFilmMap)
-      console.log(film_id)
       throw new Error("non possibile")
     }
   }
@@ -122,15 +115,12 @@ export class BasketComponent {
   }
 
   getFillSelectedBook(movie: any){
-    console.log(movie)
     if (this.selectedFilmMap.get(movie.film_id) === undefined ){
       this.selectedFilmMap.set(movie.film_id, {
         film_id: movie.film_id,
         store_id: movie.store_availability[0].store_id,
         rental_date: new Date()
       })
-
-      console.log(this.selectedFilmMap)
     }
   }
 
@@ -138,8 +128,6 @@ export class BasketComponent {
     if (this.selectedFilmMap.get(film_id) != undefined ){
       return this.selectedFilmMap.get(film_id)!.store_id === store_id
     }else{
-      console.log(this.selectedFilmMap)
-      console.log(film_id)
       throw new Error("non possibile")
     }
   }
@@ -148,6 +136,7 @@ export class BasketComponent {
     const values = Array.from(this.selectedFilmMap.values());
 
     this.apolloRentMovies(values)
+    this.clicked = true;
   }
 
 

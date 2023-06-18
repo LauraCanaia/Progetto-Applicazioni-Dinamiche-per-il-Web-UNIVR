@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/basket/basket.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/basket/basket.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/app/rental-history/rental-history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/rental-history/rental-history.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +32,7 @@
     <dismissed value="$PROJECT_DIR$/server/package.json" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2Ph0Sqis0Iz6IhfrvijYsreEKp5" />
   <component name="ProjectLevelVcsManager">
@@ -52,7 +49,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;frontchanges&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Laura/Desktop/Progetto-Applicazioni-Dinamiche-per-il-Web-UNIVR&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,

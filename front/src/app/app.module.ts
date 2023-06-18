@@ -32,6 +32,8 @@ import { CdkTableModule } from '@angular/cdk/table';
 import {MatSortModule} from '@angular/material/sort';
 
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,29 +46,31 @@ import { MatNativeDateModule } from '@angular/material/core';
     RentalHistoryComponent,
     NotfoundComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        GraphQLModule,
-        HttpClientModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatInputModule,
-        FormsModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatExpansionModule,
-        MatChipsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatRadioModule,
-        MatTableModule,
-        CdkTableModule,
-        MatSortModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    GraphQLModule,
+    HttpClientModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatInputModule,
+    FormsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatExpansionModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatTableModule,
+    CdkTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatButtonToggleModule
 
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -6,3 +6,11 @@ h1{
   max-width: 100%;
   text-align: center;
 }
+
+.rentok{
+  max-width: 100%;
+  font-size: x-large;
+  text-align: center;
+  color: green;
+  font-weight: bold;
+}
