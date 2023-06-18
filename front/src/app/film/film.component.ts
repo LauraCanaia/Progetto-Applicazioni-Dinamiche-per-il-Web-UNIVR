@@ -36,7 +36,7 @@ export class FilmComponent implements OnInit{
 
   token = sessionStorage.getItem('token') || "";
 
-  limit = 10;
+  limit = 50;
   offset = 0;
 
   constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router) {
@@ -152,28 +152,24 @@ export class FilmComponent implements OnInit{
   }
 
   OnClickPrev() {
-    let temp: number = 0;
-    if (this.offset == 10){
-      this.offset = 0;
-    this.limit = 10;
+    this.offset = this.offset - this.limit
     this.apolloCheck(this.limit, this.offset)
-    }
-    else {
-      temp = this.offset;
-      this.offset = this.limit - this.offset;
-      this.limit = temp;
-      this.apolloCheck(this.limit, this.offset)
-    }
+
+  }
+
+  OnClickNext() {
+    this.offset = this.offset + this.limit;
+    this.apolloCheck(this.limit, this.offset)
   }
 
   IsDisabledPrev() {
     return this.offset == 0;
   }
 
-  OnClickNext() {
-    this.offset = this.limit;
-    this.limit = this.limit+10;
-    this.apolloCheck(this.limit, this.offset)
+  IsDisabledNext() {
+    return this.movies.length +1 < this.limit
   }
+
+
 
 }
