@@ -1,6 +1,6 @@
 import {
   Component,
-  OnInit
+  OnInit, ViewChild
 } from '@angular/core';
 import {Apollo} from 'apollo-angular';
 import {MOVIES} from '../graphql/graphql.movies';
@@ -36,6 +36,9 @@ export class FilmComponent implements OnInit{
 
   token = sessionStorage.getItem('token') || "";
 
+  limit = 10;
+  offset = 0;
+
   constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router) {
   }
 
@@ -52,7 +55,7 @@ export class FilmComponent implements OnInit{
     });
   }
 
-  apolloCheck(){
+  apolloCheck(passedLimit : number , passedOffset : number){
     this.apollo
       .watchQuery({
         query : MOVIES,
@@ -60,8 +63,8 @@ export class FilmComponent implements OnInit{
           film_title :  this.title,
           film_category :  this.selectedCategories,
           only_available : true,
-          limit: 50,  //CHANGE VALORE (oppure no...)
-          offset: 0   //CHANGE VALORE con variabile!!!!
+          limit: passedLimit,
+          offset: passedOffset
         },
         context: {
           headers: new HttpHeaders().set("authorization", this.token),
@@ -110,7 +113,7 @@ export class FilmComponent implements OnInit{
 
   ngOnInit(): void {
     this.categoriesApollo();
-    this.apolloCheck()
+    this.apolloCheck(this.limit, this.offset)
     this.apolloFilmInBasket();
   }
 
@@ -120,7 +123,7 @@ export class FilmComponent implements OnInit{
     this.reset = (<HTMLInputElement>event.target).value
     this.title = ""
     this.selectedCategories.pop();
-    this.apolloCheck()
+    this.apolloCheck(this.limit, this.offset)
   }
 
   onClickBook(e : any, film_id : number) {
@@ -135,13 +138,32 @@ export class FilmComponent implements OnInit{
   onSearch(name : any)
   {
     this.title = name.target.value
-    this.apolloCheck()
+    this.apolloCheck(this.limit, this.offset)
   }
 
   onSearchCat(selected: boolean, category_id : number) {
 
     if (selected){
       this.selectedCategories = [category_id]}
-    this.apolloCheck()
+    this.apolloCheck(this.limit, this.offset)
   }
+
+  OnClickPrev() {
+    let temp: number = 0;
+    temp = this.offset;
+    this.offset =  this.limit - this.offset;
+    this.limit = temp;
+    this.apolloCheck(this.limit, this.offset)
+  }
+
+  IsDisabledPrev() {
+    return this.offset == 0;
+  }
+
+  OnClickNext() {
+    this.offset = this.limit;
+    this.limit = this.limit*2;
+    this.apolloCheck(this.limit, this.offset)
+  }
+
 }

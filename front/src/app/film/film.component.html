@@ -24,11 +24,12 @@
     </div>
     <main>
       <h1>Film list</h1>
-      <mat-paginator [length]="movies.length"
-                     [pageSize]="10"
-                     [pageSizeOptions]="[10, 25, 100]"
-                     aria-label="Select page">
-      </mat-paginator>
+      <button mat-raised-button class = "pages" (click)="OnClickPrev()" [disabled] = "IsDisabledPrev()" role="button" aria-label="previous page">
+        Previous Page
+      </button>
+      <button mat-raised-button class = "pages" (click)="OnClickNext()" role="button" aria-label="next page">
+        Next Page
+      </button>
       <div *ngIf = "movies" role="list">
         <li *ngFor="let movie of movies">
           <mat-card class="film-card">

@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1a4183ee-0194-4eef-a1b8-fa8eb4ab7312" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/app/film/film.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/app/film/film.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +31,7 @@
     <dismissed value="$PROJECT_DIR$/server/package.json" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2Ph0Sqis0Iz6IhfrvijYsreEKp5" />
   <component name="ProjectLevelVcsManager">
