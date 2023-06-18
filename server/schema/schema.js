@@ -193,7 +193,7 @@ const RootMutationType = new GraphQLObjectType({
       args: { 
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
-        customer_id: { type: GraphQLID }
+        customer_id: { type: new GraphQLNonNull(GraphQLID) }
       },
       resolve: async (parent, args, ) => {
         let password = await bcrypt.hash(args.password, 10)
