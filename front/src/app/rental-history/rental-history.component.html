@@ -2,7 +2,7 @@
   <h1>History</h1>
   <meta charset="UTF-8">
   <main aria-label="table with rental history" role="main">
-    <div aria-label="section with total price" role="region" aria-labelledby="total expenses" class = "total-expenses"> total price is {{totalExpense}}</div>
+    <div aria-label="section with total price" role="region" class = "total-expenses"> total price is {{totalExpense}}</div>
 
 
 <table mat-table
@@ -16,7 +16,7 @@
 
 
 
-  <ng-container matColumnDef="amount">
+  <ng-container matColumnDef="amount" role="textbox" aria-label="check how much payed in the past">
     <mat-header-cell *matHeaderCellDef mat-sort-header> amount. </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
   </ng-container>
