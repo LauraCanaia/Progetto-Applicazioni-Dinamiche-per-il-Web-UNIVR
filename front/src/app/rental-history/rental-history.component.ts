@@ -33,13 +33,12 @@ import {PAYMENT, getDuration, toISODate} from '../utils';
 })
 export class RentalHistoryComponent implements OnInit{
 
-
   @ViewChild(MatSort) sort!: MatSort;
 
   tableHistory : PAYMENT[] = []
 
   dataSource = new MatTableDataSource<PAYMENT>(this.tableHistory);
-   columnsToDisplay = ['amount', 'payment_date', "duration", "action"];
+   columnsToDisplay = ['title', 'payment_date', 'amount', "duration", "action"];
 
   expandedElement!: PAYMENT | null;
 
@@ -72,13 +71,13 @@ export class RentalHistoryComponent implements OnInit{
       this.error = result.error;
 
       this.paymentHistory = result?.data?.pecunia_pagata
+      console.log(this.paymentHistory)
 
       for (let i = 0; i < result?.data?.pecunia_pagata.length; i++) {
         this.tableHistory[i] = {
+          id : i,
           amount: this.paymentHistory[i].amount + " $",
           payment_date: toISODate(this.paymentHistory[i].payment_date),
-          rental_date: this.paymentHistory[i].rental.rental_date,
-          return_date: this.paymentHistory[i].rental.return_date,
           duration: getDuration(this.paymentHistory[i].rental.return_date - this.paymentHistory[i].rental.rental_date),
           title: this.paymentHistory[i].rental.inventory.film.title
         }
@@ -96,6 +95,11 @@ export class RentalHistoryComponent implements OnInit{
   ngOnInit(): void {
     this.apolloCheck()
   }
+
+  toDate(arg: any) {
+    return toISODate(arg)
+    }
+
 
 }
 

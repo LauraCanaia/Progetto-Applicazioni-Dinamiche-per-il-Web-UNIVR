@@ -9,13 +9,6 @@
        [dataSource]="dataSource" multiTemplateDataRows
        class="mat-elevation-z8" matSort>
 
-  <!-- <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
-    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-  </ng-container> -->
-
-
-
   <ng-container matColumnDef="amount">
     <mat-header-cell *matHeaderCellDef mat-sort-header> amount. </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
@@ -29,6 +22,11 @@
   <ng-container matColumnDef="duration">
     <mat-header-cell *matHeaderCellDef mat-sort-header> duration </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.duration}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> title </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="action">
@@ -45,8 +43,9 @@
 
 
         <div class="example-element-description">
-          <!-- {{this.paymentHistory[element].amount + element.title}} -->
-          <span class="example-element-description-attribution"> other info </span>
+          <p>rental date: {{toDate(this.paymentHistory[element.id].rental.rental_date)}}</p>
+          <p>return date: {{toDate(this.paymentHistory[element.id].rental.return_date)}}</p>
+          <p>payment date: {{toDate(this.paymentHistory[element.id].payment_date)}}</p>
         </div>
       </div>
     </td>
