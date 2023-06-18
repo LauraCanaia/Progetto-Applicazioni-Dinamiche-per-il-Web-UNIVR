@@ -59,7 +59,9 @@ export class FilmComponent implements OnInit{
         variables : {
           film_title :  this.title,
           film_category :  this.selectedCategories,
-          only_available : true
+          only_available : true,
+          limit: 50,  //CHANGE VALORE (oppure no...)
+          offset: 0   //CHANGE VALORE con variabile!!!!
         },
         context: {
           headers: new HttpHeaders().set("authorization", this.token),
