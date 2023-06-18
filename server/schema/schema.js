@@ -3,6 +3,7 @@ const query = require('../config/db')
 const query_credentials = require('../config/db_credentials')
 const jwt = require('jsonwebtoken')
 const queries = require('../src/queries')
+const queriesCredentials = require('../src/queriesCredentials')
 const _ = require('lodash')
 const {RentInputType} = require('../src/inputTypes')
 
@@ -29,13 +30,6 @@ const {
     GraphQLError,
     GraphQLInputObjectType
   } = require('graphql');
-
-  //   const PersonInputType = new GraphQLInputObjectType({
-  //   name: 'PersonInput',
-  //   fields: {
-  //     id: { type: new GraphQLNonNull(GraphQLID) },
-  //   }
-  // });
 
 
 const RootQueryType = new GraphQLObjectType({
@@ -138,7 +132,7 @@ const RootQueryType = new GraphQLObjectType({
           description: 'get all categories',
           resolve: async ( parent, args, {user}) => {
             if (user){
-            const result = await query("select * from category c group by category_id")
+            const result = await query(queries.getcategoryById)
             return result.rows
           }          
             return null
@@ -163,7 +157,7 @@ const RootQueryType = new GraphQLObjectType({
           description: 'list movie in basket',
           resolve: async (parent, args, {user}) => {
             if (user){
-              const result = await query_credentials("SELECT customer_id, film_id FROM public.basket WHERE customer_id = $1", [user.customer_id])
+              const result = await query_credentials(queriesCredentials.getCustomerIdAndFilmIdFromCustomerId, [user.customer_id])
               console.log (result.rows)
               const basket = {
                 'customer_id': user.customer_id,
@@ -221,7 +215,7 @@ const RootMutationType = new GraphQLObjectType({
       resolve: async (parent, args, {user}) => {
         if (user){
           try{
-            await query_credentials(`INSERT INTO public.basket (customer_id, film_id) VALUES($1, $2);`, [user.customer_id, args.film_id])
+            await query_credentials(queriesCredentials.insertIntoBasketCustomerIdAndFilmId, [user.customer_id, args.film_id])
           }catch(e){
             return false
           }
@@ -243,30 +237,19 @@ const RootMutationType = new GraphQLObjectType({
 
           console.log(args)
           try{
-            const result = await query(`select inventory_id
-            from rental
-            where inventory_id in (select inventory_id 
-            from inventory i 
-            where film_id = $1) and inventory_id not in (
-            select inventory_id
-            from rental
-            where return_date is null)
-            group by inventory_id;`, [args.rentObj[0].film_id])
+            const result = await query(queries.getAvailableInventoryIdByFilmIdAndStoreId, [args.rentObj[0].film_id, args.rentObj[0].store_id])
             console.log(result.rows)
             console.log(result.rows[0].inventory_id)
 
             let customer_id = user.customer_id;
             let rental_date = args.rentObj[0].rental_date.slice(0, 19).replace('T', ' ');
-            let store_id = args.rentObj[0].store_id;
             let inventory_id = result.rows[0].inventory_id
 
 
 
-            await query(`INSERT INTO public.rental
-            (rental_date, inventory_id, customer_id, return_date, staff_id, last_update) VALUES($1, $2, $3, NULL, $4, now());`, 
-            [rental_date, inventory_id, customer_id, 1]) //staff_id hardcoded to 1
+            await query(queries.insertNewRental, [rental_date, inventory_id, customer_id, 1]) //staff_id hardcoded to 1
 
-            await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
+            await query_credentials(queriesCredentials.deleteBasketByCustomerId, [user.customer_id])
           }catch(e){
             console.log(e)
             return false
@@ -294,7 +277,7 @@ const RootMutationType = new GraphQLObjectType({
             console.log(args.film_id)
 
             try{
-              await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1 AND film_id=$2;`, [user.customer_id, args.film_id])
+              await query_credentials(queriesCredentials.deleteBasketByCustomerIdAndFilmId, [user.customer_id, args.film_id])
               console.log("cancello " + user.customer_id, args.film_id)
             }catch(e){
               return false
@@ -302,7 +285,7 @@ const RootMutationType = new GraphQLObjectType({
             return true
           }
           try{
-            await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
+            await query_credentials(queriesCredentials.deleteBasketByCustomerId, [user.customer_id])
             console.log("cancello tutto" + user.customer_id, args.film_id)
           }catch(e){
             return false
@@ -324,9 +307,13 @@ const RootMutationType = new GraphQLObjectType({
       },
       resolve: async (parent, {email, password}, {SECRET}) => {
         
-        const user = await query_credentials(`select * from public."user" u where email like $1`, [email]) ||  ""
+        const user = await query_credentials(queriesCredentials.getUserByEmail, [email]) ||  ""
         console.log(user)
-        
+
+        if(user.rows[0] === null){
+          throw new Error('Incorret user or password'); 
+        }
+
         const valid = await bcrypt.compare(password, user.rows[0].password)
         if (!valid){  
           throw new Error('Incorret user or password');
