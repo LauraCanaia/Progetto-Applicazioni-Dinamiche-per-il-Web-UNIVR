@@ -16,7 +16,7 @@ import { HttpHeaders } from '@angular/common/http';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {PAYMENT, getDuration, toISODate} from '../utils';
+import {PAYMENT, RENTAL, getDuration, toISODate} from '../utils';
 
 
 @Component({
@@ -42,7 +42,8 @@ export class RentalHistoryComponent implements OnInit{
 
   expandedElement!: PAYMENT | null;
 
-  paymentHistory : any[] = []
+  rentalHistory : any[] = []
+  // paymentHistory : any[] = []
 
   totalExpense:number=0
 
@@ -70,23 +71,27 @@ export class RentalHistoryComponent implements OnInit{
       this.loading = result.loading;
       this.error = result.error;
 
-      this.paymentHistory = result?.data?.pecunia_pagata
-      console.log(this.paymentHistory)
+      this.rentalHistory = result?.data?.pecunia_pagata
 
-      for (let i = 0; i < result?.data?.pecunia_pagata.length; i++) {
+      for (let i = 0; i < this.rentalHistory.length; i++) {
+
+        let payment = this.rentalHistory[i].payment
+        let inventory = this.rentalHistory[i].inventory
+
         this.tableHistory[i] = {
           id : i,
-          amount: this.paymentHistory[i].amount + " $",
-          payment_date: toISODate(this.paymentHistory[i].payment_date),
-          duration: getDuration(this.paymentHistory[i].rental.return_date - this.paymentHistory[i].rental.rental_date),
-          title: this.paymentHistory[i].rental.inventory.film.title
+          amount: (payment != null) ? payment?.amount + " $" : "-",
+          payment_date:  (payment != null) ? toISODate(payment.payment_date) : "-",
+          duration: (this.rentalHistory[i].return_date != null) ? getDuration(this.rentalHistory[i].return_date - this.rentalHistory[i].rental_date) : "Not yet returned",
+          title: inventory.film.title
         }
+
       }
 
-      var sum = this.paymentHistory.reduce((accum:Number,item:PAYMENT) => (Number(accum) + Number(item.amount)), 0)
+      var sum = this.rentalHistory.reduce((accum:Number,item:RENTAL) => (item.payment != null) ? Number(accum) +  Number(item.payment.amount) : Number(accum) + 0, 0)
       this.totalExpense = sum.toFixed(2);
 
-      this.dataSource = new MatTableDataSource<PAYMENT>(this.tableHistory);
+      this.dataSource = new MatTableDataSource<any>(this.tableHistory);
       this.dataSource.sort = this.sort;
     });
 

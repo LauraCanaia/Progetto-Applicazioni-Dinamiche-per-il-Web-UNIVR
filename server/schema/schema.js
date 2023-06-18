@@ -11,7 +11,8 @@ const {
   MovieType,
   PaymentType,
   UserType,
-  BasketType
+  BasketType,
+  RentalType
 }  = require('../src/types');
 
 
@@ -146,11 +147,11 @@ const RootQueryType = new GraphQLObjectType({
 
 
         pecunia_pagata:{
-          type: new GraphQLList(PaymentType),
+          type: new GraphQLList(RentalType),
           description: 'list of payment',
          resolve: async (parent, args, {user}) => {
           if (user){
-            const result = await query("select * from payment p where customer_id = $1", [user.customer_id])
+            const result = await query(queries.getRentalByCustomerId, [user.customer_id])
           return result.rows
         }  
           return null

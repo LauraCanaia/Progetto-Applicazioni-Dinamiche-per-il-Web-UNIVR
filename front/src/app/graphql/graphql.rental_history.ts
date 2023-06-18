@@ -1,20 +1,26 @@
 import {gql} from 'apollo-angular';
 
-const RENTAL_HISTORY = gql`query{
-  pecunia_pagata{
-    rental{
-      rental_date,
-      inventory{
-        film{
-          title
-        }
+const RENTAL_HISTORY = gql`query Pecunia_pagata {
+  pecunia_pagata {
+      payment {
+          payment_id
+          staff_id
+          amount
+          payment_date
       }
+      rental_date
       return_date
-    },
-    amount,
-    payment_date
+      inventory {
+          film {
+              film_id
+              title
+          }
+          inventory_id
+      }
+      rental_id
   }
-}`
+}
+`
 ;
 
 export {RENTAL_HISTORY};

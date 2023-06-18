@@ -5,18 +5,23 @@
     <div aria-label="section with total price" role="region" class = "total-expenses"> total price is {{totalExpense}}</div>
 
 
+    <table mat-table
+    [dataSource]="dataSource" multiTemplateDataRows
+    class="mat-elevation-z8" matSort>
+<!--
 <table mat-table
-       [dataSource]="dataSource" multiTemplateDataRows
-       class="mat-elevation-z8" matSort>
+    [dataSource]="dataSource" multiTemplateDataRows
+    (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8" matSort> -->
 
 
   <ng-container matColumnDef="amount" role="textbox" aria-label="check how much payed in the past">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> amount. </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> amount </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="payment_date">
-    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort for ascending/descending payament date"> payment_date </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort for ascending/descending payament date"> payment date </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.payment_date}} </mat-cell>
   </ng-container>
 
@@ -42,11 +47,10 @@
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-
         <div class="example-element-description" role="textbox" aria-label="rental dates">
-          <p>rental date: {{toDate(this.paymentHistory[element.id].rental.rental_date)}}</p>
-          <p>return date: {{toDate(this.paymentHistory[element.id].rental.return_date)}}</p>
-          <p>payment date: {{toDate(this.paymentHistory[element.id].payment_date)}}</p>
+          <p>rental date: {{ toDate(this.rentalHistory[element.id].rental_date) }}</p>
+          <p>return date: {{ (this.rentalHistory[element.id].return_date != null) ? toDate(this.rentalHistory[element.id].return_date) : "-" }}</p>
+          <p>payment date: {{ (this.rentalHistory[element.id].payment != null) ? toDate(this.rentalHistory[element.id].payment.payment_date) : "-" }}</p>
         </div>
       </div>
     </td>

@@ -7,6 +7,16 @@ export interface PAYMENT {
 
 }
 
+export interface RENTAL {
+  rental_id: Number,
+  rental_date: string;
+  inventory: string;
+  return_date:string;
+  payment: PAYMENT;
+}
+
+
+
 export function getDuration(milli: any){
   let minutes = Math.floor(milli / 60000);
   let hours = Math.round(minutes / 60);

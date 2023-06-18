@@ -115,6 +115,12 @@ const RentalType = new GraphQLObjectType({
       },
       return_date: { type: GraphQLString },
       staff_id: { type: GraphQLID },
+      payment: { type: PaymentType, 
+        resolve: async (parent, args) => {
+          const result = await query(queries.getPaymentByRentalId, [parent.rental_id]);
+          return result.rows[0]
+        }
+      },
       last_update: { type: GraphQLString }
   }),
 });
@@ -133,7 +139,7 @@ const PaymentType = new GraphQLObjectType({
       staff_id: { type: GraphQLID },
       rental: { type: RentalType, 
         resolve: async (parent, args) => {
-          const result = await query(queries.getRentalById, [parent.rental_id]);
+          const result = await query(queries.getRentalByRentalId, [parent.rental_id]);
           return result.rows[0]
         }
       },
@@ -248,5 +254,6 @@ module.exports  = {
     PaymentType,
     MovieType,
     UserType,
-    BasketType
+    BasketType,
+    RentalType
 }
