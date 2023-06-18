@@ -104,7 +104,7 @@ const RootQueryType = new GraphQLObjectType({
                 newQuery += " OFFSET $1".replace("$1", "$"+conditionNumber);
                 paramsList.push(args.offset);
               }
-
+              newQuery += " LIMIT 50"
               const result = await query(newQuery, paramsList)
               return result.rows
             }
@@ -185,8 +185,10 @@ const RootMutationType = new GraphQLObjectType({
   name: 'RootMutationType',
   description: 'this is a root mutation',
   fields: {
+
+
     register:{
-      type: GraphQLString,
+      type: GraphQLBoolean,
       description: 'testiamo il register',
       args: { 
         email: { type: new GraphQLNonNull(GraphQLString) },
@@ -195,13 +197,15 @@ const RootMutationType = new GraphQLObjectType({
       },
       resolve: async (parent, args, ) => {
         let password = await bcrypt.hash(args.password, 10)
-
-        await query_credentials(    `INSERT INTO public."user"
-        (email, "password", customer_id)
-        VALUES($1, $2, $3);`, [args.email, password, args.customer_id])
-
+        try{
+          await query_credentials(    `INSERT INTO public."user"
+            (email, "password", customer_id)
+            VALUES($1, $2, $3);`, [args.email, password, args.customer_id])
+        }catch(e){
+          return false
+        }
         console.log(password)
-        return "test register"
+        return true
       }   
     },
 
@@ -238,13 +242,32 @@ const RootMutationType = new GraphQLObjectType({
 
           console.log(args)
           try{
-            // await query_credentials(`INSERT INTO public.basket (customer_id, film_id) VALUES($1, $2);`, [user.customer_id, args.film_id])  //inserire in rent
+            const result = await query(`select inventory_id
+            from rental
+            where inventory_id in (select inventory_id 
+            from inventory i 
+            where film_id = $1) and inventory_id not in (
+            select inventory_id
+            from rental
+            where return_date is null)
+            group by inventory_id;`, [args.rentObj[0].film_id])
+            console.log(result.rows)
+            console.log(result.rows[0].inventory_id)
+
+            let customer_id = user.customer_id;
+            let rental_date = args.rentObj[0].rental_date.slice(0, 19).replace('T', ' ');
+            let store_id = args.rentObj[0].store_id;
+            let inventory_id = result.rows[0].inventory_id
+
+
+
+            await query(`INSERT INTO public.rental
+            (rental_date, inventory_id, customer_id, return_date, staff_id, last_update) VALUES($1, $2, $3, NULL, $4, now());`, 
+            [rental_date, inventory_id, customer_id, 1]) //staff_id hardcoded to 1
+
+            await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
           }catch(e){
-            return false
-          }
-          try {
-            // await query_credentials(`DELETE FROM public.basket WHERE customer_id=$1;`, [user.customer_id])
-          }catch(e){
+            console.log(e)
             return false
           }
           return true

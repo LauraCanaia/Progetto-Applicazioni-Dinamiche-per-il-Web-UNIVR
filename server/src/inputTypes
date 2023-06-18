@@ -10,9 +10,7 @@ const {
     const RentInputType = new GraphQLInputObjectType({
         name: 'RentInput',
         fields: {
-            id: { type: new GraphQLNonNull(GraphQLID) },
-            store_id: { type: new GraphQLNonNull(GraphQLID) },
-            rental_date: { type: new GraphQLNonNull(GraphQLString) },
+            film_id: { type: GraphQLID }, rental_date: { type: GraphQLString }, store_id: { type: GraphQLID },
     }
     });
 
