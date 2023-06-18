@@ -1,6 +1,7 @@
 import {gql} from 'apollo-angular';
 
-const MOVIES = gql`query($film_title : String, $film_category : [ID], $only_available:Boolean, $limit : Int, $offset : Int){
+const MOVIES = gql`query($film_title : String, $film_category : [ID], $only_available:Boolean,
+  $limit : Int, $offset : Int){
   movies(
       film_title : $film_title,
       film_category : $film_category,

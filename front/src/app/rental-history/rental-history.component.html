@@ -16,17 +16,17 @@
   </ng-container>
 
   <ng-container matColumnDef="payment_date">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> payment_date </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort for ascending/descending payament date"> payment_date </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.payment_date}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="duration">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> duration </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort for ascending/descending duration"> duration </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.duration}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="title">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> title </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort for ascending/descending title"> title </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
   </ng-container>
 
