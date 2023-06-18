@@ -150,10 +150,21 @@ export class FilmComponent implements OnInit{
 
   OnClickPrev() {
     let temp: number = 0;
-    temp = this.offset;
-    this.offset =  this.limit - this.offset;
-    this.limit = temp;
+    if (this.offset == 10){
+      this.offset = 0;
+    this.limit = 10;
+    console.log(this.offset)
+    console.log(this.limit)
     this.apolloCheck(this.limit, this.offset)
+    }
+    else {
+      temp = this.offset;
+      this.offset = this.limit - this.offset;
+      this.limit = temp;
+      console.log(this.offset)
+      console.log(this.limit)
+      this.apolloCheck(this.limit, this.offset)
+    }
   }
 
   IsDisabledPrev() {
@@ -162,7 +173,9 @@ export class FilmComponent implements OnInit{
 
   OnClickNext() {
     this.offset = this.limit;
-    this.limit = this.limit*2;
+    this.limit = this.limit+10;
+    console.log(this.offset)
+    console.log(this.limit)
     this.apolloCheck(this.limit, this.offset)
   }
 
