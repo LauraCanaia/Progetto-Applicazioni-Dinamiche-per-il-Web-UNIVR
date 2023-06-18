@@ -45,3 +45,6 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-description {
   padding: 16px;
 }
+.mat-elevation-z8{
+  max-width: 100%;
+}
