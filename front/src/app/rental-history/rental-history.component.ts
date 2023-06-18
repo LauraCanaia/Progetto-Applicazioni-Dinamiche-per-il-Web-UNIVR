@@ -39,7 +39,7 @@ export class RentalHistoryComponent implements OnInit{
   tableHistory : PAYMENT[] = []
 
   dataSource = new MatTableDataSource<PAYMENT>(this.tableHistory);
-   columnsToDisplay = ['amount', 'payment_date', 'rental_date', 'return_date','title', "duration"];
+   columnsToDisplay = ['amount', 'payment_date', "duration", "action"];
 
   expandedElement!: PAYMENT | null;
 
