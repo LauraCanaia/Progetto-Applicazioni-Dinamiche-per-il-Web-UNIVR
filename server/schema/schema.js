@@ -104,7 +104,7 @@ const RootQueryType = new GraphQLObjectType({
                 newQuery += " OFFSET $1".replace("$1", "$"+conditionNumber);
                 paramsList.push(args.offset);
               }
-              newQuery += " LIMIT 50"
+
               const result = await query(newQuery, paramsList)
               return result.rows
             }
