@@ -13,9 +13,9 @@ import {AuthGuard} from "./auth/auth.guard";
 const routes: Routes = [
   {path : '', pathMatch : 'full' ,redirectTo : 'login'},
   {path : 'login', component : LoginComponent},
-  {path : 'films', component : FilmComponent},
-  {path : 'history', component : RentalHistoryComponent},
-  {path : 'basket', component : BasketComponent},
+  {path : 'films', component : FilmComponent, canActivate : [AuthGuard]},
+  {path : 'history', component : RentalHistoryComponent, canActivate : [AuthGuard]},
+  {path : 'basket', component : BasketComponent, canActivate : [AuthGuard]},
   {path : '404', component : NotfoundComponent},
   {path : '**', redirectTo : '/404'}
 ];

@@ -1,21 +1,26 @@
-<main>
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-    <div class="login">
-      <mat-card>
-      <mat-form-field class = "email_form">
-        <mat-label>Email</mat-label>
-        <input matInput type="text" name="email" ngModel required email>
-      </mat-form-field>
-      <mat-form-field class = "password_form">
-        <mat-label >Password</mat-label >
-        <input type = "password" matInput type="password" name="password" ngModel required>
-      </mat-form-field>
-        <div *ngIf="error">
-          <p>{{errorMessage}}</p>
+<html lang = "en-US">
+  <meta charset="UTF-8">
+  <h1>Login Form</h1>
+  <div aria-labelledby="login-form-page" role="form">
+    <main>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <div aria-label = "login-form" class ="login">
+          <mat-card>
+          <mat-form-field aria-label = "insert email" class = "email_form">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" name="email" ngModel required email>
+          </mat-form-field>
+          <mat-form-field aria-label  = "insert password" class = "password_form">
+            <mat-label >Password</mat-label >
+            <input type = "password" matInput type="password" name="password" ngModel required>
+          </mat-form-field>
+            <div *ngIf="error">
+              <p>{{errorMessage}}</p>
+            </div>
+          <button mat-raised-button color="accent" class = "login-butt" aria-labelledby="login-button" type="submit" [disabled]="!loginForm.valid" (click)="onClick()" role="button">Login</button>
+        </mat-card>
         </div>
-      <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.valid" (click)="onClick()">Login</button>
-    </mat-card>
-    </div>
-  </form>
-</main>
-
+      </form>
+    </main>
+  </div>
+</html>

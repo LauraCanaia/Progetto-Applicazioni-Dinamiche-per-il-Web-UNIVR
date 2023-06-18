@@ -1,10 +1,12 @@
-<mat-toolbar color="accent" class= "navbar">
-  <div>
-    FilmFinder
-  </div>
-  <div>
-    <app-navbar (idEvent)="receivedName($event)"></app-navbar>
-  </div>
-</mat-toolbar>
+<html lang="en-US">
+  <mat-toolbar color="accent" class= "navbar" role="search">
+    <div role="banner">
+      FilmFinder
+    </div>
+    <div role="search" class = "components">
+      <app-navbar (idEvent)="receivedName($event)"></app-navbar>
+    </div>
+  </mat-toolbar>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</html>

@@ -1,3 +1,8 @@
 .film-card{
   margin: 15px;
 }
+
+h1{
+  max-width: 100%;
+  text-align: center;
+}

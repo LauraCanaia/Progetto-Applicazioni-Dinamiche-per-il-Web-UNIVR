@@ -1,6 +1,7 @@
-span {
+div {
   /*creates space around an element's content*/
   padding-right: 1rem;
+  display: inline-block;
 }
 
 button{
@@ -9,4 +10,13 @@ button{
   font-weight: bold;
   height: auto;
   width: auto;
+}
+
+@media only screen and (max-width: 819px){
+
+  div {
+    /*creates space around an element's content*/
+    padding-right: 1rem;
+    display: block;
+  }
 }

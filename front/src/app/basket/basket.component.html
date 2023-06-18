@@ -1,48 +1,52 @@
-<div *ngIf="loading">
-  Loading ...
-</div>
-<div *ngIf="error">
-  Error :(
-</div>
-<main>
-  <!-- <div *ngIf = "basket"> -->
-    <li *ngFor="let movie of basket; index as i">
-      <mat-card class="film-card">
-        <mat-card-header>
-          <mat-card-title>{{movie.title}}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>Rent for {{movie.rental_rate}}$ and keep it max {{movie.rental_duration}} days</p>
-          <p>start date:
-            <mat-form-field class="calendar" aria-label="Choose a date to rent">
-                <input matInput [min]="minDate" [max]="maxDate" [(ngModel)]="selectedFilmMap.get(movie.film_id)!.date" [matDatepicker]="picker" placeholder="Choose a date">
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
+<html lang = "en-US">
+  <h1>Basket</h1>
+  <meta charset="UTF-8">
+  <div *ngIf="loading">
+    Loading ...
+  </div>
+  <div *ngIf="error">
+    Error :(
+  </div>
+  <main role = "main" aria-label="film booked from homepage">
+    <!-- <div *ngIf = "basket"> -->
+      <li *ngFor="let movie of basket; index as i">
+        <mat-card class="film-card" aria-label="button needed to see the details about the film">
+          <mat-card-header>
+            <mat-card-title>{{movie.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>Rent for {{movie.rental_rate}}$ and keep it max {{movie.rental_duration}} days</p>
+            <p>start date:
+              <mat-form-field class="calendar" aria-label="Choose a date to rent">
+                  <input matInput [min]="minDate" [max]="maxDate" [(ngModel)]="selectedFilmMap.get(movie.film_id)!.rental_date" [matDatepicker]="picker" placeholder="Choose a date">
+                  <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
 
-            <button mat-raised-button (click)="picker.open()">Open</button>
-          </p>
-          <p>choose the store:
+              <button mat-raised-button (click)="picker.open()" aria-label="open button">Open</button>
+            </p>
+            <p>choose the store:
 
-            <mat-radio-group [(ngModel)]="selectedFilmMap.get(movie.film_id)!.store_id" aria-label="Choose a store to rent from">
-              <mat-radio-button *ngFor="let store of movie.store_availability" [value]="store.store_id">{{store.address.address + ", " + store.address.district}}</mat-radio-button>
-            </mat-radio-group>
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button class = "Delete" (click)="onClickDelete(movie.film_id)"> Delete {{movie.title}} from basket </button>
-        </mat-card-actions>
-      </mat-card>
-    </li>
+              <mat-radio-group [(ngModel)]="selectedFilmMap.get(movie.film_id)!.store_id" aria-label="Choose a store to rent from">
+                <mat-radio-button *ngFor="let store of movie.store_availability" [value]="store.store_id">{{store.address.address + ", " + store.address.district}}</mat-radio-button>
+              </mat-radio-group>
+            </p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button class = "Delete" (click)="onClickDelete(movie.film_id)"aria-label="delete button"> Delete {{movie.title}} from basket </button>
+          </mat-card-actions>
+        </mat-card>
+      </li>
 
-    <mat-card-actions>
-      <button mat-raised-button class = "Rent" (click)="onClickRent($event)">
-        Rent {{basket.length}} movies
-      </button>
-    </mat-card-actions>
-  <!-- </div> -->
-</main>
+      <mat-card-actions>
+        <button mat-raised-button class = "Rent" (click)="onClickRent($event)" aria-label="button needed to rent the movie">
+          Rented {{basket.length}} movies
+        </button>
+      </mat-card-actions>
+    <!-- </div> -->
+  </main>
 
-<ng-template #movie>
-<p>...
-</p>
-</ng-template>
+  <ng-template #movie>
+  <p>...
+  </p>
+  </ng-template>
+</html>

@@ -1,6 +1,11 @@
 
+h1{
+  max-width: 100%;
+  text-align: center;
+}
+
 .book{
-  color: deeppink;
+  color: #ff4081;
   font-weight: bolder;
   cursor: pointer;
   margin-top: 5px;
@@ -52,3 +57,4 @@ mat-content ng-tns-c1351155106-2 mat-content-hide-toggle{
   width: 100%;
   align-items: center;
 }
+

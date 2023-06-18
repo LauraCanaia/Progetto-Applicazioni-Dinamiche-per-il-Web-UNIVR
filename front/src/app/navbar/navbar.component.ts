@@ -11,21 +11,17 @@ export class NavbarComponent implements OnInit{
 
   @Output() idEvent = new EventEmitter<string>();
 
-  nome = "Giovanni"
-
   constructor(private _router : Router) {
   }
 
   ngOnInit(): void {
   }
 
-  sendName(){
-    this.idEvent.emit(this.nome)
-  }
 
   onClickLogout() {
     sessionStorage.clear();
     this._router.navigateByUrl('/');
   }
+
 
 }
