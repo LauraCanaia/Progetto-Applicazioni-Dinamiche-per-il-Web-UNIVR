@@ -28,3 +28,8 @@
     justify-items: flex-start;
   }
 }
+
+p{
+  font-weight: normal;
+  font-size: x-large;
+}

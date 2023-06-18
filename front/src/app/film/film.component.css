@@ -5,11 +5,13 @@ h1{
 }
 
 .book{
-  color: #ff4081;
-  font-weight: bolder;
+  color: #C70042;
+  font-weight: bold;
   cursor: pointer;
   margin-top: 5px;
   align-items: center;
+  margin-right: 20px;
+  text-align: center;
 }
 book ng-tns-c1351155106-2{
   text-align: center;
@@ -17,6 +19,8 @@ book ng-tns-c1351155106-2{
 
 .reset{
   font-weight: bold;
+  font-size: large;
+  background: #C70042;
 }
 
 li{
@@ -56,5 +60,12 @@ mat-content ng-tns-c1351155106-2 mat-content-hide-toggle{
   color: black;
   width: 100%;
   align-items: center;
+}
+
+.page_button{
+  width: 100%;
+  align-items: center;
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 

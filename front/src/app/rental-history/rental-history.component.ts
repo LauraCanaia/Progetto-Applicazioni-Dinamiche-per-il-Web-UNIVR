@@ -13,14 +13,10 @@ import {util} from "protobufjs";
 import EventEmitter = util.EventEmitter;
 import {ActivatedRoute, Router} from "@angular/router";
 import { HttpHeaders } from '@angular/common/http';
-import {MatTableModule} from '@angular/material/table';
-import {DataSource} from '@angular/cdk/collections';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-
-
-
+import {PAYMENT, RENTAL, getDuration, toISODate} from '../utils';
 
 
 @Component({
@@ -37,32 +33,19 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class RentalHistoryComponent implements OnInit{
 
-
-
-  toDate(timemillis: string) {
-    var date = parseInt(timemillis);
-    var d = new Date(date);
-    var ds = d.toLocaleString();
-    return ds
-}
   @ViewChild(MatSort) sort!: MatSort;
 
-  history : PAYMENT[] = []
-  // dataSource = new MatTableDataSource(ELEMENT_DATA);
-  dataSource = new MatTableDataSource<PAYMENT>(this.history);
-  columnsToDisplay = ['amount', 'payment_date', 'rental_date', 'return_date','title'];
+  tableHistory : PAYMENT[] = []
+
+  dataSource = new MatTableDataSource<PAYMENT>(this.tableHistory);
+   columnsToDisplay = ['title', 'payment_date', 'amount', "duration", "action"];
 
   expandedElement!: PAYMENT | null;
 
+  rentalHistory : any[] = []
+  // paymentHistory : any[] = []
 
-  getDuration(milli: any){
-    let minutes = Math.floor(milli / 60000);
-    let hours = Math.round(minutes / 60);
-    let days = Math.round(hours / 24);
-    return days
-  };
-
-  totalExpense:string = ""
+  totalExpense:number=0
 
   ishistory = false
 
@@ -88,22 +71,27 @@ export class RentalHistoryComponent implements OnInit{
       this.loading = result.loading;
       this.error = result.error;
 
-      let temp = result?.data?.pecunia_pagata
+      this.rentalHistory = result?.data?.pecunia_pagata
 
-      for (let i = 0; i < result?.data?.pecunia_pagata.length; i++) {
-        this.history[i] = {
-          amount: temp[i].amount,
-          payment_date: temp[i].payment_date,
-          rental_date: temp[i].rental.rental_date,
-          return_date: temp[i].rental.return_date,
-          title: temp[i].rental.inventory.film.title
+      for (let i = 0; i < this.rentalHistory.length; i++) {
+
+        let payment = this.rentalHistory[i].payment
+        let inventory = this.rentalHistory[i].inventory
+
+        this.tableHistory[i] = {
+          id : i,
+          amount: (payment != null) ? payment?.amount + " $" : "-",
+          payment_date:  (payment != null) ? toISODate(payment.payment_date) : "-",
+          duration: (this.rentalHistory[i].return_date != null) ? getDuration(this.rentalHistory[i].return_date - this.rentalHistory[i].rental_date) : "Not yet returned",
+          title: inventory.film.title
         }
+
       }
 
-      var sum = this.history.reduce((accum:Number,item:PAYMENT) => (Number(accum) + Number(item.amount)), 0)
+      var sum = this.rentalHistory.reduce((accum:Number,item:RENTAL) => (item.payment != null) ? Number(accum) +  Number(item.payment.amount) : Number(accum) + 0, 0)
       this.totalExpense = sum.toFixed(2);
 
-      this.dataSource = new MatTableDataSource<PAYMENT>(this.history);
+      this.dataSource = new MatTableDataSource<any>(this.tableHistory);
       this.dataSource.sort = this.sort;
     });
 
@@ -113,17 +101,10 @@ export class RentalHistoryComponent implements OnInit{
     this.apolloCheck()
   }
 
-}
+  toDate(arg: any) {
+    return toISODate(arg)
+    }
 
 
-export interface DATATYPE {
-  pecuniapagata:PAYMENT
 }
 
-export interface PAYMENT {
-  amount: Number;
-  payment_date: string;
-  rental_date: string;
-  return_date:string;
-  title:string;
-}

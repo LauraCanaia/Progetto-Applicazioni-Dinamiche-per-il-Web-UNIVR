@@ -11,7 +11,8 @@ const {
   MovieType,
   PaymentType,
   UserType,
-  BasketType
+  BasketType,
+  RentalType
 }  = require('../src/types');
 
 
@@ -146,11 +147,11 @@ const RootQueryType = new GraphQLObjectType({
 
 
         pecunia_pagata:{
-          type: new GraphQLList(PaymentType),
+          type: new GraphQLList(RentalType),
           description: 'list of payment',
          resolve: async (parent, args, {user}) => {
           if (user){
-            const result = await query("select * from payment p where customer_id = $1", [user.customer_id])
+            const result = await query(queries.getRentalByCustomerId, [user.customer_id])
           return result.rows
         }  
           return null
@@ -193,7 +194,7 @@ const RootMutationType = new GraphQLObjectType({
       args: { 
         email: { type: new GraphQLNonNull(GraphQLString) },
         password: { type: new GraphQLNonNull(GraphQLString) },
-        customer_id: { type: GraphQLID }
+        customer_id: { type: new GraphQLNonNull(GraphQLID) }
       },
       resolve: async (parent, args, ) => {
         let password = await bcrypt.hash(args.password, 10)

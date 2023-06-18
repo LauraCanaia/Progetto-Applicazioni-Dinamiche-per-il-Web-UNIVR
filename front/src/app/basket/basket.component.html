@@ -17,16 +17,17 @@
           <mat-card-content>
             <p>Rent for {{movie.rental_rate}}$ and keep it max {{movie.rental_duration}} days</p>
             <p>start date:
-              <mat-form-field class="calendar" aria-label="Choose a date to rent">
-                  <input matInput [min]="minDate" [max]="maxDate" [(ngModel)]="selectedFilmMap.get(movie.film_id)!.rental_date" [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-form-field class="calendar" aria-label="Choose a date to rent" role="region">
+                  <input matInput [min]="minDate" [max]="maxDate" [(ngModel)]="selectedFilmMap.get(movie.film_id)!.rental_date" [matDatepicker]="picker" placeholder="Choose a date"
+                  role="combobox" aria-label="choose a date">
                   <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
 
-              <button mat-raised-button (click)="picker.open()" aria-label="open button">Open</button>
+              <button mat-raised-button (click)="picker.open()" aria-label="open button" role="button">Open</button>
             </p>
             <p>choose the store:
 
-              <mat-radio-group [(ngModel)]="selectedFilmMap.get(movie.film_id)!.store_id" aria-label="Choose a store to rent from">
+              <mat-radio-group [(ngModel)]="selectedFilmMap.get(movie.film_id)!.store_id" aria-label="Choose a store to rent from" role="region">
                 <mat-radio-button *ngFor="let store of movie.store_availability" [value]="store.store_id">{{store.address.address + ", " + store.address.district}}</mat-radio-button>
               </mat-radio-group>
             </p>
@@ -39,14 +40,14 @@
 
       <mat-card-actions>
         <button mat-raised-button class = "Rent" (click)="onClickRent($event)" aria-label="button needed to rent the movie">
-          Rented {{basket.length}} movies
+          Rent {{basket.length}} movies
         </button>
       </mat-card-actions>
+      <mat-card-content>
+        <div *ngIf="clicked" (selectionchange)="clicked = !clicked" class = "rentok" aria-label="renting success">
+          Renting success
+        </div>
+      </mat-card-content>
     <!-- </div> -->
   </main>
-
-  <ng-template #movie>
-  <p>...
-  </p>
-  </ng-template>
 </html>
