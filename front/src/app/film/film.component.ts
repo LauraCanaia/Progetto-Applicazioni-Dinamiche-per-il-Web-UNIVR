@@ -145,6 +145,9 @@ export class FilmComponent implements OnInit{
 
     if (selected){
       this.selectedCategories = [category_id]}
+    else{
+      this.selectedCategories = []
+    }
     this.apolloCheck(this.limit, this.offset)
   }
 

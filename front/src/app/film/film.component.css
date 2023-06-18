@@ -6,7 +6,7 @@ h1{
 
 .book{
   color: #ff4081;
-  font-weight: bold;
+  font-weight: bolder;
   cursor: pointer;
   margin-top: 5px;
   align-items: center;
