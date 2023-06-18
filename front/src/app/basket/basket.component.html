@@ -44,8 +44,11 @@
         </button>
       </mat-card-actions>
       <mat-card-content>
-        <div *ngIf="clicked" (selectionchange)="clicked = !clicked" class = "rentok" aria-label="renting success">
+        <div *ngIf="success && result" (selectionchange)="success = !success" class = "rentok" aria-label="renting success">
           Renting success
+        </div>
+        <div *ngIf="!success && result" (selectionchange)="success = !success" class = "rentok" aria-label="renting failure">
+          Problem with one or more rent
         </div>
       </mat-card-content>
     <!-- </div> -->

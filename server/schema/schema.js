@@ -234,26 +234,29 @@ const RootMutationType = new GraphQLObjectType({
       },
       resolve: async (parent, args, {user}) => {
         if (user){
+         
+            try{
+              for (let i = 0; i < args.rentObj.length; i++) {
 
-          console.log(args)
-          try{
-            const result = await query(queries.getAvailableInventoryIdByFilmIdAndStoreId, [args.rentObj[0].film_id, args.rentObj[0].store_id])
-            console.log(result.rows)
-            console.log(result.rows[0].inventory_id)
+                if (args.rentObj[i].rental_date == null){
+                  return false
+                }
 
-            let customer_id = user.customer_id;
-            let rental_date = args.rentObj[0].rental_date.slice(0, 19).replace('T', ' ');
-            let inventory_id = result.rows[0].inventory_id
+                const result = await query(queries.getAvailableInventoryIdByFilmIdAndStoreId, [args.rentObj[i].film_id, args.rentObj[i].store_id])
 
+                let customer_id = user.customer_id;
+                let rental_date = args.rentObj[i].rental_date.slice(0, 19).replace('T', ' ');
+                let inventory_id = result.rows[i].inventory_id
 
+                await query(queries.insertNewRental, [rental_date, inventory_id, customer_id, 1]) //staff_id hardcoded to 1
 
-            await query(queries.insertNewRental, [rental_date, inventory_id, customer_id, 1]) //staff_id hardcoded to 1
-
-            await query_credentials(queriesCredentials.deleteBasketByCustomerId, [user.customer_id])
-          }catch(e){
-            console.log(e)
-            return false
-          }
+                await query_credentials(queriesCredentials.deleteBasketByCustomerIdAndFilmId, [user.customer_id, args.rentObj[i].film_id])
+              }
+              // await query_credentials(queriesCredentials.deleteBasketByCustomerId, [user.customer_id])
+            }catch(e){
+              console.log(e)
+              return false
+            }
           return true
         }  
         return null
