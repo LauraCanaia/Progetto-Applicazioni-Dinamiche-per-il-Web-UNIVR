@@ -26,7 +26,8 @@ export class BasketComponent {
 
   date: any = new FormControl(new Date());
 
-  clicked = false;
+  success = false;
+  result = false
 
   apolloBasket(){
     this.apollo
@@ -77,8 +78,8 @@ export class BasketComponent {
         },
         refetchQueries: [BASKET],
       }).subscribe((result : any) => {
-        console.log(result?.data)///IF SUCCESS, DILLO!!!!!
-
+        this.success = result?.data.rentMovies;
+        this.result = true
     });
   }
 
@@ -136,7 +137,7 @@ export class BasketComponent {
     const values = Array.from(this.selectedFilmMap.values());
 
     this.apolloRentMovies(values)
-    this.clicked = true;
+
   }
 
 

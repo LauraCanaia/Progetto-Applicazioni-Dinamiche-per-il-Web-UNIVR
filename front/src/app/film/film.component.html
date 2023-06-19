@@ -29,7 +29,7 @@
           <button mat-raised-button class = "book" (click)="OnClickPrev()" [disabled] = "IsDisabledPrev()" role="button" aria-label="previous page">
             Previous Page
           </button>
-          <button mat-raised-button class = "book" (click)="OnClickNext()" role="button" aria-label="next page">
+          <button mat-raised-button class = "book" (click)="OnClickNext()" [disabled] = "IsDisabledNext()" role="button" aria-label="next page">
             Next Page
           </button>
         </div>

@@ -72,14 +72,14 @@ const MovieType = new GraphQLObjectType({
       actor: { 
         type: new GraphQLList(ActorType), 
         resolve: async (parent, args) => {
-          const result = await query("select * from actor a join film_actor fa on a.actor_id = fa.actor_id where fa.film_id = $1", [parent.film_id]);
+          const result = await query(queries.getActorFromFilmId, [parent.film_id]);
           return result.rows
         }
       },
       category: { 
         type: new GraphQLList(CategoryType), 
         resolve: async (parent, args) => {
-          const result = await query("select * from category c join film_category fc on c.category_id  = fc.category_id where fc.film_id = $1", [parent.film_id]);
+          const result = await query(queries.getCategoryByFilmId, [parent.film_id]);
           return result.rows
         }
       },
@@ -239,7 +239,7 @@ const BasketType = new GraphQLObjectType({
       },
       film: { type: new GraphQLList(MovieType), 
         resolve: async (parent, args) => {
-          const result = await query('SELECT * FROM film WHERE film_id = ANY ($1)', [parent.film_id]);
+          const result = await query(queries.getMoviesByFilmIds, [parent.film_id]);
           return result.rows
         }
       }

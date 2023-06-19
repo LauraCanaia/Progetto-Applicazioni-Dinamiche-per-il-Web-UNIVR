@@ -14,3 +14,29 @@ h1{
   color: green;
   font-weight: bold;
 }
+
+.film_rented{
+  max-width: 100%;
+  font-size: x-large;
+  text-align: center;
+  color:crimson;
+  font-weight: bold;
+}
+
+.Rent{
+  font-size: large;
+  margin-top: 10px;
+}
+
+.Delete{
+  font-size: large;
+  margin-bottom: 5px;
+}
+
+.rentproblem{
+  max-width: 100%;
+  font-size: x-large;
+  text-align: center;
+  color: crimson;
+  font-weight: bold;
+}
