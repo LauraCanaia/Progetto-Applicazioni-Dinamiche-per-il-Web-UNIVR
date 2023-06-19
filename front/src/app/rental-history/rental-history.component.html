@@ -20,9 +20,14 @@
     <mat-cell *matCellDef="let element"> {{element.amount}} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="payment_date">
-    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort for ascending/descending payament date"> payment date </mat-header-cell>
+  <!-- <ng-container matColumnDef="payment_date">
+    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort for ascending/descending payment date"> payment date </mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.payment_date}} </mat-cell>
+  </ng-container> -->
+
+  <ng-container matColumnDef="rental_date">
+    <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="sort for ascending/descending rental date"> rental date </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.rental_date}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="duration">

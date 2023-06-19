@@ -38,7 +38,7 @@ export class RentalHistoryComponent implements OnInit{
   tableHistory : PAYMENT[] = []
 
   dataSource = new MatTableDataSource<PAYMENT>(this.tableHistory);
-   columnsToDisplay = ['title', 'payment_date', 'amount', "duration", "action"];
+   columnsToDisplay = ['title', 'rental_date', 'amount', "duration", "action"];
 
   expandedElement!: PAYMENT | null;
 
@@ -82,6 +82,7 @@ export class RentalHistoryComponent implements OnInit{
           id : i,
           amount: (payment != null) ? payment?.amount + " $" : "-",
           payment_date:  (payment != null) ? toISODate(payment.payment_date) : "-",
+          rental_date: toISODate(this.rentalHistory[i].rental_date),
           duration: (this.rentalHistory[i].return_date != null) ? getDuration(this.rentalHistory[i].return_date - this.rentalHistory[i].rental_date) : "Not yet returned",
           title: inventory.film.title
         }

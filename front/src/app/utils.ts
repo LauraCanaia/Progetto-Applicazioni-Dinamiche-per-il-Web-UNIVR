@@ -2,6 +2,7 @@ export interface PAYMENT {
   id: Number,
   amount: string;
   payment_date: string;
+  rental_date: string;
   duration:string;
   title:string;
 
