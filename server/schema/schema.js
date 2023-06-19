@@ -246,7 +246,8 @@ const RootMutationType = new GraphQLObjectType({
 
                 let customer_id = user.customer_id;
                 let rental_date = args.rentObj[i].rental_date.slice(0, 19).replace('T', ' ');
-                let inventory_id = result.rows[i].inventory_id
+                let inventory_id = result.rows[0].inventory_id
+
 
                 await query(queries.insertNewRental, [rental_date, inventory_id, customer_id, 1]) //staff_id hardcoded to 1
 
