@@ -36,7 +36,7 @@ export class FilmComponent implements OnInit{
 
   token = sessionStorage.getItem('token') || "";
 
-  limit = 50;
+  limit = 10;
   offset = 0;
 
   constructor(private apollo : Apollo, private route : ActivatedRoute, private _router : Router) {

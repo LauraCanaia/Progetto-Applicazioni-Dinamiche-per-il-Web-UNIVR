@@ -38,6 +38,12 @@
         </mat-card>
       </li>
 
+      <mat-card-content>
+        <div class = "film_rented" *ngIf="basket.length == 0 && !result" role = "plain text" aria-label = "no film rented">
+          No Films Rented Yet
+        </div>
+      </mat-card-content>
+
       <mat-card-actions>
         <button mat-raised-button class = "Rent" (click)="onClickRent($event)" aria-label="button needed to rent the movie">
           Rent {{basket.length}} movies
@@ -47,7 +53,7 @@
         <div *ngIf="success && result" (selectionchange)="success = !success" class = "rentok" aria-label="renting success">
           Renting success
         </div>
-        <div *ngIf="!success && result" (selectionchange)="success = !success" class = "rentok" aria-label="renting failure">
+        <div *ngIf="!success && result" (selectionchange)="success = !success" class = "rentproblem" aria-label="renting failure">
           Problem with one or more rent
         </div>
       </mat-card-content>
